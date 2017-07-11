@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 25
@@ -20,15 +22,44 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+
+    //Tests
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    testCompile 'junit:junit:4.12'
+
+
+    //Layout
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "com.android.support:support-v4:$layout_deps_version"
+    compile "com.android.support:design:$layout_deps_version"
+    compile "com.android.support:recyclerview-v7:$layout_deps_version"
+    compile "com.android.support:cardview-v7:$layout_deps_version"
+
+    //Rx
+    compile 'io.reactivex:rxkotlin:1.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+
+    //Dagger
+    compile 'com.google.dagger:dagger:2.2'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.2'
+
+    //Retrofit
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+
 }
 repositories {
     mavenCentral()
