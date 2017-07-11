@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <!--TODO: add stars-->
+               <!-- <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:rating="4.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small" />-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:tint="#808080"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_access_time_black_24dp"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:id="@+id/horas_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="horaa"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/avaliacao_titulo_tv"
+            android:typeface="monospace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_dark_background"
+            android:text="PRÓS"/>
+
+        <TextView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="asdhoashdoiashdoiahsoidh aosdhaoisdh aosdasodih aosdhadsoiahsd oih "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pros_tv"/>
+
+        <TextView
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_dark_background"
+            android:text="CONTRAS"/>
+
+        <TextView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="asdhoashdoiashdoiahsoidh aosdhaoisdh aosdasodih aosdhadsoiahsd oih "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contras_tv"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
