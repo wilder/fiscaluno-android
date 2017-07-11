@@ -50,7 +50,8 @@ captures/
 .idea/gradle.xml
 .idea/dictionaries
 .idea/libraries
-
+.idea/misc.xml
+.ides/
 # Keystore files
 *.jks
 
@@ -64,4 +65,3 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
->>>>>>> 3e83ceee83119fdb148242ced67742e1f7f5269b
