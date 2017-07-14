@@ -9,4 +9,5 @@
 
     <dimen name="padding_view">16dp</dimen>
     <dimen name="drawable_padding_view">10dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

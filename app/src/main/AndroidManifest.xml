@@ -9,13 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.IntroActivity"
+        <activity
+            android:name=".view.IntroActivity"
             android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.RatingActivity"
+            android:label="@string/title_activity_rating"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
