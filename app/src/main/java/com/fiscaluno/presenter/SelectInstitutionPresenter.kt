@@ -1,6 +1,7 @@
 package com.fiscaluno.presenter
 
 import com.fiscaluno.contracts.SelectInstitutionContract
+import com.fiscaluno.model.Institution
 
 /**
  * Created by Wilder on 16/07/17.
@@ -8,17 +9,25 @@ import com.fiscaluno.contracts.SelectInstitutionContract
 
 class SelectInstitutionPresenter : SelectInstitutionContract.Presenter {
 
-    internal var view: SelectInstitutionContract.View
+    var view: SelectInstitutionContract.View? = null
 
     override fun bindView(view: SelectInstitutionContract.View) {
         this.view = view
     }
 
     override fun loadMainInstitutions() {
-        view.updateInstitutionList(null)
+        val institutions = ArrayList<Institution>()
+        var i = 0
+        while (i < 5) {
+            val inst = Institution()
+            inst.name = "Inst $i"
+            institutions.add(inst)
+            i+=1
+        }
+        view?.updateInstitutionList(institutions)
     }
 
     override fun searchInstitutions(search: String) {
-        view.updateInstitutionList(null)
+        view?.updateInstitutionList(arrayListOf())
     }
 }

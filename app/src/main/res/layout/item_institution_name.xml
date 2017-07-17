@@ -12,13 +12,15 @@
     app:cardUseCompatPadding="false">
 
     <LinearLayout
+        android:id="@+id/institution_name_ll_item
+"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/drawable_padding_view">
 
         <ImageView
-            android:id="@+id/iv_logo_escola"
+            android:id="@+id/icon_iv_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -26,7 +28,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tv_nome_escola"
+            android:id="@+id/institution_name_tv_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
