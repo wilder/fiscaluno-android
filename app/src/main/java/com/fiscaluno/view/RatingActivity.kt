@@ -27,7 +27,7 @@ class RatingActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         mPagerAdapter = ViewPagerAdapter(supportFragmentManager,
-                listOf(RatingSelectInstitutionFragment.newInstance(""),
+                listOf(RatingSelectInstitutionFragment.newInstance(),
                         RatingCourseInfoFragment.newInstance(""),
                         RatingGeneralFragment.newInstance(""),
                         RatingDetailedFragment.newInstance("")), resources.getString(R.string.title_activity_rating))

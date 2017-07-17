@@ -32,8 +32,8 @@ class RatingDetailedFragment : Fragment() {
 
 
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String): RatingSelectInstitutionFragment {
-            val fragment = RatingSelectInstitutionFragment()
+        fun newInstance(param1: String): RatingDetailedFragment {
+            val fragment = RatingDetailedFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             fragment.arguments = args
