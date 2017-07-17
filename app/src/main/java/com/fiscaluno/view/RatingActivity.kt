@@ -15,9 +15,9 @@ import com.fiscaluno.view.adapter.ViewPagerAdapter
 
 class RatingActivity : AppCompatActivity() {
 
-    private var mPagerAdapter: ViewPagerAdapter? = null
+    public var mPagerAdapter: ViewPagerAdapter? = null
 
-    private var mViewPager: ViewPager? = null
+    var mViewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
