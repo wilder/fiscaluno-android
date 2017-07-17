@@ -15,6 +15,7 @@ class Institution : Parcelable {
     var email: String? = null
     var website: String? = null
     var phoneNumber: String? = null
+    var imageUri: String? = null
 
     override fun describeContents(): Int {
         return 0
@@ -28,6 +29,7 @@ class Institution : Parcelable {
         dest.writeString(this.email)
         dest.writeString(this.website)
         dest.writeString(this.phoneNumber)
+        dest.writeString(this.imageUri)
     }
 
     constructor() {}
@@ -40,6 +42,8 @@ class Institution : Parcelable {
         this.email = `in`.readString()
         this.website = `in`.readString()
         this.phoneNumber = `in`.readString()
+        this.imageUri = `in`.readString()
+
     }
 
     companion object {
