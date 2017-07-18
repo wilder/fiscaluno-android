@@ -12,6 +12,7 @@ import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
 import android.support.v4.view.ViewPager
 import android.util.Log
+import com.fiscaluno.view.RatingCourseInfoFragment
 import java.util.ArrayList
 
 
@@ -37,10 +38,9 @@ class InstitutionListAdapter constructor(mDataset: ArrayList<Institution>, viewP
         }
         holder.institutionName.text = institution.name
 
-        Log.d("asda ", "onBindViewHolder $institution")
-
         // Set click listener for the whole post view
         holder.conainer.setOnClickListener {
+            (viewPager.adapter as ViewPagerAdapter).add(RatingCourseInfoFragment.newInstance(institution))
             viewPager.setCurrentItem(viewPager.currentItem + 1, true)
         }
     }
