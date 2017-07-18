@@ -2,20 +2,22 @@ package com.fiscaluno.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.fiscaluno.R
+import com.fiscaluno.model.GeneralReview
 
 class RatingGeneralFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
+    private var reviewParam: GeneralReview? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
+            reviewParam = arguments.get(REVIEW_PARAM) as GeneralReview?
+            Log.d("test", reviewParam.toString()+"oi")
         }
     }
 
@@ -26,16 +28,11 @@ class RatingGeneralFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-
-
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String): RatingGeneralFragment {
+        private val REVIEW_PARAM = "review"
+        fun newInstance(review: GeneralReview): RatingGeneralFragment {
             val fragment = RatingGeneralFragment()
             val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
+            args.putParcelable(REVIEW_PARAM, review)
             fragment.arguments = args
             return fragment
         }
