@@ -13,6 +13,8 @@ class GeneralReview : Review, Parcelable {
     var pros: String? = null
     var cons: String? = null
     var description: String? = null
+    var payment: Double? = null
+    var startYear: Int? = null
 
     override fun describeContents(): Int {
         return 0
@@ -24,6 +26,8 @@ class GeneralReview : Review, Parcelable {
         dest.writeString(this.pros)
         dest.writeString(this.cons)
         dest.writeString(this.description)
+        dest.writeDouble(this.payment!!)
+        dest.writeValue(this.startYear)
     }
 
     constructor() {}
@@ -34,6 +38,8 @@ class GeneralReview : Review, Parcelable {
         this.pros = `in`.readString()
         this.cons = `in`.readString()
         this.description = `in`.readString()
+        this.payment = `in`.readDouble()
+        this.startYear = `in`.readValue(Int::class.java.classLoader) as Int
     }
 
     companion object {
