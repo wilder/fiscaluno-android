@@ -8,4 +8,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_institution">Procure pela instituição.</string>
     <string name="institutions">Instituições</string>
+    <string name="course">Curso</string>
+    <string name="course_name">Nome do curso</string>
+    <string name="type">Tipo</string>
+    <string name="Anual">Anual</string>
+    <string name="semiannually">Semestralmente</string>
+    <string name="continueTxt">Continuar</string>
+
 </resources>
