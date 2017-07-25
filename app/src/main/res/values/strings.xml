@@ -14,5 +14,10 @@
     <string name="Anual">Anual</string>
     <string name="semiannually">semiannually</string>
     <string name="continueTxt">Continue</string>
+    <string name="rate_it">Rate it</string>
+    <string name="add">Add</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="cons">Cons</string>
+    <string name="pros">Pros</string>
 
 </resources>
