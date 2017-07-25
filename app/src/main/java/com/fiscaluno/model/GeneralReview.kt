@@ -30,6 +30,10 @@ class GeneralReview : Review, Parcelable {
         dest.writeValue(this.startYear)
     }
 
+    override fun toString(): String {
+        return "GeneralReview(institution= $institution,suggestion=$suggestion, rate=$rate, pros=$pros, cons=$cons, description=$description, payment=$payment, startYear=$startYear)"
+    }
+
     constructor() {}
 
     protected constructor(`in`: Parcel) {

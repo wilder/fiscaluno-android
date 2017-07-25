@@ -19,5 +19,6 @@
     <string name="suggestions">Suggestions</string>
     <string name="cons">Cons</string>
     <string name="pros">Pros</string>
+    <string name="review_title">Review Title</string>
 
 </resources>

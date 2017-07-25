@@ -30,6 +30,10 @@ open class Review : Parcelable {
         dest.writeParcelable(this.student, flags)
     }
 
+    override fun toString(): String {
+        return "Review(id=$id, createdAt=$createdAt, course=$course, institution=$institution, student=$student)"
+    }
+
     protected constructor(`in`: Parcel) {
         this.id = `in`.readValue(Int::class.java.classLoader) as Int
         val tmpCreatedAt = `in`.readLong()

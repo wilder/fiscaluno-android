@@ -19,6 +19,7 @@
     <string name="suggestions">Sugestões</string>
     <string name="cons">Pontos Negativos</string>
     <string name="pros">Pontos Positivos</string>
+    <string name="review_title">Título da Avaliação</string>
 
 
 </resources>
