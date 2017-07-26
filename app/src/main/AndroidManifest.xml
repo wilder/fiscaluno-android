@@ -11,9 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.IntroActivity"
-            android:theme="@style/AppFullScreenTheme">
-
-        </activity>
+            android:theme="@style/AppFullScreenTheme"></activity>
         <activity
             android:name=".view.RatingActivity"
             android:label="@string/title_activity_rating"
@@ -24,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.InstitutionDetailActivity"></activity>
     </application>
 
 </manifest>
