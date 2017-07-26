@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollVieww"
+    android:id="@+id/scrollView"
     tools:context="com.fiscaluno.view.InstitutionDetailActivity">
     <LinearLayout
         android:descendantFocusability="blocksDescendants"
@@ -105,44 +104,10 @@
             android:background="@color/cardview_dark_background"/>
 
         <!--TODO: Add to item layout-->
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:weightSum="10"
-            android:orientation="horizontal"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/detailedReviews"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:gravity="right"
-                android:text="Infraestrutura"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"/>
-
-            <LinearLayout
-                android:layout_marginLeft="8dp"
-                android:layout_weight="5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <RatingBar
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:id="@+id/rating_stars_instdt_item"
-                    android:clickable="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:numStars="5"
-                    android:stepSize="1"
-                    android:isIndicator="false" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <!--TODO: Add to item layout-->
-
+            android:layout_height="match_parent"/>
 
         <FrameLayout
             android:layout_margin="@dimen/activity_horizontal_margin"

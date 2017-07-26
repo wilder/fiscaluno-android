@@ -13,17 +13,22 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_weight="5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
-                <!--TODO: add stars-->
-               <!-- <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                    android:rating="4.5"
+                <RatingBar
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:id="@+id/rating_item"
+                    android:clickable="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small" />-->
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:isIndicator="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -43,7 +48,7 @@
                     android:id="@+id/horas_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="horaa"/>
+                    android:text="00:00"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -63,11 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/cardview_dark_background"
-            android:text="PRÓS"/>
+            android:text="@string/pros"/>
 
         <TextView
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="asdhoashdoiashdoiahsoidh aosdhaoisdh aosdasodih aosdhadsoiahsd oih "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pros_tv"/>
@@ -82,14 +86,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/cardview_dark_background"
-            android:text="CONTRAS"/>
+            android:text="@string/cons"/>
 
         <TextView
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="asdhoashdoiashdoiahsoidh aosdhaoisdh aosdasodih aosdhadsoiahsd oih "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/contras_tv"/>
+            android:id="@+id/cons_tv"/>
 
     </LinearLayout>
 
