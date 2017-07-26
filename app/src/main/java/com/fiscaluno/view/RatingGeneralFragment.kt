@@ -39,6 +39,11 @@ class RatingGeneralFragment : Fragment() {
             reviewParam?.cons = consTv?.text.toString()
             reviewParam?.pros = prosTv?.text.toString()
             reviewParam?.suggestion = suggestionsEt?.text.toString()
+
+            val adapter = (activity as RatingActivity).mPagerAdapter
+            val pager = (activity as RatingActivity).mViewPager
+            adapter?.add(RatingDetailedFragment.newInstance(reviewParam!!))
+            pager?.setCurrentItem(pager.currentItem + 1, true)
             Toast.makeText(this.context, reviewParam?.toString(), Toast.LENGTH_LONG).show()
         }
     }

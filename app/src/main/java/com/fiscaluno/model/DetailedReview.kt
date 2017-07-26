@@ -9,6 +9,7 @@ import android.os.Parcelable
 
 class DetailedReview : Review, Parcelable {
     var type: String ? = null
+    var value: Int ? = null
 
     override fun describeContents(): Int {
         return 0
@@ -17,12 +18,14 @@ class DetailedReview : Review, Parcelable {
     override fun writeToParcel(dest: Parcel, flags: Int) {
         super.writeToParcel(dest, flags)
         dest.writeString(this.type)
+        dest.writeInt(this.value!!)
     }
 
     constructor() {}
 
     protected constructor(`in`: Parcel) : super(`in`) {
         this.type = `in`.readString()
+        this.value = `in`.readInt()
     }
 
     companion object {

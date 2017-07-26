@@ -11,7 +11,6 @@ import com.fiscaluno.R
 import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
 import android.support.v4.view.ViewPager
-import android.util.Log
 import com.fiscaluno.view.RatingCourseInfoFragment
 import java.util.ArrayList
 
