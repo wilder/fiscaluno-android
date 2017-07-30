@@ -68,7 +68,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View {
         }
     }
 
-    override fun setupReviewsList(review: ArrayList<DetailedReview>) {
+    override fun setupDetailedReviewsList(review: ArrayList<DetailedReview>) {
         setupList(review)
     }
 

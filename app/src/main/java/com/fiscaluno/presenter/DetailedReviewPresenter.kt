@@ -24,7 +24,7 @@ class DetailedReviewPresenter : DetailedReviewContract.Presenter {
             reviews.add(review)
         }
 
-        view?.setupReviewsList(reviews)
+        view?.setupDetailedReviewsList(reviews)
     }
 
     override fun loadReviewsByInstitutionId(institutionId: String) {

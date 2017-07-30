@@ -1,7 +1,6 @@
 package com.fiscaluno.contracts
 
-import com.fiscaluno.model.DetailedReview
-import com.fiscaluno.model.Institution
+import com.fiscaluno.model.GeneralReview
 
 import java.util.ArrayList
 
@@ -9,14 +8,13 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-interface DetailedReviewContract {
-    interface View {
-        fun setupReviewsList(review: ArrayList<DetailedReview>)
+interface InstitutionDetailContract {
+    interface View : DetailedReviewContract.View {
+        fun setupGeneralReviewsList(reviews: ArrayList<GeneralReview>)
     }
 
     interface Presenter {
-        fun bindView(view: DetailedReviewContract.View)
-        fun loadReviews()
-        fun loadReviewsByInstitutionId(institutionId: String)
+        fun bindView(view: InstitutionDetailContract.View)
+        fun loadInstitution(institutionId: String)
     }
 }
