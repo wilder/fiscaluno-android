@@ -26,18 +26,29 @@ class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract
         setContentView(R.layout.activity_institution_detail)
         //intent.getParcelableExtra<Institution>("institution")
         presenter = InstitutionDetailPresenter()
+        presenter?.bindView(this)
         presenter?.loadInstitution("0")
     }
 
-    override fun setupDetailedReviewsList(reviews: ArrayList<DetailedReview>){
+    override fun setupInstitutionDetails(institution: Institution) {
+        institution_institution_name.text = institution.name
+        rating_average.rating = institution.averageRating!!
+        average_tv.text = institution.averageRating!!.toString()
+        val reviewdBy = institution.reviewdBy
+        reviews_count_tv.text = "Avaliado por $reviewdBy alunos"
+        setupDetailedReviewsList(ArrayList(institution.detailedReviews))
+        setupGeneralReviewsList(ArrayList(institution.generalReviews))
+    }
+
+    private fun setupDetailedReviewsList(reviews: ArrayList<DetailedReview>){
         detailedReviewAdapter = DetailedReviewAdapter(reviews)
         detailedReviewsRv.adapter = detailedReviewAdapter
         detailedReviewsRv.layoutManager = LinearLayoutManager(baseContext)
     }
 
-    override fun setupGeneralReviewsList(reviews: ArrayList<GeneralReview>){
+    private fun setupGeneralReviewsList(reviews: ArrayList<GeneralReview>){
         generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(reviews)
-        generalReviewsRv.adapter = detailedReviewAdapter
+        generalReviewsRv.adapter = generalReviewAdapter
         generalReviewsRv.layoutManager = LinearLayoutManager(baseContext)
     }
 

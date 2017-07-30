@@ -42,16 +42,11 @@
 
         <LinearLayout
             android:gravity="center_vertical"
-            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iv_happiness"
-                android:tint="#808080"
-                android:src="@drawable/ic_smile"
-                android:layout_width="18dp"
-                android:layout_height="18dp" />
             <TextView
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_width="wrap_content"
@@ -73,28 +68,26 @@
                 <RatingBar
                     android:layout_marginLeft="@dimen/activity_vertical_margin"
                     android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:id="@+id/rating_average_item"
-                    android:clickable="true"
+                    android:id="@+id/rating_average"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:attr/ratingBarStyleIndicator"
                     android:numStars="5"
-                    android:stepSize="1"
-                    android:isIndicator="false" />
+                    android:stepSize="0.5"
+                    android:clickable="false"
+                    android:isIndicator="true" />
                 <TextView
                     android:id="@+id/reviews_count_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6 Avaliações"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
             <TextView
                 android:layout_marginLeft="8dp"
                 android:textSize="24sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/average_tv"
-                android:text="4,2"/>
+                android:id="@+id/average_tv" />
         </LinearLayout>
 
         <FrameLayout
