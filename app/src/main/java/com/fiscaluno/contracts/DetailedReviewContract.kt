@@ -11,11 +11,12 @@ import java.util.ArrayList
 
 interface DetailedReviewContract {
     interface View {
-        fun setupReviewsList(review: ArrayList<DetailedReview>)
+        fun setupDetailedReviewsList(review: ArrayList<DetailedReview>)
     }
 
     interface Presenter {
         fun bindView(view: DetailedReviewContract.View)
         fun loadReviews()
+        fun loadReviewsByInstitutionId(institutionId: String)
     }
 }

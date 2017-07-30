@@ -26,4 +26,18 @@ class DetailedReviewPresenter : DetailedReviewContract.Presenter {
 
         view?.setupReviewsList(reviews)
     }
+
+    override fun loadReviewsByInstitutionId(institutionId: String) {
+        //TODO: Load average detailed review ratings from the institution
+        val reviews  = java.util.ArrayList<DetailedReview>()
+
+        for(i in 0..4){
+            var review = DetailedReview()
+            review.type = "Test $i"
+            review.rate = i+(0.03f*i)
+            reviews.add(review)
+        }
+
+    }
+
 }
