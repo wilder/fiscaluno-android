@@ -27,6 +27,8 @@ class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
         institution.website = "http://faculdadeimpacta.edu/"
         institution.phoneNumber = "+551112381234"
         institution.email = "contato@impacta.edu.br"
+        institution.averageRating = 4.5f
+        institution.reviewdBy = 432
 
         //TODO: Load average detailed review ratings from the institution
         val detailedReviews  = java.util.ArrayList<DetailedReview>()

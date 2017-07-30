@@ -16,6 +16,8 @@ class Institution() : Parcelable {
     var website: String? = null
     var phoneNumber: String? = null
     var imageUri: String? = null
+    var averageRating: Float? = null
+    var reviewdBy: Int? = null
     var detailedReviews: List<DetailedReview>? = null
     var generalReviews: List<GeneralReview>? = null
 
@@ -28,6 +30,8 @@ class Institution() : Parcelable {
         website = parcel.readString()
         phoneNumber = parcel.readString()
         imageUri = parcel.readString()
+        averageRating = parcel.readValue(Float::class.java.classLoader) as? Float
+        reviewdBy = parcel.readValue(Int::class.java.classLoader) as? Int
         detailedReviews = parcel.createTypedArrayList(DetailedReview.CREATOR)
         generalReviews = parcel.createTypedArrayList(GeneralReview.CREATOR)
     }
@@ -41,6 +45,8 @@ class Institution() : Parcelable {
         parcel.writeString(website)
         parcel.writeString(phoneNumber)
         parcel.writeString(imageUri)
+        parcel.writeValue(averageRating)
+        parcel.writeValue(reviewdBy)
         parcel.writeTypedList(detailedReviews)
         parcel.writeTypedList(generalReviews)
     }
@@ -58,6 +64,5 @@ class Institution() : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
 
 }
