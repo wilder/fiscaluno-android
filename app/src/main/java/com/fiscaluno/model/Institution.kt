@@ -7,7 +7,7 @@ import android.os.Parcelable
  * Created by Wilder on 11/07/17.
  */
 
-class Institution : Parcelable {
+class Institution() : Parcelable {
     var id: Int? = null
     var name: String? = null
     var address: String? = null

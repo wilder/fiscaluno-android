@@ -34,7 +34,7 @@ class RatingGeneralFragment : Fragment() {
         institutionNameTv?.text = reviewParam?.institution?.name
         addButton?.setOnClickListener {
             //TODO: Validate Values
-            reviewParam?.rate = ratingBar?.numStars
+            reviewParam?.rate = ratingBar?.rating
             reviewParam?.description = reviewTitleEt?.text.toString()
             reviewParam?.cons = consTv?.text.toString()
             reviewParam?.pros = prosTv?.text.toString()

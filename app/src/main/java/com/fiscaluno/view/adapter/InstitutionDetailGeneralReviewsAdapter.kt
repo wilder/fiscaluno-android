@@ -12,7 +12,7 @@ import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
 import android.support.v4.view.ViewPager
 import android.widget.RatingBar
-import com.fiscaluno.model.DetailedReview
+import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.view.RatingCourseInfoFragment
 import java.util.ArrayList
 
@@ -21,24 +21,23 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>) : RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>() {
+class InstitutionDetailReviewsAdapter constructor(mDataset: ArrayList<GeneralReview>) : RecyclerView.Adapter<InstitutionDetailReviewsAdapter.ViewHolder>() {
 
-    var mDataset: ArrayList<DetailedReview> = mDataset
+    var mDataset: ArrayList<GeneralReview> = mDataset
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ViewHolder(layoutInflater.inflate(R.layout.item_detailed_review, parent, false))
+        return ViewHolder(layoutInflater.inflate(R.layout.item_review, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val review = mDataset[position]
 
-        holder.reviewName.text = review.type
+        holder.prosTv.text = review.pros
+        holder.consTv.text = review.cons
+        holder.timeTv.text = review.createdAt?.time.toString() //TODO: Format time
+        holder.starsBar.rating = review.rate!!
 
-        // Set click listener for the whole post view
-        holder.starsBar.setOnClickListener {
-            review.rate = holder.starsBar.rating
-        }
     }
 
     override fun getItemCount(): Int {
@@ -46,11 +45,13 @@ class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>) : R
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var reviewName: TextView = v.findViewById(R.id.review_title_tv_dr_item) as TextView
-        var starsBar: RatingBar = v.findViewById(R.id.rating_stars_dr_item) as RatingBar
+        var prosTv: TextView = v.findViewById(R.id.pros_tv) as TextView
+        var consTv: TextView = v.findViewById(R.id.cons_tv) as TextView
+        var timeTv: TextView = v.findViewById(R.id.time_tv) as TextView
+        var starsBar: RatingBar = v.findViewById(R.id.rating_item) as RatingBar
     }
 
-    fun getDetailedReviews(): ArrayList<DetailedReview> {
+    fun getGeneralReviews(): ArrayList<GeneralReview> {
         return mDataset
     }
 

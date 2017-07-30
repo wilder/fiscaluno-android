@@ -9,7 +9,6 @@ import android.os.Parcelable
 
 class GeneralReview : Review, Parcelable {
     var suggestion: String? = null
-    var rate: Int? = null //from 1 to 5 -
     var pros: String? = null
     var cons: String? = null
     var description: String? = null
@@ -22,7 +21,6 @@ class GeneralReview : Review, Parcelable {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeString(this.suggestion)
-        dest.writeValue(this.rate)
         dest.writeString(this.pros)
         dest.writeString(this.cons)
         dest.writeString(this.description)
@@ -38,7 +36,6 @@ class GeneralReview : Review, Parcelable {
 
     protected constructor(`in`: Parcel) {
         this.suggestion = `in`.readString()
-        this.rate = `in`.readValue(Int::class.java.classLoader) as Int
         this.pros = `in`.readString()
         this.cons = `in`.readString()
         this.description = `in`.readString()
