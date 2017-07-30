@@ -41,7 +41,7 @@ class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract
     }
 
     private fun setupDetailedReviewsList(reviews: ArrayList<DetailedReview>){
-        detailedReviewAdapter = DetailedReviewAdapter(reviews)
+        detailedReviewAdapter = DetailedReviewAdapter(reviews, false)
         detailedReviewsRv.adapter = detailedReviewAdapter
         detailedReviewsRv.layoutManager = LinearLayoutManager(baseContext)
     }

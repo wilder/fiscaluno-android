@@ -73,7 +73,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View {
     }
 
     private fun setupList(reviews: ArrayList<DetailedReview>){
-        adapter = DetailedReviewAdapter(reviews)
+        adapter = DetailedReviewAdapter(reviews, true)
         reviewsList?.adapter = adapter
         reviewsList?.layoutManager = LinearLayoutManager(context)
     }

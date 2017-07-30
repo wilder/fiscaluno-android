@@ -21,9 +21,10 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>) : RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>() {
+class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>, clickable: Boolean) : RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>() {
 
     var mDataset: ArrayList<DetailedReview> = mDataset
+    var clickable: Boolean = clickable
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -39,10 +40,13 @@ class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>) : R
             holder.starsBar.rating = review.rate!!
         }
 
-        // TODO: Check if should allow clicking
-        holder.starsBar.setOnClickListener {
-            review.rate = holder.starsBar.rating
+        holder.starsBar.setIsIndicator(!clickable)
+        if(clickable){
+            holder.starsBar.setOnClickListener {
+                review.rate = holder.starsBar.rating
+            }
         }
+
     }
 
     override fun getItemCount(): Int {
