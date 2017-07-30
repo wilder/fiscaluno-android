@@ -16,46 +16,48 @@ class Institution() : Parcelable {
     var website: String? = null
     var phoneNumber: String? = null
     var imageUri: String? = null
+    var detailedReviews: List<DetailedReview>? = null
+    var generalReviews: List<GeneralReview>? = null
+
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readValue(Int::class.java.classLoader) as? Int
+        name = parcel.readString()
+        address = parcel.readString()
+        cnpj = parcel.readString()
+        email = parcel.readString()
+        website = parcel.readString()
+        phoneNumber = parcel.readString()
+        imageUri = parcel.readString()
+        detailedReviews = parcel.createTypedArrayList(DetailedReview.CREATOR)
+        generalReviews = parcel.createTypedArrayList(GeneralReview.CREATOR)
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeString(name)
+        parcel.writeString(address)
+        parcel.writeString(cnpj)
+        parcel.writeString(email)
+        parcel.writeString(website)
+        parcel.writeString(phoneNumber)
+        parcel.writeString(imageUri)
+        parcel.writeTypedList(detailedReviews)
+        parcel.writeTypedList(generalReviews)
+    }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeValue(this.id)
-        dest.writeString(this.name)
-        dest.writeString(this.address)
-        dest.writeString(this.cnpj)
-        dest.writeString(this.email)
-        dest.writeString(this.website)
-        dest.writeString(this.phoneNumber)
-        dest.writeString(this.imageUri)
-    }
+    companion object CREATOR : Parcelable.Creator<Institution> {
+        override fun createFromParcel(parcel: Parcel): Institution {
+            return Institution(parcel)
+        }
 
-    constructor() {}
-
-    protected constructor(`in`: Parcel) {
-        this.id = `in`.readValue(Int::class.java.classLoader) as Int
-        this.name = `in`.readString()
-        this.address = `in`.readString()
-        this.cnpj = `in`.readString()
-        this.email = `in`.readString()
-        this.website = `in`.readString()
-        this.phoneNumber = `in`.readString()
-        this.imageUri = `in`.readString()
-
-    }
-
-    companion object {
-
-        val CREATOR: Parcelable.Creator<Institution> = object : Parcelable.Creator<Institution> {
-            override fun createFromParcel(source: Parcel): Institution {
-                return Institution(source)
-            }
-
-            override fun newArray(size: Int): Array<Institution?> {
-                return arrayOfNulls(size)
-            }
+        override fun newArray(size: Int): Array<Institution?> {
+            return arrayOfNulls(size)
         }
     }
+
+
 }

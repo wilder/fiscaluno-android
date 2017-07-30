@@ -4,16 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.fiscaluno.R
-import com.fiscaluno.extensions.toUri
-import com.fiscaluno.model.Institution
-import android.support.v4.view.ViewPager
 import android.widget.RatingBar
 import com.fiscaluno.model.GeneralReview
-import com.fiscaluno.view.RatingCourseInfoFragment
 import java.util.ArrayList
 
 
@@ -21,7 +15,7 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class InstitutionDetailReviewsAdapter constructor(mDataset: ArrayList<GeneralReview>) : RecyclerView.Adapter<InstitutionDetailReviewsAdapter.ViewHolder>() {
+class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: ArrayList<GeneralReview>) : RecyclerView.Adapter<InstitutionDetailGeneralReviewsAdapter.ViewHolder>() {
 
     var mDataset: ArrayList<GeneralReview> = mDataset
 
