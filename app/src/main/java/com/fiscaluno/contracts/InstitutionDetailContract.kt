@@ -1,6 +1,7 @@
 package com.fiscaluno.contracts
 
 import com.fiscaluno.model.GeneralReview
+import com.fiscaluno.model.Institution
 
 import java.util.ArrayList
 
@@ -9,8 +10,8 @@ import java.util.ArrayList
  */
 
 interface InstitutionDetailContract {
-    interface View : DetailedReviewContract.View {
-        fun setupGeneralReviewsList(reviews: ArrayList<GeneralReview>)
+    interface View {
+        fun setupInstitutionDetails(institution: Institution)
     }
 
     interface Presenter {

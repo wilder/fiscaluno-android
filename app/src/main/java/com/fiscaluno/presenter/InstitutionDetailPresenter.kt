@@ -56,7 +56,6 @@ class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
         institution.generalReviews = generalReviews
         institution.detailedReviews = detailedReviews
 
-        view?.setupDetailedReviewsList(institution.detailedReviews as ArrayList<DetailedReview>)
-        view?.setupGeneralReviewsList(institution.generalReviews as ArrayList<GeneralReview>)
+        view?.setupInstitutionDetails(institution)
     }
 }
