@@ -35,7 +35,11 @@ class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>) : R
 
         holder.reviewName.text = review.type
 
-        // Set click listener for the whole post view
+        if(review.rate != null) {
+            holder.starsBar.rating = review.rate!!
+        }
+
+        // TODO: Check if should allow clicking
         holder.starsBar.setOnClickListener {
             review.rate = holder.starsBar.rating
         }
