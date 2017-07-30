@@ -2,16 +2,14 @@
     <string name="app_name">Fiscaluno</string>
     <string name="title_activity_rating">Rating</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_institution">Search the Institution</string>
     <string name="institutions">Institutions</string>
     <string name="course">Course</string>
     <string name="course_name">Course Name</string>
     <string name="type">Type</string>
-    <string name="Anual">Anual</string>
+    <string name="Anual">Annual</string>
     <string name="semiannually">semiannually</string>
     <string name="continueTxt">Continue</string>
     <string name="rate_it">Rate it</string>
