@@ -8,10 +8,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.fiscaluno.R
+import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
-import android.support.v4.view.ViewPager
-import com.fiscaluno.view.RatingCourseInfoFragment
+import com.fiscaluno.view.RatingActivity
 import java.util.ArrayList
 
 
@@ -19,10 +19,10 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class InstitutionListAdapter constructor(mDataset: ArrayList<Institution>, viewPager: ViewPager) : RecyclerView.Adapter<InstitutionListAdapter.ViewHolder>() {
+class InstitutionListAdapter (mDataset: ArrayList<Institution>, ratingActivity: RatingActivity) : RecyclerView.Adapter<InstitutionListAdapter.ViewHolder>() {
 
     var mDataset: ArrayList<Institution> = mDataset
-    val viewPager: ViewPager = viewPager
+    val ratingActivity: RatingActivity = ratingActivity //TODO: Change to interface to decouple the code
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -39,8 +39,8 @@ class InstitutionListAdapter constructor(mDataset: ArrayList<Institution>, viewP
 
         // Set click listener for the whole post view
         holder.conainer.setOnClickListener {
-            (viewPager.adapter as ViewPagerAdapter).add(RatingCourseInfoFragment.newInstance(institution))
-            viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+            ratingActivity.saveInstitution(institution)
+            ratingActivity.proceedListener()
         }
     }
 

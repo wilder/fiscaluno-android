@@ -1,5 +1,6 @@
 package com.fiscaluno.view
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.fiscaluno.R
+import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
@@ -17,9 +19,13 @@ import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.DetailedReviewPresenter
 import com.fiscaluno.view.adapter.DetailedReviewAdapter
 import com.fiscaluno.view.adapter.InstitutionListAdapter
+import com.stepstone.stepper.BlockingStep
+import com.stepstone.stepper.Step
+import com.stepstone.stepper.StepperLayout
+import com.stepstone.stepper.VerificationError
 import java.util.ArrayList
 
-class RatingDetailedFragment : Fragment(), DetailedReviewContract.View {
+class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, BlockingStep {
 
     private var generalReview: GeneralReview? = null
     private var institutionName: TextView? = null
@@ -27,19 +33,26 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View {
     private var reviewsList: RecyclerView? = null
     private var adapter: DetailedReviewAdapter? = null
     private var presenter: DetailedReviewContract.Presenter? = null
+    lateinit var dataManager: DataManager
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        institutionName?.setText(generalReview?.institution?.name)
-        institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: get image
-        presenter?.loadReviews()
+    companion object {
+        fun newInstance(): RatingDetailedFragment {
+            val fragment = RatingDetailedFragment()
+            return fragment
+        }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is DataManager) {
+            dataManager = context
+        } else {
+            throw IllegalStateException("Activity must implement DataManager interface!")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            generalReview = arguments.get(RatingDetailedFragment.REVIEW_PARAM) as GeneralReview?
-        }
         presenter = DetailedReviewPresenter()
         presenter?.bindView(this)
     }
@@ -56,17 +69,13 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View {
         return view
     }
 
-    companion object {
-        private val REVIEW_PARAM = "review"
-
-        fun newInstance(param1: GeneralReview): RatingDetailedFragment {
-            val fragment = RatingDetailedFragment()
-            val args = Bundle()
-            args.putParcelable(REVIEW_PARAM, param1)
-            fragment.arguments = args
-            return fragment
-        }
+    override fun onSelected() {
+        generalReview = dataManager.getGeneralReview()
+        institutionName?.setText(generalReview?.institution?.name)
+        institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: get image
+        presenter?.loadReviews()
     }
+
 
     override fun setupDetailedReviewsList(review: ArrayList<DetailedReview>) {
         setupList(review)
@@ -76,5 +85,23 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View {
         adapter = DetailedReviewAdapter(reviews, true)
         reviewsList?.adapter = adapter
         reviewsList?.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onBackClicked(callback: StepperLayout.OnBackClickedCallback?) {
+        callback?.goToPrevStep()
+    }
+
+    override fun onCompleteClicked(callback: StepperLayout.OnCompleteClickedCallback?) {
+    }
+
+    override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback?) {
+        //TODO: save datailedreview
+    }
+
+    override fun verifyStep(): VerificationError? {
+        return null
+    }
+
+    override fun onError(error: VerificationError) {
     }
 }

@@ -1,5 +1,6 @@
 package com.fiscaluno.view
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -7,9 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.fiscaluno.R
+import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.model.GeneralReview
+import com.stepstone.stepper.BlockingStep
+import com.stepstone.stepper.Step
+import com.stepstone.stepper.StepperLayout
+import com.stepstone.stepper.VerificationError
 
-class RatingGeneralFragment : Fragment() {
+class RatingGeneralFragment : Fragment(), BlockingStep {
 
     private var reviewParam: GeneralReview? = null
     private var institutionImage: ImageView? = null
@@ -20,37 +26,28 @@ class RatingGeneralFragment : Fragment() {
     private var suggestionsEt: EditText? = null
     private var ratingBar: RatingBar? = null
     private var addButton: Button? = null
+    lateinit var dataManager: DataManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            reviewParam = arguments.get(REVIEW_PARAM) as GeneralReview?
+
+    companion object {
+        fun newInstance(): RatingGeneralFragment {
+            val fragment = RatingGeneralFragment()
+            return fragment
         }
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: Get institution image
-        institutionNameTv?.text = reviewParam?.institution?.name
-        addButton?.setOnClickListener {
-            //TODO: Validate Values
-            reviewParam?.rate = ratingBar?.rating
-            reviewParam?.description = reviewTitleEt?.text.toString()
-            reviewParam?.cons = consTv?.text.toString()
-            reviewParam?.pros = prosTv?.text.toString()
-            reviewParam?.suggestion = suggestionsEt?.text.toString()
-
-            val adapter = (activity as RatingActivity).mPagerAdapter
-            val pager = (activity as RatingActivity).mViewPager
-            adapter?.add(RatingDetailedFragment.newInstance(reviewParam!!))
-            pager?.setCurrentItem(pager.currentItem + 1, true)
-            Toast.makeText(this.context, reviewParam?.toString(), Toast.LENGTH_LONG).show()
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is DataManager) {
+            dataManager = context
+        } else {
+            throw IllegalStateException("Activity must implement DataManager interface!")
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater!!.inflate(R.layout.fragment_rating_general, container, false)
 
         institutionImage = view.findViewById(R.id.institution_small_image_gn) as ImageView
@@ -65,14 +62,37 @@ class RatingGeneralFragment : Fragment() {
         return view
     }
 
-    companion object {
-        private val REVIEW_PARAM = "review"
-        fun newInstance(review: GeneralReview): RatingGeneralFragment {
-            val fragment = RatingGeneralFragment()
-            val args = Bundle()
-            args.putParcelable(REVIEW_PARAM, review)
-            fragment.arguments = args
-            return fragment
-        }
+    override fun onSelected() {
+        reviewParam = dataManager.getGeneralReview()
+        institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: Get institution image
+        institutionNameTv?.text = reviewParam?.institution?.name
     }
+
+    override fun verifyStep(): VerificationError? {
+        //TODO: Validate Values
+        return null
+    }
+
+    override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback) {
+        reviewParam?.rate = ratingBar?.rating
+        reviewParam?.description = reviewTitleEt?.text.toString()
+        reviewParam?.cons = consTv?.text.toString()
+        reviewParam?.pros = prosTv?.text.toString()
+        reviewParam?.suggestion = suggestionsEt?.text.toString()
+        (activity as RatingActivity).saveGeneralReview(reviewParam)
+
+        Toast.makeText(this.context, reviewParam?.toString(), Toast.LENGTH_LONG).show()
+        callback.goToNextStep()
+    }
+
+    override fun onBackClicked(callback: StepperLayout.OnBackClickedCallback?) {
+        callback?.goToPrevStep()
+    }
+
+    override fun onCompleteClicked(callback: StepperLayout.OnCompleteClickedCallback?) {
+    }
+
+    override fun onError(error: VerificationError) {
+    }
+
 }
