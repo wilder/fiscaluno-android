@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/searchInstitution_et_rating"
+        <android.support.v7.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/searchInstitution_autoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

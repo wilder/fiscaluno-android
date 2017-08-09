@@ -2,30 +2,29 @@ package com.fiscaluno.view
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.SelectInstitutionContract
 import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.SelectInstitutionPresenter
+import com.fiscaluno.view.adapter.InstitutionAutoCompleteAdapter
 import com.fiscaluno.view.adapter.InstitutionListAdapter
-import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.Step
-import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
-import java.util.ArrayList
+
 
 class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.View, Step {
 
     var presenter : SelectInstitutionContract.Presenter? = null
     var institutionList: RecyclerView? = null
-    var searchEt: TextInputEditText? = null
+    var searchEt: AutoCompleteTextView? = null
     var adapter: InstitutionListAdapter? = null
 
     lateinit var dataManager: DataManager
@@ -56,13 +55,19 @@ class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.Vi
                               savedInstanceState: Bundle?): View? {
         val view =  inflater!!.inflate(R.layout.fragment_rating_select_institution, container, false)
         institutionList = view.findViewById(R.id.instituitons_rv_rating) as RecyclerView
-        searchEt = view.findViewById(R.id.searchInstitution_et_rating) as TextInputEditText
+        searchEt = view.findViewById(R.id.searchInstitution_autoComplete) as AutoCompleteTextView
         return view
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter?.loadMainInstitutions()
+        presenter?.searchInstitutions()
+    }
+
+    override fun setupInstitutionAutocomplete(institutions: ArrayList<Institution>) {
+        val adapter = InstitutionAutoCompleteAdapter(context, R.layout.item_institution_name, institutions)
+        searchEt?.setAdapter(adapter)
     }
 
     private fun setupList(institutions: ArrayList<Institution>){

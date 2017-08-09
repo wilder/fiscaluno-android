@@ -27,7 +27,16 @@ class SelectInstitutionPresenter : SelectInstitutionContract.Presenter {
         view?.updateInstitutionList(institutions)
     }
 
-    override fun searchInstitutions(search: String) {
-        view?.updateInstitutionList(arrayListOf())
+    override fun searchInstitutions() {
+        //TODO: Change to list of Institutions and get Institutions from Web Service
+        val institutions = ArrayList<Institution>()
+        var i = 0
+        while (i < 5) {
+            val inst = Institution()
+            inst.name = "Inst $i"
+            institutions.add(inst)
+            i+=1
+        }
+        view?.setupInstitutionAutocomplete(institutions)
     }
 }

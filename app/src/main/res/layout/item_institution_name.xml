@@ -12,8 +12,7 @@
     app:cardUseCompatPadding="false">
 
     <LinearLayout
-        android:id="@+id/institution_name_ll_item
-"
+        android:id="@+id/institution_name_ll_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
