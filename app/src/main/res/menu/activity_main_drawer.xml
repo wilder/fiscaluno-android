@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Tela Inicial" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_create_black_24dp"
+            android:title="Postar Avaliação" />
+        <item
+            app:itemIconTint="#808080"
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_fiber_smart_record_black_24dp"
+            android:title="Realizar Doação" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Configurações" />
+        <item
+            android:id="@+id/nav_manageeee"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="Sobre" />
+    </group>
+</menu>
