@@ -1,19 +1,20 @@
-package com.fiscaluno
+package com.fiscaluno.view
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v7.widget.Toolbar
-import com.fiscaluno.R.id.toolbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import android.view.View
-import com.fiscaluno.view.RatingActivity
+import com.fiscaluno.R
+import com.fiscaluno.contracts.MainContract
+import com.fiscaluno.model.Institution
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +82,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun showTopInstitutions(institutions: List<Institution>) {
+
+    }
+
+    override fun showUserInstitutionInfo(userInstitution: Institution) {
+
     }
 
 }
