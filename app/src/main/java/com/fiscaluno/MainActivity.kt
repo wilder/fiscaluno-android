@@ -1,14 +1,19 @@
 package com.fiscaluno
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v7.widget.Toolbar
 import com.fiscaluno.R.id.toolbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.view.GravityCompat
+import android.view.MenuItem
+import android.view.View
+import com.fiscaluno.view.RatingActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +28,51 @@ class MainActivity : AppCompatActivity() {
         drawer.setDrawerListener(toggle)
         toggle.syncState()
 
+        val navigationView = findViewById(R.id.nav_view) as NavigationView
+        navigationView.setNavigationItemSelectedListener(this)
+
+    }
+
+
+    fun fbReviewClick(view: View) {
+        val intent = Intent(this, RatingActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun fbSearchInstitutionClick(view: View) {
+        //TODO: Go to search passing type as institution
+        val intent = Intent(this, RatingActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun fbSearchCourseClick(view: View) {
+        //TODO: Go to search passing type as course
+        val intent = Intent(this, RatingActivity::class.java)
+        startActivity(intent)
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var intent: Intent? = null
+        when (item.itemId) {
+
+            R.id.nav_profile -> {
+                intent = Intent(this, RatingActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.nav_review -> {
+                intent = Intent(this, RatingActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.nav_info -> {
+                intent = Intent(this, RatingActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
+        return true
     }
 
     override fun onBackPressed() {
@@ -33,4 +83,5 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
 }

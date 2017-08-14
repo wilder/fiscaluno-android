@@ -163,7 +163,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"
             app:fab_size="mini"
-            app:fab_label="Add Review" />
+            app:fab_label="Add Review"
+            android:onClick="fbReviewClick"/>
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fav_search_institution"
             android:layout_width="wrap_content"

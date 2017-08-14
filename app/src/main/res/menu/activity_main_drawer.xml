@@ -4,14 +4,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="Minha Conta" />
     </group>
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_review"
             android:icon="@drawable/ic_create_black_24dp"
             android:title="Postar Avaliação" />
         <!--TODO <item
