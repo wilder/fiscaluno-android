@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-
     fun fbReviewClick(view: View) {
         val intent = Intent(this, RatingActivity::class.java)
         startActivity(intent)
