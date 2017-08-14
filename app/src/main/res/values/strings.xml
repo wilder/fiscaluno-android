@@ -21,5 +21,9 @@
     <string name="students_satisfaction">Students\' Satisfaction</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="rated_by">Rated By:</string>
+    <string name="your_rating">Your Rating</string>
+    <string name="average">Average</string>
 
 </resources>

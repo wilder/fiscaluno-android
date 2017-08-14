@@ -6,7 +6,7 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Tela Inicial" />
+            android:title="Minha Conta" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -14,20 +14,20 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_create_black_24dp"
             android:title="Postar Avaliação" />
-        <item
+        <!--TODO <item
             app:itemIconTint="#808080"
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_fiber_smart_record_black_24dp"
-            android:title="Realizar Doação" />
+            android:title="Realizar Doação" />-->
     </group>
 
     <group android:checkableBehavior="single">
+        <!--TODO <item-->
+            <!--android:id="@+id/nav_manage"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Configurações" />-->
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Configurações" />
-        <item
-            android:id="@+id/nav_manageeee"
+            android:id="@+id/nav_info"
             android:icon="@drawable/ic_info_outline_black_24dp"
             android:title="Sobre" />
     </group>

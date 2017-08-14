@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context="com.fiscaluno.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -23,14 +22,128 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
+    <!-- TODO: create dashboards and display here-->
     <LinearLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
         <TextView
-            android:text="oi"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"/>
+            android:layout_height="wrap_content"
+            android:text="Your Institution"/>
+
+        <!-- TODO: Change to fragment -->
+
+        <android.support.v7.widget.CardView
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:background="@color/colorAccent"
+                    android:id="@+id/institutionIv"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:layout_width="115dp"
+                    android:layout_height="115dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/institutionNameTv"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:text="@string/your_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RatingBar
+                            android:id="@+id/institutionRating"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:isIndicator="true"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_vertical_margin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:weightSum="10"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rated_by"/>
+                            <TextView
+                                android:id="@+id/ratedBy"
+                                android:text="5.0"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/average"/>
+                            <TextView
+                                android:id="@+id/average"
+                                android:text="5.0"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/top_rated"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:id="@+id/topInstitutions"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
-</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
