@@ -1,5 +1,6 @@
 package com.fiscaluno.view
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,13 +9,20 @@ import android.support.v7.widget.Toolbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.view.GravityCompat
+import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.R
 import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.model.Institution
+import com.fiscaluno.presenter.MainPresenter
+import com.fiscaluno.view.adapter.TopInstitutionsAdapter
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
+
+    private var presenter: MainContract.Presenter? =  null
+    private var topInstitutionsAdapter: TopInstitutionsAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,25 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
 
+        presenter = MainPresenter()
+        presenter?.bindView(this)
+        //TODO: Call in different threads?
+        presenter?.loadTopInstitutions()
+        //TODO: Fix it!
+        presenter?.loadUserInstitutionInfo(getSharedPreferences("userpref", Context.MODE_PRIVATE))
+    }
+
+    override fun showTopInstitutions(institutions: List<Institution>) {
+        topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions))
+        topInstitutionsRv.adapter = topInstitutionsAdapter
+
+    }
+
+    override fun showUserInstitutionInfo(userInstitution: Institution) {
+        institutionNameTv.text = userInstitution.name
+        ratedBy.text = userInstitution.reviewdBy.toString()
+        average.text = userInstitution.averageRating.toString()
+        institutionRating.rating = userInstitution.averageRating!!
     }
 
     fun fbReviewClick(view: View) {
@@ -82,14 +109,6 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         } else {
             super.onBackPressed()
         }
-    }
-
-    override fun showTopInstitutions(institutions: List<Institution>) {
-
-    }
-
-    override fun showUserInstitutionInfo(userInstitution: Institution) {
-
     }
 
 }
