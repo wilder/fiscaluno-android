@@ -35,7 +35,7 @@ class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder? {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TopInstitutionsAdapter.ViewHolder(layoutInflater.inflate(R.layout.item_detailed_review, parent, false))
+        return TopInstitutionsAdapter.ViewHolder(layoutInflater.inflate(R.layout.item_institution_main, parent, false))
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
