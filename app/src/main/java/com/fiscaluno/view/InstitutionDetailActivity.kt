@@ -24,10 +24,10 @@ class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_institution_detail)
-        //intent.getParcelableExtra<Institution>("institution")
+        val institution = intent.getParcelableExtra<Institution>("institution")
         presenter = InstitutionDetailPresenter()
         presenter?.bindView(this)
-        presenter?.loadInstitution("0")
+        presenter?.loadInstitution(institution.id.toString())
     }
 
     override fun setupInstitutionDetails(institution: Institution) {
