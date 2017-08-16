@@ -29,7 +29,7 @@ class MainPresenter : MainContract.Presenter{
         view.showTopInstitutions(topInstitutions!!)
     }
 
-    override fun loadUserInstitutionInfo(sharedPreferences: SharedPreferences) {
+    override fun loadUserInstitutionInfo(sharedPreferences: SharedPreferences){
         //TODO: Get user's institution
         val institution = Institution()
         institution.name = "Faculdade Impacta de Tecnologia"

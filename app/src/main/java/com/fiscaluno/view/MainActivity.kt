@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
     private var presenter: MainContract.Presenter? =  null
     private var topInstitutionsAdapter: TopInstitutionsAdapter? = null
+    private var userInstitution: Institution? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     }
 
     override fun showUserInstitutionInfo(userInstitution: Institution) {
+        this.userInstitution = userInstitution
         institutionNameTv.text = userInstitution.name
         ratedBy.text = userInstitution.reviewdBy.toString()
         average.text = userInstitution.averageRating.toString()
@@ -75,6 +77,12 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     fun fbSearchCourseClick(view: View) {
         //TODO: Go to search passing type as course
         val intent = Intent(this, RatingActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToUserInstitution(view: View){
+        val intent = Intent(this, InstitutionDetailActivity::class.java)
+        intent.putExtra("institution", userInstitution)
         startActivity(intent)
     }
 
