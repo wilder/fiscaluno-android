@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.R
 import com.fiscaluno.contracts.MainContract
+import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.MainPresenter
 import com.fiscaluno.view.adapter.TopInstitutionsAdapter
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     private var presenter: MainContract.Presenter? =  null
     private var topInstitutionsAdapter: TopInstitutionsAdapter? = null
     private var userInstitution: Institution? = null
+    private var preferences: PreferencesManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +47,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         presenter?.bindView(this)
         //TODO: Call in different threads?
         presenter?.loadTopInstitutions()
-        //TODO: Fix it!
-        presenter?.loadUserInstitutionInfo(getSharedPreferences("userpref", Context.MODE_PRIVATE))
+        presenter?.loadUserInstitutionInfo(preferences!!.userInstitutionId)
     }
 
     override fun showTopInstitutions(institutions: List<Institution>) {
