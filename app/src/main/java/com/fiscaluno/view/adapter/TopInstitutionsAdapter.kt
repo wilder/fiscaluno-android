@@ -1,6 +1,10 @@
 package com.fiscaluno.view.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +14,16 @@ import android.widget.TextView
 import com.fiscaluno.R
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.Institution
+import com.fiscaluno.view.InstitutionDetailActivity
 import java.util.ArrayList
 
 /**
  * Created by Wilder on 14/08/17.
  */
-class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>) : RecyclerView.Adapter<com.fiscaluno.view.adapter.TopInstitutionsAdapter.ViewHolder>() {
+class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>, context: Context) : RecyclerView.Adapter<com.fiscaluno.view.adapter.TopInstitutionsAdapter.ViewHolder>() {
 
     var institutions = institutions
+    var context = context
 
     override fun getItemCount(): Int {
         return institutions.size
@@ -31,6 +37,11 @@ class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>) :
         holder.ratedByCount.text = institution.reviewdBy.toString()
         //TODO: Set imagedrawable
         //holder.institutionImage.setImageDrawable()
+        holder.institutionCard.setOnClickListener {
+            val intent: Intent = Intent(context, InstitutionDetailActivity::class.java)
+            intent.putExtra("institution", institution)
+            context.startActivity(intent)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder? {
@@ -44,6 +55,7 @@ class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>) :
         val institutionImage : ImageView = v.findViewById(R.id.institutionIv) as ImageView
         val ratedByCount: TextView = v.findViewById(R.id.ratedBy) as TextView
         val averageRating: TextView = v.findViewById(R.id.average) as TextView
+        val institutionCard: CardView = v.findViewById(R.id.institutionCard) as CardView
     }
 
 }

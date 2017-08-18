@@ -27,6 +27,7 @@ class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract
         val institution = intent.getParcelableExtra<Institution>("institution")
         presenter = InstitutionDetailPresenter()
         presenter?.bindView(this)
+        //TODO: pass whole institution?
         presenter?.loadInstitution(institution.id.toString())
     }
 

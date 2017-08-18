@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     }
 
     override fun showTopInstitutions(institutions: List<Institution>) {
-        topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions))
+        topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions), this)
         topInstitutionsRv.adapter = topInstitutionsAdapter
 
     }
