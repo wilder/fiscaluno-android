@@ -56,12 +56,25 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
     }
 
-    override fun showUserInstitutionInfo(userInstitution: Institution) {
-        this.userInstitution = userInstitution
-        institutionNameTv.text = userInstitution.name
-        ratedBy.text = userInstitution.reviewdBy.toString()
-        average.text = userInstitution.averageRating.toString()
-        institutionRating.rating = userInstitution.averageRating!!
+    override fun showUserInstitutionInfo(userInstitution: Institution?) {
+
+        //display user institution information
+        if(userInstitution != null) {
+            this.userInstitution = userInstitution
+            institutionNameTv.text = userInstitution?.name
+            ratedBy.text = userInstitution?.reviewdBy.toString()
+            average.text = userInstitution?.averageRating.toString()
+            institutionRating.rating = userInstitution?.averageRating!!
+        } else {
+            /*
+             * User haven't reviewed a institution yet
+             * Displaying a card saying that
+             * TODO: Create class to handle views?
+             */
+            userInstitutionCard.visibility = View.GONE
+            haventReviewedCard.visibility = View.VISIBLE
+        }
+
     }
 
     fun fbReviewClick(view: View) {
@@ -91,7 +104,6 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var intent: Intent? = null
         when (item.itemId) {
-
             R.id.nav_profile -> {
                 intent = Intent(this, RatingActivity::class.java)
                 startActivity(intent)

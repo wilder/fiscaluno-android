@@ -15,6 +15,9 @@ class MainPresenter : MainContract.Presenter{
         this.view = view
     }
 
+    /**
+     * Loads the top rated Institutions
+     */
     override fun loadTopInstitutions() {
         //TODO: Load top Institutions
         val topInstitutions: ArrayList<Institution> = ArrayList()
@@ -29,13 +32,30 @@ class MainPresenter : MainContract.Presenter{
         view.showTopInstitutions(topInstitutions!!)
     }
 
-    override fun loadUserInstitutionInfo(sharedPreferences: SharedPreferences){
-        //TODO: Get user's institution
-        val institution = Institution()
-        institution.name = "Faculdade Impacta de Tecnologia"
-        institution.averageRating = 3.12f * 0.9f
-        institution.id = 2
-        institution.reviewdBy = 132 * 5
+    /**
+     * TODO: handle multiple institutions
+     * Loads the id of the user's institution
+     *
+     * The view will handle when the institution is null
+     * and display a card informing the user that he doesn'
+     * have a institution yet
+     */
+    override fun loadUserInstitutionInfo(institutionId: String?){
+
+        var institution: Institution? = null
+
+        if (institutionId != null) {
+
+            //TODO: Get user's institution
+            institution = Institution()
+            institution.name = "Faculdade Impacta de Tecnologia"
+            institution.averageRating = 3.12f * 0.9f
+            institution.id = 2
+            institution.reviewdBy = 132 * 5
+
+        }
+
         view.showUserInstitutionInfo(institution)
+
     }
 }

@@ -9,11 +9,11 @@ import com.fiscaluno.model.Institution
 interface MainContract {
     interface View {
         fun showTopInstitutions(institutions: List<Institution>)
-        fun showUserInstitutionInfo(userInstitution: Institution)
+        fun showUserInstitutionInfo(userInstitution: Institution?)
     }
     interface Presenter {
         fun bindView(view: MainContract.View)
         fun loadTopInstitutions()
-        fun loadUserInstitutionInfo(sharedPreferences: SharedPreferences)
+        fun loadUserInstitutionInfo(institutionId: String?)
     }
 }
