@@ -40,6 +40,7 @@
 
             <!-- TODO: Change to fragment -->
             <android.support.v7.widget.CardView
+                android:id="@+id/userInstitutionCard"
                 android:onClick="goToUserInstitution"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
@@ -131,6 +132,22 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- TODO: Improve it -->
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/haventReviewedCard"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="fbReviewClick">
+                    <TextView
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="You haven't reviewed an institution yet \n Wanna do it now?"/>
             </android.support.v7.widget.CardView>
 
             <TextView
