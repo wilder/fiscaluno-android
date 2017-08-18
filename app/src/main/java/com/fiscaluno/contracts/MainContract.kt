@@ -14,6 +14,6 @@ interface MainContract {
     interface Presenter {
         fun bindView(view: MainContract.View)
         fun loadTopInstitutions()
-        fun loadUserInstitutionInfo(institutionId: String?)
+        fun loadUserInstitutionInfo(institutionId: String)
     }
 }

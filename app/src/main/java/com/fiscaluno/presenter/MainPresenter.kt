@@ -40,11 +40,11 @@ class MainPresenter : MainContract.Presenter{
      * and display a card informing the user that he doesn'
      * have a institution yet
      */
-    override fun loadUserInstitutionInfo(institutionId: String?){
+    override fun loadUserInstitutionInfo(institutionId: String){
 
         var institution: Institution? = null
 
-        if (institutionId != null) {
+        if (!institutionId.isEmpty()) {
 
             //TODO: Get user's institution
             institution = Institution()

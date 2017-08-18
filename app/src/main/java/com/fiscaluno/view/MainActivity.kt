@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         presenter?.bindView(this)
         //TODO: Call in different threads?
         presenter?.loadTopInstitutions()
+        preferences = PreferencesManager(this)
         presenter?.loadUserInstitutionInfo(preferences!!.userInstitutionId)
     }
 

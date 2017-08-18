@@ -13,7 +13,7 @@ class PreferencesManager (context: Context) {
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
     var userInstitutionId: String
-        get() = prefs.getString(USER_INSTITUTION_ID, null)
+        get() = prefs.getString(USER_INSTITUTION_ID, "")
 
         /**
          * This property is set after the user review a institution
