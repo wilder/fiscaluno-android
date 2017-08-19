@@ -5,6 +5,7 @@ buildscript {
     ext.retrofit_version = '2.2.0'
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'

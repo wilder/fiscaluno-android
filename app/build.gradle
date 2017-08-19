@@ -54,9 +54,9 @@ dependencies {
     compile "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
-
-
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     testCompile 'junit:junit:4.12'
 }
