@@ -20,8 +20,7 @@ import java.util.*
 import com.facebook.GraphResponse
 import org.json.JSONObject
 import com.facebook.GraphRequest
-
-
+import com.fiscaluno.model.Student
 
 
 class LoginActivity : AppCompatActivity() {
