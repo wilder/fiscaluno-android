@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.fiscaluno.R
+import com.fiscaluno.helper.PreferencesManager
 
 import com.github.paolorotolo.appintro.AppIntro
 import com.github.paolorotolo.appintro.AppIntroFragment
@@ -22,6 +23,7 @@ class IntroActivity : AppIntro() {
 
     override fun onDonePressed(currentFragment: Fragment) {
         super.onDonePressed(currentFragment)
+        PreferencesManager(this).haveSeenIntro = true
         startActivity(Intent(this@IntroActivity, RatingActivity::class.java))
     }
 }

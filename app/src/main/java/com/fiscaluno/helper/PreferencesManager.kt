@@ -2,6 +2,8 @@ package com.fiscaluno.helper
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.fiscaluno.model.Student
+import com.google.gson.Gson
 
 /**
  * Manages dealing with SharedPreferences
@@ -10,6 +12,8 @@ import android.content.SharedPreferences
 class PreferencesManager (context: Context) {
     val PREFS_FILENAME = "fiscaluno.prefs"
     val USER_INSTITUTION_ID = "user_institution_id"
+    val USER = "user_obj"
+    val INTRO_KEY = "intro_key"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
     var userInstitutionId: String
@@ -19,4 +23,13 @@ class PreferencesManager (context: Context) {
          * This property is set after the user review a institution
          */
         set(value) = prefs.edit().putString(USER_INSTITUTION_ID, value).apply()
+
+    var user: Student
+        get() = Gson().fromJson(prefs.getString(USER, ""), Student::class.java)
+        set(user) = prefs.edit().putString(USER, Gson().toJson(user)).apply()
+
+    var haveSeenIntro: Boolean
+        get() = prefs.getBoolean(INTRO_KEY, false)
+        set(value) = prefs.edit().putBoolean(INTRO_KEY, value).apply()
+
 }
