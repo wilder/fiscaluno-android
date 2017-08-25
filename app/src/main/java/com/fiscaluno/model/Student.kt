@@ -9,7 +9,7 @@ import android.os.Parcelable
 
 class Student : Parcelable {
     var id: Int? = null
-    var age: Int? = null
+    var birthday: String? = null
     var name: String? = null
     var email: String? = null
     var gender: String? = null
@@ -20,6 +20,8 @@ class Student : Parcelable {
     var state: String? = null
     var phone: String? = null
     var institution: Institution? = null
+    var fbInstitutionName: String? = null
+    var fbId: String? = null
     //TODO add reviews
 
     override fun describeContents(): Int {
@@ -28,7 +30,7 @@ class Student : Parcelable {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeValue(this.id)
-        dest.writeValue(this.age)
+        dest.writeValue(this.birthday)
         dest.writeString(this.name)
         dest.writeString(this.email)
         dest.writeString(this.gender)
@@ -38,6 +40,8 @@ class Student : Parcelable {
         dest.writeString(this.city)
         dest.writeString(this.state)
         dest.writeString(this.phone)
+        dest.writeString(this.fbInstitutionName)
+        dest.writeString(this.fbId)
         dest.writeParcelable(this.institution, flags)
     }
 
@@ -45,7 +49,7 @@ class Student : Parcelable {
 
     protected constructor(`in`: Parcel) {
         this.id = `in`.readValue(Int::class.java.classLoader) as Int
-        this.age = `in`.readValue(Int::class.java.classLoader) as Int
+        this.birthday = `in`.readString()
         this.name = `in`.readString()
         this.email = `in`.readString()
         this.gender = `in`.readString()
@@ -55,6 +59,8 @@ class Student : Parcelable {
         this.city = `in`.readString()
         this.state = `in`.readString()
         this.phone = `in`.readString()
+        this.fbInstitutionName = `in`.readString()
+        this.fbId = `in`.readString()
         this.institution = `in`.readParcelable<Institution>(Institution::class.java.classLoader)
     }
 
