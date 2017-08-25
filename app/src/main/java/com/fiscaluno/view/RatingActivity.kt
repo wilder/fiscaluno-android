@@ -11,6 +11,7 @@ import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
 import com.fiscaluno.view.adapter.StepperAdapter
 import com.stepstone.stepper.StepperLayout
+import kotlinx.android.synthetic.main.activity_rating.*
 
 class RatingActivity : AppCompatActivity(), DataManager {
 
@@ -32,8 +33,6 @@ class RatingActivity : AppCompatActivity(), DataManager {
         institution = savedInstanceState?.getParcelable(INSTITUTION)
         generalReview = savedInstanceState?.getParcelable(GENERALREVIEW)
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
         mStepperLayout = findViewById(R.id.stepperLayout) as StepperLayout
         mStepperLayout.setAdapter(StepperAdapter(supportFragmentManager, this), startingStepPosition)
     }
