@@ -20,16 +20,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.RatingActivity"
-            android:label="@string/title_activity_rating"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_rating" />
         <activity android:name=".view.InstitutionDetailActivity" />
         <activity
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
