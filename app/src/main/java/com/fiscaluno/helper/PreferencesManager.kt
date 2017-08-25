@@ -25,7 +25,8 @@ class PreferencesManager (context: Context) {
         set(value) = prefs.edit().putString(USER_INSTITUTION_ID, value).apply()
 
     var user: Student
-        get() = Gson().fromJson(prefs.getString(USER, ""), Student::class.java)
+    //TODO: check if null is a problem
+        get() = Gson().fromJson(prefs.getString(USER, Gson().toJson(null)), Student::class.java)
         set(user) = prefs.edit().putString(USER, Gson().toJson(user)).apply()
 
     var haveSeenIntro: Boolean

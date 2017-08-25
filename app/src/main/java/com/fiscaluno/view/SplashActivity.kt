@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.fiscaluno.R
 import com.fiscaluno.helper.PreferencesManager
+import com.fiscaluno.login.LoginActivity
 import com.fiscaluno.model.Student
 
 class SplashActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
         val prefs = PreferencesManager(this)
         val student = prefs.user
 
+        //TODO: change to local database
         if (isValidUser(student)) {
             if (prefs.haveSeenIntro) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
