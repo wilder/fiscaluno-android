@@ -25,7 +25,6 @@ class RatingGeneralFragment : Fragment(), BlockingStep {
     private var consTv: EditText? = null
     private var suggestionsEt: EditText? = null
     private var ratingBar: RatingBar? = null
-    private var addButton: Button? = null
     lateinit var dataManager: DataManager
 
 
@@ -57,7 +56,6 @@ class RatingGeneralFragment : Fragment(), BlockingStep {
         consTv = view.findViewById(R.id.cons_et_gn) as EditText
         suggestionsEt = view.findViewById(R.id.suggestions_et_gn) as EditText
         ratingBar = view.findViewById(R.id.rating_stars_gn) as RatingBar
-        addButton = view.findViewById(R.id.add_btn_gn) as Button
 
         return view
     }
@@ -69,7 +67,37 @@ class RatingGeneralFragment : Fragment(), BlockingStep {
     }
 
     override fun verifyStep(): VerificationError? {
-        //TODO: Validate Values
+        var canGoToNext = true
+
+        if (ratingBar!!.rating == 0.0f) {
+            //TODO: display message
+            canGoToNext = false
+        }
+
+        if (prosTv?.text == null || prosTv?.text.toString().equals("")){
+            prosTv?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        if (suggestionsEt?.text == null || suggestionsEt?.text.toString().equals("")){
+            suggestionsEt?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        if (consTv?.text == null || consTv?.text.toString().equals("")){
+            consTv?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        if (reviewTitleEt?.text == null || reviewTitleEt?.text.toString().equals("")){
+            reviewTitleEt?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        if (!canGoToNext) {
+            return VerificationError("teste")
+        }
+
         return null
     }
 

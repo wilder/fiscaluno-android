@@ -1,6 +1,7 @@
 package com.fiscaluno.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -84,7 +85,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     private fun setupList(reviews: ArrayList<DetailedReview>){
         adapter = DetailedReviewAdapter(reviews, true)
         reviewsList?.adapter = adapter
-        reviewsList?.layoutManager = LinearLayoutManager(context)
+        reviewsList?.layoutManager = LinearLayoutManager(context) as RecyclerView.LayoutManager?
     }
 
     override fun onBackClicked(callback: StepperLayout.OnBackClickedCallback?) {
@@ -92,10 +93,30 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     }
 
     override fun onCompleteClicked(callback: StepperLayout.OnCompleteClickedCallback?) {
+        //activity.fragmentManager.popBackStack()
+        if (check()) {
+            //TODO: Save
+            startActivity(Intent(activity, MainActivity::class.java))
+        }
+    }
+
+    /**
+     *  Checks if all rating bars have been clicked
+     */
+    private fun check() : Boolean {
+        val reviews = adapter?.getDetailedReviews()
+        reviews!!.forEach {
+            i ->
+            if (i.rate == 0.0f || i.rate == null) {
+                //TODO: display message
+                return false
+            }
+        }
+        return true
     }
 
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback?) {
-        //TODO: save datailedreview
+
     }
 
     override fun verifyStep(): VerificationError? {

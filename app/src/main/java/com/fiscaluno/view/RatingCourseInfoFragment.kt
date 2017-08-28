@@ -73,6 +73,28 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
     }
 
     override fun verifyStep(): VerificationError? {
+        var canGoToNext = true
+        if (courseEt?.text == null || courseEt?.text.toString().equals("")){
+            courseEt?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        if (paymentValue?.text == null || paymentValue?.text.toString().equals("")){
+            paymentValue?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        if (startYear?.text == null || startYear?.text.toString().equals("")){
+            startYear?.error = "This field must be filed"
+            canGoToNext = false
+        }
+
+        //TODO: check radiogroup
+
+        if (!canGoToNext) {
+            return VerificationError("teste")
+        }
+
         return null
     }
 
