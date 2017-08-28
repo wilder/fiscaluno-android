@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.DetailedReviewContract
+import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
@@ -96,6 +97,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
         //activity.fragmentManager.popBackStack()
         if (check()) {
             //TODO: Save
+            PreferencesManager(context).userInstitutionId = generalReview?.institution?.id.toString()
             startActivity(Intent(activity, MainActivity::class.java))
         }
     }
