@@ -11,10 +11,17 @@ import com.fiscaluno.R
 import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
 import android.support.v4.view.ViewPager
+import android.util.Log
+import android.view.MotionEvent
 import android.widget.RatingBar
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.view.RatingCourseInfoFragment
 import java.util.ArrayList
+import android.widget.Toast
+import com.fiscaluno.view.MainActivity
+import android.opengl.ETC1.getWidth
+
+
 
 
 /**
@@ -38,12 +45,30 @@ class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>, cli
 
         if(review.rate != null) {
             holder.starsBar.rating = review.rate!!
+        } else {
+            holder.starsBar.rating = 0.0f
         }
 
         holder.starsBar.setIsIndicator(!clickable)
         if(clickable){
-            holder.starsBar.setOnClickListener {
-                review.rate = holder.starsBar.rating
+            holder.starsBar.setOnTouchListener { v, event ->
+                if (event.action == MotionEvent.ACTION_UP) {
+                    val touchPositionX = event.x
+                    val width = holder.starsBar.getWidth()
+                    val starsf = touchPositionX / width * 5.0f
+                    val stars = starsf.toInt() + 1
+                    holder.starsBar.rating = stars.toFloat()
+                    review.rate = stars.toFloat()
+                    v.isPressed = false
+                }
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    v.isPressed = true
+                }
+
+                if (event.action == MotionEvent.ACTION_CANCEL) {
+                    v.isPressed = false
+                }
+                true
             }
         }
 
