@@ -33,7 +33,7 @@ open class Review : Parcelable {
     }
 
     override fun toString(): String {
-        return "Review(id=$id, createdAt=$createdAt, course=$course, institution=$institution, student=$student)"
+        return "Review(id=$id, createdAt=$createdAt, rate=$rate, course=$course, institution=$institution, student=$student)"
     }
 
     protected constructor(`in`: Parcel) {
