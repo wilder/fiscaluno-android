@@ -14,12 +14,11 @@ class SplashActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        val prefs = PreferencesManager(this)
-        val student = prefs.user
+        val student = PreferencesManager(this).user
 
         //TODO: change to local database
         if (isValidUser(student)) {
-            if (prefs.haveSeenIntro) {
+            if (PreferencesManager(this).haveSeenIntro) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             } else {
                 startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
