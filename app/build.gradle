@@ -33,6 +33,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile 'com.google.firebase:firebase-firestore:11.4.2'
+
     //Layout
     compile "com.android.support:support-v4:25.3.1"
     compile "com.android.support:design:25.3.1"
