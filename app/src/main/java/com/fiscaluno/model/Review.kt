@@ -10,7 +10,7 @@ import java.util.Date
  */
 
 open class Review : Parcelable {
-    var id: Int? = null
+    var id: String? = null
     var createdAt: Date? = null
     var rate: Float? = null //from 1 to 5 -
     var course: String ? = null
@@ -37,7 +37,7 @@ open class Review : Parcelable {
     }
 
     protected constructor(`in`: Parcel) {
-        this.id = `in`.readValue(Int::class.java.classLoader) as Int
+        this.id = `in`.readString()
         val tmpCreatedAt = `in`.readLong()
         this.rate = `in`.readValue(Float::class.java.classLoader) as Float
         this.createdAt = if (tmpCreatedAt.toInt() == -1) null else Date(tmpCreatedAt)

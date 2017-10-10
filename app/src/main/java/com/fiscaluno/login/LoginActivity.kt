@@ -17,6 +17,7 @@ import com.facebook.GraphRequest
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Student
 import com.fiscaluno.view.IntroActivity
+import com.fiscaluno.view.MainActivity
 import org.json.JSONArray
 
 
@@ -57,8 +58,11 @@ class LoginActivity : AppCompatActivity() {
                     val education = (jsonObject.get("education") as JSONArray)
                     student.fbInstitutionName = ((education.get(education.length()-1) as JSONObject).get("school") as JSONObject).get("name") as String
                     PreferencesManager(this@LoginActivity).user = student
-                    val intent = Intent(this@LoginActivity, IntroActivity::class.java)
-                    startActivity(intent)
+                    if (PreferencesManager(this@LoginActivity).haveSeenIntro) {
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    } else {
+                        startActivity(Intent(this@LoginActivity, IntroActivity::class.java))
+                    }
                 }
                 val parameters = Bundle()
                 parameters.putString("fields", "id,email,name,link,education,birthday,about,gender,hometown,work")

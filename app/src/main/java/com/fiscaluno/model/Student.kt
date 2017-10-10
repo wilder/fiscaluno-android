@@ -8,7 +8,7 @@ import android.os.Parcelable
  */
 
 class Student : Parcelable {
-    var id: Int? = null
+    var id: String? = null
     var birthday: String? = null
     var name: String? = null
     var email: String? = null
@@ -48,7 +48,7 @@ class Student : Parcelable {
     constructor() {}
 
     protected constructor(`in`: Parcel) {
-        this.id = `in`.readValue(Int::class.java.classLoader) as Int
+        this.id = `in`.readString()
         this.birthday = `in`.readString()
         this.name = `in`.readString()
         this.email = `in`.readString()

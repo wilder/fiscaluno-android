@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.DetailedReviewContract
@@ -96,7 +97,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     override fun onCompleteClicked(callback: StepperLayout.OnCompleteClickedCallback?) {
         //activity.fragmentManager.popBackStack()
         if (check()) {
-            //TODO: Save
+            //TODO: Move to presenter and Save
             PreferencesManager(context).userInstitutionId = generalReview?.institution?.id.toString()
             startActivity(Intent(activity, MainActivity::class.java))
         }

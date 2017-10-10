@@ -8,7 +8,7 @@ import android.os.Parcelable
  */
 
 class Institution() : Parcelable {
-    var id: Int? = null
+    var id: String? = null
     var name: String? = null
     var address: String? = null
     var cnpj: String? = null
@@ -22,7 +22,7 @@ class Institution() : Parcelable {
     var generalReviews: List<GeneralReview>? = null
 
     constructor(parcel: Parcel) : this() {
-        id = parcel.readValue(Int::class.java.classLoader) as? Int
+        id = parcel.readString()
         name = parcel.readString()
         address = parcel.readString()
         cnpj = parcel.readString()
