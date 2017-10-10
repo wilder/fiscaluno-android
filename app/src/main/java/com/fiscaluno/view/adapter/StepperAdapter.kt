@@ -3,7 +3,7 @@ package com.fiscaluno.view.adapter
 import android.content.Context
 import android.support.v4.app.FragmentManager
 import com.fiscaluno.view.RatingCourseInfoFragment
-import com.fiscaluno.view.RatingDetailedFragment
+import detailedReview.RatingDetailedFragment
 import com.fiscaluno.view.RatingGeneralFragment
 import com.fiscaluno.view.RatingSelectInstitutionFragment
 import com.stepstone.stepper.Step

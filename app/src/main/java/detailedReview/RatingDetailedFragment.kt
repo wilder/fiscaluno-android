@@ -1,4 +1,4 @@
-package com.fiscaluno.view
+package detailedReview
 
 import android.content.Context
 import android.content.Intent
@@ -11,19 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
-import com.fiscaluno.model.Institution
-import com.fiscaluno.presenter.DetailedReviewPresenter
-import com.fiscaluno.view.adapter.DetailedReviewAdapter
-import com.fiscaluno.view.adapter.InstitutionListAdapter
+import com.fiscaluno.view.MainActivity
 import com.stepstone.stepper.BlockingStep
-import com.stepstone.stepper.Step
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
 import java.util.ArrayList

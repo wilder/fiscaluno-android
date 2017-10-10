@@ -1,4 +1,4 @@
-package com.fiscaluno.presenter
+package detailedReview
 
 import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.model.DetailedReview

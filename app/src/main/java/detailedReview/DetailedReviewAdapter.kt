@@ -1,27 +1,15 @@
-package com.fiscaluno.view.adapter
+package detailedReview
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.fiscaluno.R
-import com.fiscaluno.extensions.toUri
-import com.fiscaluno.model.Institution
-import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.MotionEvent
 import android.widget.RatingBar
 import com.fiscaluno.model.DetailedReview
-import com.fiscaluno.view.RatingCourseInfoFragment
 import java.util.ArrayList
-import android.widget.Toast
-import com.fiscaluno.view.MainActivity
-import android.opengl.ETC1.getWidth
-
-
 
 
 /**
