@@ -25,7 +25,7 @@ class MainPresenter : MainContract.Presenter{
             val institution = Institution()
             institution.name = "test $i"
             institution.averageRating = i * 0.9f
-            institution.id = i
+            institution.id = i.toString()
             institution.reviewdBy = 132 * i
             topInstitutions?.add(institution)
         }
@@ -50,7 +50,7 @@ class MainPresenter : MainContract.Presenter{
             institution = Institution()
             institution.name = "Faculdade Impacta de Tecnologia"
             institution.averageRating = 3.12f * 0.9f
-            institution.id = 2
+            institution.id = "2"
             institution.reviewdBy = 132 * 5
 
         }

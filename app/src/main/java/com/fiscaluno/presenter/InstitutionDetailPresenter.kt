@@ -21,7 +21,7 @@ class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
         val institution = Institution()
         institution.address = "Avenida Rudge, 215"
         institution.cnpj = "1239123912"
-        institution.id = 0
+        institution.id = "0"
         institution.name = "Faculdade Impacta Tecnologia"
         institution.imageUri = "http://faculdadeimpacta.edu/logo.png"
         institution.website = "http://faculdadeimpacta.edu/"

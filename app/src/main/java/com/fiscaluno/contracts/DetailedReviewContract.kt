@@ -1,5 +1,6 @@
 package com.fiscaluno.contracts
 
+import android.content.Context
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.Institution
 
