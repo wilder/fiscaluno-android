@@ -9,14 +9,9 @@ import com.fiscaluno.helper.PreferencesManager
 
 import com.github.paolorotolo.appintro.AppIntro
 import com.github.paolorotolo.appintro.AppIntroFragment
-import android.view.WindowManager
 import android.os.Build
 import android.view.View
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-
-
-
+import com.fiscaluno.rating.RatingActivity
 
 
 class IntroActivity : AppIntro() {

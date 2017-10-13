@@ -1,8 +1,7 @@
-package com.fiscaluno.view
+package com.fiscaluno.rating
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import com.fiscaluno.R
@@ -11,7 +10,6 @@ import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
 import com.fiscaluno.view.adapter.StepperAdapter
 import com.stepstone.stepper.StepperLayout
-import kotlinx.android.synthetic.main.activity_rating.*
 
 class RatingActivity : AppCompatActivity(), DataManager {
 

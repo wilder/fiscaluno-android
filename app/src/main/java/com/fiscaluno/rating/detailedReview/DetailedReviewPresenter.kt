@@ -1,15 +1,8 @@
-package detailedReview
+package com.fiscaluno.rating.detailedReview
 
-import android.util.Log
 import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.model.DetailedReview
-import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.DocumentSnapshot
-
-
-
-
 
 /**
  * Created by Wilder on 25/07/17.

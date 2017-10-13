@@ -1,4 +1,4 @@
-package detailedReview
+package com.fiscaluno.rating.detailedReview
 
 import android.content.Context
 import android.content.Intent
@@ -17,6 +17,7 @@ import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
+import com.fiscaluno.model.Institution
 import com.fiscaluno.view.MainActivity
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout

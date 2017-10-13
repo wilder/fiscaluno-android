@@ -1,6 +1,5 @@
 package com.fiscaluno.view
 
-import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.support.v7.widget.Toolbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.view.GravityCompat
-import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.R
@@ -17,6 +15,7 @@ import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.MainPresenter
+import com.fiscaluno.rating.RatingActivity
 import com.fiscaluno.view.adapter.TopInstitutionsAdapter
 import kotlinx.android.synthetic.main.content_main.*
 

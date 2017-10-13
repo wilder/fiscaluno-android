@@ -1,4 +1,4 @@
-package detailedReview
+package com.fiscaluno.rating.detailedReview
 
 /**
  * Created by Wilder on 10/10/17.

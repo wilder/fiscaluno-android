@@ -1,4 +1,4 @@
-package com.fiscaluno.view
+package com.fiscaluno.rating
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
 import com.stepstone.stepper.BlockingStep
-import com.stepstone.stepper.Step
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
 

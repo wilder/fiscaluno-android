@@ -1,4 +1,4 @@
-package detailedReview
+package com.fiscaluno.rating.detailedReview
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

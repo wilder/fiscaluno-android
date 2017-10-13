@@ -20,7 +20,7 @@
             android:name=".view.IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.RatingActivity"
+            android:name=".rating.RatingActivity"
             android:label="@string/title_activity_rating" />
         <activity android:name=".view.InstitutionDetailActivity" />
         <activity

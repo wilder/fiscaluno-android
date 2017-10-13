@@ -2,10 +2,10 @@ package com.fiscaluno.view.adapter
 
 import android.content.Context
 import android.support.v4.app.FragmentManager
-import com.fiscaluno.view.RatingCourseInfoFragment
-import detailedReview.RatingDetailedFragment
-import com.fiscaluno.view.RatingGeneralFragment
-import com.fiscaluno.view.RatingSelectInstitutionFragment
+import com.fiscaluno.rating.RatingCourseInfoFragment
+import com.fiscaluno.rating.detailedReview.RatingDetailedFragment
+import com.fiscaluno.rating.generalReview.RatingGeneralFragment
+import com.fiscaluno.rating.RatingSelectInstitutionFragment
 import com.stepstone.stepper.Step
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter
 

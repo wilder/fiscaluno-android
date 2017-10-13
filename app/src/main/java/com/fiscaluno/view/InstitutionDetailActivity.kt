@@ -10,7 +10,7 @@ import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.InstitutionDetailPresenter
-import detailedReview.DetailedReviewAdapter
+import com.fiscaluno.rating.detailedReview.DetailedReviewAdapter
 import com.fiscaluno.view.adapter.InstitutionDetailGeneralReviewsAdapter
 import kotlinx.android.synthetic.main.activity_institution_detail.*
 import kotlin.collections.ArrayList

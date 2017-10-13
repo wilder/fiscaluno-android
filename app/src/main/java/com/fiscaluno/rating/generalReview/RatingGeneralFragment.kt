@@ -1,4 +1,4 @@
-package com.fiscaluno.view
+package com.fiscaluno.rating.generalReview
 
 import android.content.Context
 import android.os.Bundle

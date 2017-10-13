@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.fiscaluno.view.RatingGeneralFragment">
+    tools:context="com.fiscaluno.rating.generalReview.RatingGeneralFragment">
 
     <LinearLayout
         android:orientation="vertical"

@@ -8,10 +8,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.fiscaluno.R
-import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
-import com.fiscaluno.view.RatingActivity
+import com.fiscaluno.rating.RatingActivity
 import java.util.ArrayList
 
 
