@@ -21,6 +21,7 @@ class SelectInstitutionPresenter : SelectInstitutionContract.Presenter {
         while (i < 5) {
             val inst = Institution()
             inst.name = "Inst $i"
+            inst.id = "bmtnYGMva25ljuXABdQx"
             institutions.add(inst)
             i+=1
         }

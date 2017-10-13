@@ -29,7 +29,7 @@ class GeneralReview : Review, Parcelable {
     }
 
     override fun toString(): String {
-        return "GeneralReview(institution= $institution,suggestion=$suggestion, rate=$rate, pros=$pros, cons=$cons, description=$description, payment=$payment, startYear=$startYear)"
+        return "GeneralReview(institution= $institutionId,suggestion=$suggestion, rate=$rate, pros=$pros, cons=$cons, description=$description, payment=$payment, startYear=$startYear)"
     }
 
     constructor() {}

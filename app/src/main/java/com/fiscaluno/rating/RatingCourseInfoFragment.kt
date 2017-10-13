@@ -64,7 +64,7 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback?) {
         val review = GeneralReview()
         review.course = courseEt?.text.toString()
-        review.institution = instParam
+        dataManager.saveInstitution(instParam)
         review.payment = paymentValue?.text.toString().toDouble()
         review.startYear = startYear?.text.toString().toInt()
         (activity as RatingActivity).saveGeneralReview(review)

@@ -33,6 +33,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     private var adapter: DetailedReviewAdapter? = null
     private var presenter: DetailedReviewContract.Presenter? = null
     lateinit var dataManager: DataManager
+    lateinit var institution: Institution
 
     companion object {
         fun newInstance(): RatingDetailedFragment {
@@ -65,12 +66,14 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
         institutionImage = view.findViewById(R.id.institution_small_image_gr) as ImageView
         reviewsList = view.findViewById(R.id.detailedReviewsRv) as RecyclerView
 
+        institution = dataManager.getInstitution()!!
+
         return view
     }
 
     override fun onSelected() {
         generalReview = dataManager.getGeneralReview()
-        institutionName?.setText(generalReview?.institution?.name)
+        institutionName?.text = institution.name
         institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: get image
         presenter?.loadReviews()
     }
@@ -94,7 +97,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
         //activity.fragmentManager.popBackStack()
         if (check()) {
             //TODO: Move to presenter and Save
-            PreferencesManager(context).userInstitutionId = generalReview?.institution?.id.toString()
+            PreferencesManager(context).userInstitutionId = institution.id.toString()
             startActivity(Intent(activity, MainActivity::class.java))
         }
     }

@@ -23,7 +23,6 @@ class DetailedReviewPresenter : DetailedReviewContract.Presenter {
     }
 
     override fun loadReviews() {
-        //TODO: Get reviews list
         val reviews  = java.util.ArrayList<DetailedReview>()
 
         db.collection(DETAILED_REVIEW_TYPES_REFERENCE)

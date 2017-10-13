@@ -9,15 +9,20 @@ import android.view.ViewGroup
 import android.widget.*
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
+import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.GeneralReview
+import com.fiscaluno.model.Institution
+import com.fiscaluno.rating.RatingActivity
 import com.stepstone.stepper.BlockingStep
-import com.stepstone.stepper.Step
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
+import java.util.*
 
-class RatingGeneralFragment : Fragment(), BlockingStep {
+class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.View {
 
-    private var reviewParam: GeneralReview? = null
+    private lateinit var presenter: GeneralReviewContract.Presenter
+    private lateinit var institution: Institution
+    private var review: GeneralReview? = null
     private var institutionImage: ImageView? = null
     private var institutionNameTv: TextView? = null
     private var reviewTitleEt: EditText? = null
@@ -47,6 +52,9 @@ class RatingGeneralFragment : Fragment(), BlockingStep {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        presenter = GeneralReviewPresenter()
+        presenter!!.bindView(this)
+
         val view = inflater!!.inflate(R.layout.fragment_rating_general, container, false)
 
         institutionImage = view.findViewById(R.id.institution_small_image_gn) as ImageView
@@ -60,10 +68,15 @@ class RatingGeneralFragment : Fragment(), BlockingStep {
         return view
     }
 
+    override fun error(message: String) {
+        //TODO: display error message
+    }
+
     override fun onSelected() {
-        reviewParam = dataManager.getGeneralReview()
+        review = dataManager.getGeneralReview()
+        institution = dataManager.getInstitution()!!
         institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: Get institution image
-        institutionNameTv?.text = reviewParam?.institution?.name
+        institutionNameTv?.text = institution.name
     }
 
     override fun verifyStep(): VerificationError? {
@@ -102,14 +115,20 @@ class RatingGeneralFragment : Fragment(), BlockingStep {
     }
 
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback) {
-        reviewParam?.rate = ratingBar?.rating
-        reviewParam?.description = reviewTitleEt?.text.toString()
-        reviewParam?.cons = consTv?.text.toString()
-        reviewParam?.pros = prosTv?.text.toString()
-        reviewParam?.suggestion = suggestionsEt?.text.toString()
-        (activity as RatingActivity).saveGeneralReview(reviewParam)
+        //TODO: move to presenter
+        review?.rate = ratingBar?.rating
+        review?.description = reviewTitleEt?.text.toString()
+        review?.cons = consTv?.text.toString()
+        review?.pros = prosTv?.text.toString()
+        review?.suggestion = suggestionsEt?.text.toString()
+        review?.createdAt = Date()
+        review?.studentId = PreferencesManager(context).user?.id
+        review?.institutionId = institution.id
+        (activity as RatingActivity).saveInstanceStateGeneralReview(review)
 
-        Toast.makeText(this.context, reviewParam?.toString(), Toast.LENGTH_LONG).show()
+        presenter.saveGeneralReview(generalReview = review!!)
+
+        Toast.makeText(this.context, review?.toString(), Toast.LENGTH_LONG).show()
         callback.goToNextStep()
     }
 

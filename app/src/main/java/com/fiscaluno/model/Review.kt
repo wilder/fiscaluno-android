@@ -14,8 +14,8 @@ open class Review : Parcelable {
     var createdAt: Date? = null
     var rate: Float? = null //from 1 to 5 -
     var course: String ? = null
-    var institution: Institution? = null
-    var student: Student? = null
+    var institutionId: String? = null
+    var studentId: String? = null
 
     constructor() {}
 
@@ -28,12 +28,12 @@ open class Review : Parcelable {
         dest.writeLong(if (this.createdAt != null) this.createdAt!!.time else -1)
         dest.writeString(this.course)
         dest.writeValue(this.rate)
-        dest.writeParcelable(this.institution, flags)
-        dest.writeParcelable(this.student, flags)
+        dest.writeString(this.institutionId)
+        dest.writeString(this.studentId)
     }
 
     override fun toString(): String {
-        return "Review(id=$id, createdAt=$createdAt, rate=$rate, course=$course, institution=$institution, student=$student)"
+        return "Review(id=$id, createdAt=$createdAt, rate=$rate, course=$course, institutioIdn=$institutionId, student=$studentId)"
     }
 
     protected constructor(`in`: Parcel) {
@@ -42,8 +42,8 @@ open class Review : Parcelable {
         this.rate = `in`.readValue(Float::class.java.classLoader) as Float
         this.createdAt = if (tmpCreatedAt.toInt() == -1) null else Date(tmpCreatedAt)
         this.course = `in`.readString()
-        this.institution = `in`.readParcelable<Institution>(Institution::class.java.classLoader)
-        this.student = `in`.readParcelable<Student>(Student::class.java.classLoader)
+        this.institutionId = `in`.readString()
+        this.studentId = `in`.readString()
     }
 
     companion object {
