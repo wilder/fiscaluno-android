@@ -63,7 +63,7 @@ class RatingActivity : AppCompatActivity(), DataManager {
         return institution
     }
 
-    override fun saveGeneralReview(review: GeneralReview?) {
+    override fun saveInstanceStateGeneralReview(review: GeneralReview?) {
         generalReview = review
     }
 

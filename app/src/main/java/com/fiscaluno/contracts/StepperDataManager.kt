@@ -13,7 +13,7 @@ interface DataManager {
 
     fun getInstitution(): Institution?
 
-    fun saveGeneralReview(review: GeneralReview?)
+    fun saveInstanceStateGeneralReview(review: GeneralReview?)
 
     fun getGeneralReview(): GeneralReview?
 }

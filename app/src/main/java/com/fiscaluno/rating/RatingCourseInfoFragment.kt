@@ -67,7 +67,7 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
         dataManager.saveInstitution(instParam)
         review.payment = paymentValue?.text.toString().toDouble()
         review.startYear = startYear?.text.toString().toInt()
-        (activity as RatingActivity).saveGeneralReview(review)
+        (activity as RatingActivity).saveInstanceStateGeneralReview(review)
         callback?.goToNextStep()
     }
 
