@@ -57,14 +57,13 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
         presenter?.bindView(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_rating_detailed, container, false)
 
-        institutionName = view.findViewById(R.id.institution_name_tv_gr) as TextView
-        institutionImage = view.findViewById(R.id.institution_small_image_gr) as ImageView
-        reviewsList = view.findViewById(R.id.detailedReviewsRv) as RecyclerView
+        institutionName = view.findViewById(R.id.institution_name_tv_gr)
+        institutionImage = view.findViewById(R.id.institution_small_image_gr)
+        reviewsList = view.findViewById(R.id.detailedReviewsRv)
 
         institution = dataManager.getInstitution()!!
 

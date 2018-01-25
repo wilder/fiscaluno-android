@@ -49,21 +49,20 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         presenter = GeneralReviewPresenter()
         presenter!!.bindView(this)
 
         val view = inflater!!.inflate(R.layout.fragment_rating_general, container, false)
 
-        institutionImage = view.findViewById(R.id.institution_small_image_gn) as ImageView
-        institutionNameTv = view.findViewById(R.id.institution_name_tv_gn) as TextView
-        reviewTitleEt = view.findViewById(R.id.review_title_et_gn) as EditText
-        prosTv = view.findViewById(R.id.pros_et_gn) as EditText
-        consTv = view.findViewById(R.id.cons_et_gn) as EditText
-        suggestionsEt = view.findViewById(R.id.suggestions_et_gn) as EditText
-        ratingBar = view.findViewById(R.id.rating_stars_gn) as RatingBar
+        institutionImage = view.findViewById(R.id.institution_small_image_gn)
+        institutionNameTv = view.findViewById(R.id.institution_name_tv_gn)
+        reviewTitleEt = view.findViewById(R.id.review_title_et_gn)
+        prosTv = view.findViewById(R.id.pros_et_gn)
+        consTv = view.findViewById(R.id.cons_et_gn)
+        suggestionsEt = view.findViewById(R.id.suggestions_et_gn)
+        ratingBar = view.findViewById(R.id.rating_stars_gn)
 
         return view
     }
@@ -122,7 +121,7 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
         review?.pros = prosTv?.text.toString()
         review?.suggestion = suggestionsEt?.text.toString()
         review?.createdAt = Date()
-        review?.studentId = PreferencesManager(context).user?.id
+        review?.studentId = PreferencesManager(context!!).user?.id
         review?.institutionId = institution.id
         (activity as RatingActivity).saveInstanceStateGeneralReview(review)
 

@@ -49,9 +49,9 @@ class InstitutionListAdapter (mDataset: ArrayList<Institution>, ratingActivity: 
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         // each data item is just a string in this case
-        var institutionName: TextView = v.findViewById(R.id.institution_name_tv_item) as TextView
-        var icon: ImageView = v.findViewById(R.id.icon_iv_item) as ImageView
-        var conainer: LinearLayout = v.findViewById(R.id.institution_name_ll_item) as LinearLayout
+        var institutionName: TextView = v.findViewById(R.id.institution_name_tv_item)
+        var icon: ImageView = v.findViewById(R.id.icon_iv_item)
+        var conainer: LinearLayout = v.findViewById(R.id.institution_name_ll_item)
 
     }
 

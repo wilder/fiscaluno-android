@@ -50,12 +50,12 @@ class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>, c
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val institutionName: TextView = v.findViewById(R.id.institutionNameTv) as TextView
-        val rating: RatingBar = v.findViewById(R.id.institutionRating) as RatingBar
-        val institutionImage : ImageView = v.findViewById(R.id.institutionIv) as ImageView
-        val ratedByCount: TextView = v.findViewById(R.id.ratedBy) as TextView
-        val averageRating: TextView = v.findViewById(R.id.average) as TextView
-        val institutionCard: CardView = v.findViewById(R.id.institutionCard) as CardView
+        val institutionName: TextView = v.findViewById(R.id.institutionNameTv)
+        val rating: RatingBar = v.findViewById(R.id.institutionRating)
+        val institutionImage : ImageView = v.findViewById(R.id.institutionIv)
+        val ratedByCount: TextView = v.findViewById(R.id.ratedBy)
+        val averageRating: TextView = v.findViewById(R.id.average)
+        val institutionCard: CardView = v.findViewById(R.id.institutionCard)
     }
 
 }

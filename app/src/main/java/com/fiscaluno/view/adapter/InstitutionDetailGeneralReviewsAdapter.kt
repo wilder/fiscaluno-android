@@ -39,10 +39,10 @@ class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: ArrayList<Gen
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var prosTv: TextView = v.findViewById(R.id.pros_tv) as TextView
-        var consTv: TextView = v.findViewById(R.id.cons_tv) as TextView
-        var timeTv: TextView = v.findViewById(R.id.time_tv) as TextView
-        var starsBar: RatingBar = v.findViewById(R.id.rating_item) as RatingBar
+        var prosTv: TextView = v.findViewById(R.id.pros_tv)
+        var consTv: TextView = v.findViewById(R.id.cons_tv)
+        var timeTv: TextView = v.findViewById(R.id.time_tv)
+        var starsBar: RatingBar = v.findViewById(R.id.rating_item)
     }
 
     fun getGeneralReviews(): ArrayList<GeneralReview> {

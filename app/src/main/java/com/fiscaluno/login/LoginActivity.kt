@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         //TODO: Move login logic to presenter
-        val loginButton = findViewById(R.id.login_button) as LoginButton
+        val loginButton = findViewById<LoginButton>(R.id.login_button)
         loginButton.setReadPermissions("email", "public_profile", "user_about_me", "user_birthday", "user_education_history", "user_work_history", "user_hometown")
 
         callbackManager = CallbackManager.Factory.create();

@@ -51,15 +51,14 @@ class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.Vi
         presenter?.bindView(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater!!.inflate(R.layout.fragment_rating_select_institution, container, false)
-        institutionList = view.findViewById(R.id.instituitons_rv_rating) as RecyclerView
-        searchEt = view.findViewById(R.id.searchInstitution_autoComplete) as AutoCompleteTextView
+        institutionList = view.findViewById(R.id.instituitons_rv_rating)
+        searchEt = view.findViewById(R.id.searchInstitution_autoComplete)
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter?.loadMainInstitutions()
         presenter?.searchInstitutions()

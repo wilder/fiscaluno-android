@@ -31,7 +31,7 @@ class RatingActivity : AppCompatActivity(), DataManager {
         institution = savedInstanceState?.getParcelable(INSTITUTION)
         generalReview = savedInstanceState?.getParcelable(GENERALREVIEW)
 
-        mStepperLayout = findViewById(R.id.stepperLayout) as StepperLayout
+        mStepperLayout = findViewById(R.id.stepperLayout)
         mStepperLayout.setAdapter(StepperAdapter(supportFragmentManager, this), startingStepPosition)
     }
 

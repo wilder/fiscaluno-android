@@ -42,16 +42,15 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater!!.inflate(R.layout.fragment_rating_course_info, container, false)
-        institutionName =  view.findViewById(R.id.institution_name_tv_ci) as TextView
-        institutionImage = view.findViewById(R.id.institution_small_image_ci) as ImageView
-        courseEt = view.findViewById(R.id.course_et_ci) as EditText
-        radioGroup = view.findViewById(R.id.type_group_ci) as RadioGroup
-        paymentValue = view.findViewById(R.id.payed_value_et_ci) as EditText
-        startYear = view.findViewById(R.id.start_year_et_ci) as EditText
+        institutionName =  view.findViewById(R.id.institution_name_tv_ci)
+        institutionImage = view.findViewById(R.id.institution_small_image_ci)
+        courseEt = view.findViewById(R.id.course_et_ci)
+        radioGroup = view.findViewById(R.id.type_group_ci)
+        paymentValue = view.findViewById(R.id.payed_value_et_ci)
+        startYear = view.findViewById(R.id.start_year_et_ci)
 
         return view
     }

@@ -67,8 +67,8 @@ class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>, cli
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var reviewName: TextView = v.findViewById(R.id.review_title_tv_dr_item) as TextView
-        var starsBar: RatingBar = v.findViewById(R.id.rating_stars_dr_item) as RatingBar
+        var reviewName: TextView = v.findViewById(R.id.review_title_tv_dr_item)
+        var starsBar: RatingBar = v.findViewById(R.id.rating_stars_dr_item)
     }
 
     fun getDetailedReviews(): ArrayList<DetailedReview> {
