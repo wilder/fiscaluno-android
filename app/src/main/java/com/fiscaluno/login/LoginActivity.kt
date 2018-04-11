@@ -28,13 +28,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        FacebookSdk.sdkInitialize(getApplicationContext())
+        FacebookSdk.sdkInitialize(applicationContext)
 
         setContentView(R.layout.activity_login)
 
         //TODO: Move login logic to presenter
         val loginButton = findViewById<LoginButton>(R.id.login_button)
-        loginButton.setReadPermissions("email", "public_profile", "user_about_me", "user_birthday", "user_education_history", "user_work_history", "user_hometown")
+        loginButton.setReadPermissions("email", "public_profile", "user_hometown")
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -52,11 +52,8 @@ class LoginActivity : AppCompatActivity() {
                     student.email = jsonObject.get("email") as String?
                     student.gender = jsonObject.get("gender") as String?
                     student.name = jsonObject.get("name") as String?
-                    student.nacionality = jsonObject.get("name") as String? //TODO:
-                    //student.phone = jsonObject.get("phone") as String? //TODO:
-                    //TODO: use Rxjava to get using filter type == college
-                    val education = (jsonObject.get("education") as JSONArray)
-                    student.fbInstitutionName = ((education.get(education.length()-1) as JSONObject).get("school") as JSONObject).get("name") as String
+                    student.nacionality = (jsonObject.get("hometown") as JSONObject).get("name") as String? //TODO
+                    student.fbInstitutionName = ""
                     PreferencesManager(this@LoginActivity).user = student
                     if (PreferencesManager(this@LoginActivity).haveSeenIntro) {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))

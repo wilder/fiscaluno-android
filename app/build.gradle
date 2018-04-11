@@ -23,6 +23,9 @@ android {
     packagingOptions {
         exclude 'META-INF/app_debug.kotlin_module'
     }
+    defaultConfig {
+        multiDexEnabled true
+    }
 }
 
 
