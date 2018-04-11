@@ -19,6 +19,7 @@ import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
 import com.fiscaluno.view.MainActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
@@ -26,6 +27,7 @@ import java.util.ArrayList
 
 class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, BlockingStep {
 
+    private lateinit var db: FirebaseFirestore
     private var generalReview: GeneralReview? = null
     private var institutionName: TextView? = null
     private var institutionImage: ImageView? = null
@@ -74,7 +76,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
         generalReview = dataManager.getGeneralReview()
         institutionName?.text = institution.name
         institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: get image
-        presenter?.loadReviews()
+        presenter?.loadReviewTypes()
     }
 
 
@@ -94,9 +96,10 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
 
     override fun onCompleteClicked(callback: StepperLayout.OnCompleteClickedCallback?) {
         //activity.fragmentManager.popBackStack()
-        if (check()) {
+        if (ratedAllTypes()) {
             //TODO: Move to presenter and Save
-            PreferencesManager(context).userInstitutionId = institution.id.toString()
+            presenter?.saveDetailedReviews(adapter!!.getDetailedReviews(), generalReview!!)
+            PreferencesManager(context!!).userInstitutionId = institution.id.toString()
             startActivity(Intent(activity, MainActivity::class.java))
         }
     }
@@ -104,7 +107,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     /**
      *  Checks if all rating bars have been clicked
      */
-    private fun check() : Boolean {
+    private fun ratedAllTypes() : Boolean {
         val reviews = adapter?.getDetailedReviews()
         reviews!!.forEach {
             i ->

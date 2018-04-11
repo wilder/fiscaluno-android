@@ -1,10 +1,10 @@
 package com.fiscaluno.contracts
 
-import android.content.Context
 import com.fiscaluno.model.DetailedReview
+import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
-
-import java.util.ArrayList
+import com.fiscaluno.model.Student
+import java.util.*
 
 /**
  * Created by Wilder on 16/07/17.
@@ -17,7 +17,8 @@ interface DetailedReviewContract {
 
     interface Presenter {
         fun bindView(view: DetailedReviewContract.View)
-        fun loadReviews()
+        fun loadReviewTypes()
         fun loadReviewsByInstitutionId(institutionId: String)
+        fun saveDetailedReviews(detailedReviews: ArrayList<DetailedReview>, generalReview: GeneralReview)
     }
 }
