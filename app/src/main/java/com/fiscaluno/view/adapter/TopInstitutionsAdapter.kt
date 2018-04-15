@@ -25,9 +25,7 @@ class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>, c
     var institutions = institutions
     var context = context
 
-    override fun getItemCount(): Int {
-        return institutions.size
-    }
+    override fun getItemCount(): Int = institutions.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        val institution = institutions.get(position)
@@ -44,7 +42,7 @@ class TopInstitutionsAdapter constructor(institutions: ArrayList<Institution>, c
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return TopInstitutionsAdapter.ViewHolder(layoutInflater.inflate(R.layout.item_institution_main, parent, false))
     }
