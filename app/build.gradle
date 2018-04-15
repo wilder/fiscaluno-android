@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.fiscaluno"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,38 +33,38 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //Tests
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestApi('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.google.firebase:firebase-firestore:11.4.2'
+    compile 'com.google.firebase:firebase-firestore:15.0.0'
 
     //Layout
-    compile "com.android.support:support-v4:26.1.0"
-    compile "com.android.support:design:26.1.0"
-    compile "com.android.support:recyclerview-v7:26.1.0"
-    compile "com.android.support:cardview-v7:26.1.0"
-    compile "com.android.support:appcompat-v7:26.1.0"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.android.support:support-v4:27.1.1"
+    compile "com.android.support:design:27.1.1"
+    compile "com.android.support:recyclerview-v7:27.1.1"
+    compile "com.android.support:cardview-v7:27.1.1"
+    compile "com.android.support:appcompat-v7:27.1.1"
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
 
     compile 'com.github.apl-devs:appintro:v4.2.0'
-    compile 'com.stepstone.stepper:material-stepper:3.3.0'
+    compile 'com.stepstone.stepper:material-stepper:4.0.0'
     compile 'com.github.clans:fab:1.6.4'
 
     //Dagger
-    compile 'com.google.dagger:dagger:2.2'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.2'
+    compile 'com.google.dagger:dagger:2.15'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
 
     //Retrofit
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
     compile "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.facebook.android:facebook-android-sdk:4.32.0'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 repositories {
