@@ -1,16 +1,19 @@
-package com.fiscaluno.login
+package com.fiscaluno.contracts
 
 import android.content.Intent
+import com.fiscaluno.model.Student
 
 
 interface LoginContract {
     interface View {
-        fun successfulLogin()
+        fun successfulLogin(student: Student)
+        fun loginCancelled()
+        fun loginError(message: String)
     }
 
     interface Presenter {
-        fun bindView(view: LoginContract.View)
-        fun doLogin(institutionId: String)
+        fun bindView(view: View)
+        fun doLogin()
         fun prepareForLogin()
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
     }
