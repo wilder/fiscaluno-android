@@ -23,6 +23,9 @@
     <string name="rated_by">Avaliada Por:</string>
     <string name="your_rating">Sua Avaliação</string>
     <string name="average">Média</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="not_registered_register">Ainda não sou cadastrado\nCriar conta</string>
 
 
 </resources>

@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         presenter.bindView(this)
         presenter.prepareForLogin()
 
-        //TODO: Move login logic to presenter
         val loginButton = findViewById<LoginButton>(R.id.login_button)
         loginButton.setOnClickListener { presenter.doLogin() }
 

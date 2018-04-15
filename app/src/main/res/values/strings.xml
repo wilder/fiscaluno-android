@@ -41,6 +41,9 @@
     </string>
     <string name="facebook_app_id">1538793826188514</string>
     <string name="fb_login_protocol_scheme">fb1538793826188514</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="not_registered_register">Not registered yet?\nSign in</string>
 
 
 </resources>
