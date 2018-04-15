@@ -11,29 +11,33 @@ import org.json.JSONObject
 import com.facebook.login.LoginManager
 import android.app.Activity
 import com.facebook.FacebookCallback
-
+import com.fiscaluno.repository.UserRepository
 
 
 class LoginPresenter : LoginContract.Presenter {
 
     lateinit var view: LoginContract.View
+    //TODO: Inject
+    lateinit var userRepository: UserRepository
     private var callbackManager: CallbackManager? = null
     private val facebookReadPermissions = arrayListOf("email", "public_profile", "user_hometown")
 
     override fun bindView(view: LoginContract.View) {
         this.view = view
+        this.userRepository = UserRepository()
     }
 
     override fun doLogin() {
-        val callback = LoginCallback()
-        LoginManager.getInstance().logInWithReadPermissions(view as Activity, facebookReadPermissions)
-        LoginManager.getInstance().registerCallback(callbackManager, callback)
+
 
     }
 
 
     override fun prepareForLogin() {
         callbackManager = CallbackManager.Factory.create()
+        val callback = LoginCallback()
+        LoginManager.getInstance().logInWithReadPermissions(view as Activity, facebookReadPermissions)
+        LoginManager.getInstance().registerCallback(callbackManager, callback)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -49,6 +53,7 @@ class LoginPresenter : LoginContract.Presenter {
                 Log.d("JsonObject", jsonObject.toString())
 
                 val student = getUserFromResponse(jsonObject)
+                userRepository.saveUser(student)
                 view.successfulLogin(student)
 
             }
