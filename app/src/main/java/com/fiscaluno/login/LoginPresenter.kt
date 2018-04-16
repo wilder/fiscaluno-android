@@ -66,13 +66,13 @@ class LoginPresenter : LoginContract.Presenter {
 
         private fun getUserFromResponse(jsonObject: JSONObject): Student {
             val student = Student()
-            student.fbId = jsonObject.get("id") as String?
-            student.birthday = jsonObject.get("birthday") as String?
-            student.city = (jsonObject.get("hometown") as JSONObject).get("name") as String? //TODO
-            student.email = jsonObject.get("email") as String?
-            student.gender = jsonObject.get("gender") as String?
-            student.name = jsonObject.get("name") as String?
-            student.nacionality = (jsonObject.get("hometown") as JSONObject).get("name") as String? //TODO
+            student.fbId = jsonObject.optString("id")
+            student.birthday = jsonObject.optString("birthday")
+            student.city = (jsonObject.opt("hometown") as JSONObject).optString("name")
+            student.email = jsonObject.optString("email")
+            student.gender = jsonObject.optString("gender")
+            student.name = jsonObject.optString("name")
+            student.nacionality = (jsonObject.opt("hometown") as JSONObject).optString("name")
             student.fbInstitutionName = ""
             return student
         }
