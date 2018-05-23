@@ -11,12 +11,18 @@ import org.json.JSONObject
 import com.facebook.login.LoginManager
 import android.app.Activity
 import com.facebook.FacebookCallback
+import com.fiscaluno.data.FiscalunoApi
 import com.fiscaluno.repository.UserRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 
 
-class LoginPresenter : LoginContract.Presenter {
+class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
 
     lateinit var view: LoginContract.View
+    private val api: FiscalunoApi by kodein.instance()
     //TODO: Inject
     lateinit var userRepository: UserRepository
     private var callbackManager: CallbackManager? = null
@@ -27,9 +33,25 @@ class LoginPresenter : LoginContract.Presenter {
         this.userRepository = UserRepository()
     }
 
-    override fun doLogin() {
-
-
+    override fun doLogin(student: Student) {
+        api.authenticate(AuthenticationBody(student.fbId!!))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.code() == 401) {
+                        //view.badRequest("Login expirado")
+                        Log.e("LoginPresenter", "unable to authenticate user - 401")
+                    } else if (it.code() == 500) {
+                        //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                        Log.e("LoginPresenter", "unable to authenticate user - 500")
+                    } else {
+                        userRepository.saveUser(student)
+                        view.successfulLogin(student)
+                    }
+                },{
+                    Log.e("LoginPresenter", "unable to authenticate user - ${it.message}")
+                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                })
     }
 
 
@@ -53,8 +75,8 @@ class LoginPresenter : LoginContract.Presenter {
                 Log.d("JsonObject", jsonObject.toString())
 
                 val student = getUserFromResponse(jsonObject)
-                userRepository.saveUser(student)
-                view.successfulLogin(student)
+
+                doLogin(student)
 
             }
 

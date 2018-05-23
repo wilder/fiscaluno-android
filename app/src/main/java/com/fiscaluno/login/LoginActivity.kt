@@ -4,33 +4,37 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.facebook.CallbackManager
 import com.facebook.login.widget.LoginButton
+import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.contracts.LoginContract
+import com.fiscaluno.data.FiscalunoApi
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Student
 import com.fiscaluno.view.IntroActivity
 import com.fiscaluno.view.MainActivity
-import javax.inject.Inject
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
-    @Inject
+    lateinit var kodein: Kodein
     lateinit var presenter: LoginContract.Presenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
 
-        presenter = LoginPresenter()
+        kodein = (application as App).kodein
+
+        presenter = LoginPresenter(kodein)
         presenter.bindView(this)
         presenter.prepareForLogin()
 
         val loginButton = findViewById<LoginButton>(R.id.login_button)
-        loginButton.setOnClickListener { presenter.doLogin() }
 
     }
 
