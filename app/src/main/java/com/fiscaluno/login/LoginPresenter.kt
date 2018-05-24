@@ -90,11 +90,12 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
             val student = Student()
             student.fbId = jsonObject.optString("id")
             student.birthday = jsonObject.optString("birthday")
-            student.city = (jsonObject.opt("hometown") as JSONObject).optString("name")
+            val hometown: JSONObject? = (jsonObject.opt("hometown") as JSONObject)
+            student.city = hometown?.optString("name")
             student.email = jsonObject.optString("email")
             student.gender = jsonObject.optString("gender")
             student.name = jsonObject.optString("name")
-            student.nacionality = (jsonObject.opt("hometown") as JSONObject).optString("name")
+            student.nacionality = hometown?.optString("name")
             student.fbInstitutionName = ""
             return student
         }
