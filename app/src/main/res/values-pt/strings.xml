@@ -26,6 +26,7 @@
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="not_registered_register">Ainda não sou cadastrado\nCriar conta</string>
+    <string name="must_select_institution">Selecione uma instituição!</string>
 
 
 </resources>
