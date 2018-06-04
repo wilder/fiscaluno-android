@@ -1,14 +1,21 @@
 package com.fiscaluno.presenter
 
+import android.util.Log
 import com.fiscaluno.contracts.SelectInstitutionContract
+import com.fiscaluno.data.FiscalunoApi
 import com.fiscaluno.model.Institution
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 
 /**
  * Created by Wilder on 16/07/17.
  */
 
-class SelectInstitutionPresenter : SelectInstitutionContract.Presenter {
+class SelectInstitutionPresenter(val kodein: Kodein) : SelectInstitutionContract.Presenter {
 
+    private val api: FiscalunoApi by kodein.instance()
     var view: SelectInstitutionContract.View? = null
 
     override fun bindView(view: SelectInstitutionContract.View) {
@@ -16,28 +23,30 @@ class SelectInstitutionPresenter : SelectInstitutionContract.Presenter {
     }
 
     override fun loadMainInstitutions() {
-        val institutions = ArrayList<Institution>()
-        var i = 0
-        while (i < 5) {
-            val inst = Institution()
-            inst.name = "Inst $i"
-            inst.id = "bmtnYGMva25ljuXABdQx"
-            institutions.add(inst)
-            i+=1
-        }
-        view?.updateInstitutionList(institutions)
+        api.findInstitutions()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    when {
+                        it.code() == 401 ->
+                            //TODO: view.badRequest("Login expirado")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                        it.code() == 500 ->
+                            //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                        else -> {
+                            view?.updateInstitutionList(it.body())
+                            view?.setupInstitutionAutocomplete(it.body())
+                        }
+                    }
+                },{
+                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
+                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                })
     }
 
     override fun searchInstitutions() {
         //TODO: Change to list of Institutions and get Institutions from Web Service
-        val institutions = ArrayList<Institution>()
-        var i = 0
-        while (i < 5) {
-            val inst = Institution()
-            inst.name = "Inst $i"
-            institutions.add(inst)
-            i+=1
-        }
-        view?.setupInstitutionAutocomplete(institutions)
+
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.fiscaluno.R
-import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.Institution
 import com.fiscaluno.view.InstitutionDetailActivity
 import java.util.ArrayList

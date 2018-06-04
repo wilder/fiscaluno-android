@@ -18,9 +18,9 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class InstitutionListAdapter (mDataset: ArrayList<Institution>, ratingActivity: RatingActivity) : RecyclerView.Adapter<InstitutionListAdapter.ViewHolder>() {
+class InstitutionListAdapter (mDataset: List<Institution>?, ratingActivity: RatingActivity) : RecyclerView.Adapter<InstitutionListAdapter.ViewHolder>() {
 
-    var mDataset: ArrayList<Institution> = mDataset
+    var mDataset: MutableList<Institution>? = mDataset?.toMutableList()
     val ratingActivity: RatingActivity = ratingActivity //TODO: Change to interface to decouple the code
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,12 +29,12 @@ class InstitutionListAdapter (mDataset: ArrayList<Institution>, ratingActivity: 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val institution = mDataset[position]
+        val institution = mDataset?.get(position)
         //TODO: Change to simpledraweeview'
-        if (institution.imageUri != null){
+        if (institution?.imageUri != null){
             holder.icon.setImageURI(institution.imageUri.toUri())
         }
-        holder.institutionName.text = institution.name
+        holder.institutionName.text = institution?.name
 
         // Set click listener for the whole post view
         holder.conainer.setOnClickListener {
@@ -43,9 +43,7 @@ class InstitutionListAdapter (mDataset: ArrayList<Institution>, ratingActivity: 
         }
     }
 
-    override fun getItemCount(): Int {
-        return mDataset.size
-    }
+    override fun getItemCount(): Int = if( mDataset == null) 0 else mDataset!!.size
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         // each data item is just a string in this case
@@ -56,8 +54,8 @@ class InstitutionListAdapter (mDataset: ArrayList<Institution>, ratingActivity: 
     }
 
     fun swap(data: List<Institution>) {
-        mDataset.clear()
-        mDataset.addAll(data)
+        mDataset?.clear()
+        mDataset?.addAll(data)
         notifyDataSetChanged()
     }
 }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
+import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.SelectInstitutionContract
@@ -19,6 +20,7 @@ import com.fiscaluno.view.adapter.InstitutionAutoCompleteAdapter
 import com.fiscaluno.view.adapter.InstitutionListAdapter
 import com.stepstone.stepper.Step
 import com.stepstone.stepper.VerificationError
+import org.kodein.di.Kodein
 
 
 class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.View, Step {
@@ -27,6 +29,7 @@ class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.Vi
     var institutionList: RecyclerView? = null
     var searchEt: AutoCompleteTextView? = null
     var adapter: InstitutionListAdapter? = null
+    lateinit var kodein: Kodein
 
     lateinit var dataManager: DataManager
 
@@ -48,7 +51,8 @@ class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.Vi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = SelectInstitutionPresenter()
+        kodein = (activity?.application as App).kodein
+        presenter = SelectInstitutionPresenter(kodein)
         presenter?.bindView(this)
     }
 
@@ -65,18 +69,18 @@ class RatingSelectInstitutionFragment : Fragment(), SelectInstitutionContract.Vi
         presenter?.searchInstitutions()
     }
 
-    override fun setupInstitutionAutocomplete(institutions: ArrayList<Institution>) {
+    override fun setupInstitutionAutocomplete(institutions: List<Institution>?) {
         val adapter = InstitutionAutoCompleteAdapter(context, R.layout.item_institution_name, institutions)
         searchEt?.setAdapter(adapter)
     }
 
-    private fun setupList(institutions: ArrayList<Institution>){
+    private fun setupList(institutions: List<Institution>?){
         adapter = InstitutionListAdapter(institutions, (activity as RatingActivity))
         institutionList?.adapter = adapter
         institutionList?.layoutManager = LinearLayoutManager(context)
     }
 
-    override fun updateInstitutionList(institutions: ArrayList<Institution>) {
+    override fun updateInstitutionList(institutions: List<Institution>?) {
         setupList(institutions)
     }
 

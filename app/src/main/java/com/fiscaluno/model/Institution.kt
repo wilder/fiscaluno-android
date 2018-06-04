@@ -2,20 +2,37 @@ package com.fiscaluno.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 /**
  * Created by Wilder on 11/07/17.
  */
 
 class Institution() : Parcelable {
+    @SerializedName("ID")
     var id: String? = null
+
+    @SerializedName("Name")
     var name: String? = null
+
+    @SerializedName("Address")
     var address: String? = null
+
+    @SerializedName("Cnpj")
     var cnpj: String? = null
+
+    @SerializedName("Email")
     var email: String? = null
+
+    @SerializedName("Website")
     var website: String? = null
+
+    @SerializedName("Phone")
     var phoneNumber: String? = null
+
+    @SerializedName("ImageUri")
     var imageUri: String? = null
+
     var averageRating: Float? = null
     var reviewdBy: Int? = null
     var detailedReviews: List<DetailedReview>? = null

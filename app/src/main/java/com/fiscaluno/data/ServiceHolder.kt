@@ -13,11 +13,11 @@ object ServiceHolder {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpCliente(logger()))
+                .client(okHttpClient(logger()))
                 .build()
     }
 
-    private fun okHttpCliente(interceptor: Interceptor) = OkHttpClient.Builder().run {
+    private fun okHttpClient(interceptor: Interceptor) = OkHttpClient.Builder().run {
         addInterceptor(interceptor)
         build()
     }

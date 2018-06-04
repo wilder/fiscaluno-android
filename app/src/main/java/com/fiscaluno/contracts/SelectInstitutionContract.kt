@@ -10,9 +10,9 @@ import kotlin.collections.ArrayList
 
 interface SelectInstitutionContract {
     interface View {
-        fun updateInstitutionList(institutions: ArrayList<Institution>)
+        fun updateInstitutionList(institutions: List<Institution>?)
         //TODO: Change to list of Institutions
-        fun setupInstitutionAutocomplete(institutions: ArrayList<Institution>)
+        fun setupInstitutionAutocomplete(institutions: List<Institution>?)
     }
 
     interface Presenter {

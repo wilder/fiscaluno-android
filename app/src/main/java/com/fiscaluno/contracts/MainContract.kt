@@ -1,6 +1,5 @@
 package com.fiscaluno.contracts
 
-import android.content.SharedPreferences
 import com.fiscaluno.model.Institution
 
 /**

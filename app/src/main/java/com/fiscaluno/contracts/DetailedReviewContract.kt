@@ -2,8 +2,6 @@ package com.fiscaluno.contracts
 
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
-import com.fiscaluno.model.Institution
-import com.fiscaluno.model.Student
 import java.util.*
 
 /**

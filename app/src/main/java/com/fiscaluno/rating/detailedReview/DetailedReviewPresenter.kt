@@ -4,8 +4,6 @@ import android.util.Log
 import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
-import com.fiscaluno.model.Institution
-import com.fiscaluno.model.Student
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 

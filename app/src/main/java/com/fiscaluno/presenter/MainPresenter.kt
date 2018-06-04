@@ -1,6 +1,5 @@
 package com.fiscaluno.presenter
 
-import android.content.SharedPreferences
 import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.model.Institution
 
