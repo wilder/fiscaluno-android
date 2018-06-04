@@ -45,8 +45,4 @@ class SelectInstitutionPresenter(val kodein: Kodein) : SelectInstitutionContract
                 })
     }
 
-    override fun searchInstitutions() {
-        //TODO: Change to list of Institutions and get Institutions from Web Service
-
-    }
 }

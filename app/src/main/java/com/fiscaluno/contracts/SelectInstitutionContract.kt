@@ -18,6 +18,5 @@ interface SelectInstitutionContract {
     interface Presenter {
         fun bindView(view: SelectInstitutionContract.View)
         fun loadMainInstitutions()
-        fun searchInstitutions()
     }
 }
