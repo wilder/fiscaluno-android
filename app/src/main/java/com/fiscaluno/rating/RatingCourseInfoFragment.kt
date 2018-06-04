@@ -44,7 +44,7 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater!!.inflate(R.layout.fragment_rating_course_info, container, false)
+        val view = inflater.inflate(R.layout.fragment_rating_course_info, container, false)
         institutionName =  view.findViewById(R.id.institution_name_tv_ci)
         institutionImage = view.findViewById(R.id.institution_small_image_ci)
         courseEt = view.findViewById(R.id.course_et_ci)
@@ -88,6 +88,9 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
         }
 
         //TODO: check radiogroup
+        if (!radioGroup!!.isSelected) {
+            canGoToNext = false
+        }
 
         if (!canGoToNext) {
             return VerificationError("teste")

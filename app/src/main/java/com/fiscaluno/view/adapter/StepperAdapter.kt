@@ -16,16 +16,14 @@ import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter
 class StepperAdapter(fm: FragmentManager, context: Context) : AbstractFragmentStepAdapter(fm, context) {
 
     override fun createStep(position: Int): Step {
-        when (position) {
-            0 -> return RatingSelectInstitutionFragment.newInstance()
-            1 -> return RatingCourseInfoFragment.newInstance()
-            2 -> return RatingGeneralFragment.newInstance()
-            3 -> return RatingDetailedFragment.newInstance()
-            else -> throw IllegalArgumentException("Unsupported position: " + position)
+        return when (position) {
+            0 -> RatingSelectInstitutionFragment.newInstance()
+            1 -> RatingCourseInfoFragment.newInstance()
+            2 -> RatingGeneralFragment.newInstance()
+            3 -> RatingDetailedFragment.newInstance()
+            else -> throw IllegalArgumentException("Unsupported position: $position")
         }
     }
 
-    override fun getCount(): Int {
-        return 4
-    }
+    override fun getCount(): Int = 4
 }

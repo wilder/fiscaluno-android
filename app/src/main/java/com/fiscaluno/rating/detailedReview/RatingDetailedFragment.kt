@@ -61,7 +61,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater!!.inflate(R.layout.fragment_rating_detailed, container, false)
+        val view = inflater.inflate(R.layout.fragment_rating_detailed, container, false)
 
         institutionName = view.findViewById(R.id.institution_name_tv_gr)
         institutionImage = view.findViewById(R.id.institution_small_image_gr)
