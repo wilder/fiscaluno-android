@@ -42,18 +42,19 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     when {
-                        it.code() == 401 || it.code() == 400 -> //view.badRequest("Login expirado")
-                            Log.e("LoginPresenter", "unable to authenticate user - 401")
-                        it.code() == 500 -> //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("LoginPresenter", "unable to authenticate user - 500")
-                        it.code() == 200 || it.code() == 201  -> {
-                            it.body().let {
-                                if (it != null) { // TODO: refactor let
-                                    userRepository.saveUserToken(it.body.token)
-                                }
+                        it.code() in 400..500 -> {
+                            view.loginError("Não foi possível realizar o login")
+                            Log.e("LoginPresenter", "unable to authenticate user - ${it.code()}")
+                        }
+                        it.code() in 200..299 -> {
+
+                            it.body()?.body?.token?.let {
+                                userRepository.saveUserToken(it)
                             }
+
                             firebaseStudentRepository.saveUser(student) //TODO: Remove
                             view.successfulLogin(student)
+
                         }
                         else -> {
                             view.loginError(it.message())
@@ -61,7 +62,7 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
                     }
                 },{
                     Log.e("LoginPresenter", "unable to authenticate user - ${it.message}")
-                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                    view.loginError("Não foi possível Realizar o Login.\nTente novamente mais tarde.")
                 })
     }
 
