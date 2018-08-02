@@ -2,8 +2,7 @@ package com.fiscaluno.presenter
 
 import android.util.Log
 import com.fiscaluno.contracts.SelectInstitutionContract
-import com.fiscaluno.data.FiscalunoApi
-import com.fiscaluno.model.Institution
+import com.fiscaluno.network.FiscalunoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein

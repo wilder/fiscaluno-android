@@ -2,7 +2,7 @@ package com.fiscaluno.contracts
 
 import com.fiscaluno.model.Student
 
-interface UserRepositoryContract {
+interface StudentRepository {
 
     fun saveUser(student: Student)
 

@@ -1,4 +1,4 @@
-package com.fiscaluno.data
+package com.fiscaluno.network
 
 import com.fiscaluno.model.Institution
 import com.fiscaluno.login.AuthenticationBody
@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface FiscalunoApi {
 
-    @Headers("X-Client-ID: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImNsaWVudCI6ImFueSJ9LCJpc3MiOiJtdSJ9.k7uGe0qbuwwxAp_UOVGVft4eAJwDc_FnaZg-pmwzUZ0")
+    @Headers("@: NoAuth")
     @POST("https://fiscaluno-mu.herokuapp.com/users")
     fun authenticate(@Body authenticationBody: AuthenticationBody): Observable<Response<AuthenticationResponse>>
 

@@ -1,4 +1,4 @@
-package com.fiscaluno.data
+package com.fiscaluno.network
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -8,17 +8,18 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceHolder {
-    operator fun invoke(baseUrl: String): Retrofit {
+    operator fun invoke(baseUrl: String, authInterceptor: AuthInterceptor): Retrofit {
         return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient(logger()))
+                .client(okHttpClient(logger(), authInterceptor))
                 .build()
     }
 
-    private fun okHttpClient(interceptor: Interceptor) = OkHttpClient.Builder().run {
+    private fun okHttpClient(interceptor: Interceptor, authInterceptor: AuthInterceptor) = OkHttpClient.Builder().run {
         addInterceptor(interceptor)
+        addInterceptor(authInterceptor)
         build()
     }
 

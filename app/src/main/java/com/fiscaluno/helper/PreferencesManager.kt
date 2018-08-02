@@ -13,8 +13,13 @@ class PreferencesManager (context: Context) {
     val PREFS_FILENAME = "fiscaluno.prefs"
     val USER_INSTITUTION_ID = "user_institution_id"
     val USER = "user_obj"
+    val TOKEN = "token"
     val INTRO_KEY = "intro_key"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
+
+    var token: String?
+        get() = prefs.getString(TOKEN, null)
+        set(value) = prefs.edit().putString(TOKEN, value).apply()
 
     var userInstitutionId: String
         get() = prefs.getString(USER_INSTITUTION_ID, "")

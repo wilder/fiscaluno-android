@@ -8,13 +8,11 @@ import com.facebook.login.widget.LoginButton
 import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.contracts.LoginContract
-import com.fiscaluno.data.FiscalunoApi
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Student
 import com.fiscaluno.view.IntroActivity
 import com.fiscaluno.view.MainActivity
 import org.kodein.di.Kodein
-import org.kodein.di.generic.instance
 
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {

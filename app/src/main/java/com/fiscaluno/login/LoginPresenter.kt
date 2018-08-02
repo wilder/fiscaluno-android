@@ -11,7 +11,8 @@ import org.json.JSONObject
 import com.facebook.login.LoginManager
 import android.app.Activity
 import com.facebook.FacebookCallback
-import com.fiscaluno.data.FiscalunoApi
+import com.fiscaluno.network.FiscalunoApi
+import com.fiscaluno.repository.FirebaseStudentRepository
 import com.fiscaluno.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,14 +24,16 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
 
     lateinit var view: LoginContract.View
     private val api: FiscalunoApi by kodein.instance()
+    private val userRepository: UserRepository by kodein.instance()
+
     //TODO: Inject
-    lateinit var userRepository: UserRepository
+    lateinit var firebaseStudentRepository: FirebaseStudentRepository
     private var callbackManager: CallbackManager? = null
     private val facebookReadPermissions = arrayListOf("email", "public_profile", "user_hometown")
 
     override fun bindView(view: LoginContract.View) {
         this.view = view
-        this.userRepository = UserRepository()
+        this.firebaseStudentRepository = FirebaseStudentRepository()
     }
 
     override fun doLogin(student: Student) {
@@ -38,15 +41,23 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it.code() == 401) {
-                        //view.badRequest("Login expirado")
-                        Log.e("LoginPresenter", "unable to authenticate user - 401")
-                    } else if (it.code() == 500) {
-                        //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                        Log.e("LoginPresenter", "unable to authenticate user - 500")
-                    } else {
-                        userRepository.saveUser(student)
-                        view.successfulLogin(student)
+                    when {
+                        it.code() == 401 || it.code() == 400 -> //view.badRequest("Login expirado")
+                            Log.e("LoginPresenter", "unable to authenticate user - 401")
+                        it.code() == 500 -> //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                            Log.e("LoginPresenter", "unable to authenticate user - 500")
+                        it.code() == 200 || it.code() == 201  -> {
+                            it.body().let {
+                                if (it != null) { // TODO: refactor let
+                                    userRepository.saveUserToken(it.body.token)
+                                }
+                            }
+                            firebaseStudentRepository.saveUser(student) //TODO: Remove
+                            view.successfulLogin(student)
+                        }
+                        else -> {
+                            view.loginError(it.message())
+                        }
                     }
                 },{
                     Log.e("LoginPresenter", "unable to authenticate user - ${it.message}")
