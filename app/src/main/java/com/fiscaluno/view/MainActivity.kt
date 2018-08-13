@@ -8,14 +8,17 @@ import android.support.v7.widget.Toolbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.view.GravityCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.R
 import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.helper.PreferencesManager
+import com.fiscaluno.model.Course
 import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.MainPresenter
 import com.fiscaluno.rating.RatingActivity
+import com.fiscaluno.view.adapter.TopCoursesAdapter
 import com.fiscaluno.view.adapter.TopInstitutionsAdapter
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -46,13 +49,20 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         presenter?.bindView(this)
         //TODO: Call in different threads?
         presenter?.loadTopInstitutions()
+        presenter?.loadTopCourses()
         preferences = PreferencesManager(this)
     }
 
     override fun showTopInstitutions(institutions: List<Institution>) {
         topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions), this)
+        topInstitutionsRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         topInstitutionsRv.adapter = topInstitutionsAdapter
+    }
 
+    override fun showTopCourses(courses: List<Course>) {
+        val topCoursesAdapter = TopCoursesAdapter(ArrayList(courses), this)
+        topCoursesRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        topCoursesRv.adapter = topCoursesAdapter
     }
 
     fun fbReviewClick(view: View) {

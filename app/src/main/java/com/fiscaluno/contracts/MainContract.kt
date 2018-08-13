@@ -1,5 +1,6 @@
 package com.fiscaluno.contracts
 
+import com.fiscaluno.model.Course
 import com.fiscaluno.model.Institution
 
 /**
@@ -8,9 +9,11 @@ import com.fiscaluno.model.Institution
 interface MainContract {
     interface View {
         fun showTopInstitutions(institutions: List<Institution>)
+        fun showTopCourses(courses: List<Course>)
     }
     interface Presenter {
         fun bindView(view: MainContract.View)
         fun loadTopInstitutions()
+        fun loadTopCourses()
     }
 }
