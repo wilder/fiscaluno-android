@@ -47,33 +47,11 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         //TODO: Call in different threads?
         presenter?.loadTopInstitutions()
         preferences = PreferencesManager(this)
-        presenter?.loadUserInstitutionInfo(preferences!!.userInstitutionId)
     }
 
     override fun showTopInstitutions(institutions: List<Institution>) {
         topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions), this)
         topInstitutionsRv.adapter = topInstitutionsAdapter
-
-    }
-
-    override fun showUserInstitutionInfo(userInstitution: Institution?) {
-
-        //display user institution information
-        if(userInstitution != null) {
-            this.userInstitution = userInstitution
-            institutionNameTv.text = userInstitution?.name
-            ratedBy.text = userInstitution?.reviewdBy.toString()
-            average.text = userInstitution?.averageRating.toString()
-            institutionRating.rating = userInstitution?.averageRating!!
-        } else {
-            /*
-             * User haven't reviewed a institution yet
-             * Displaying a card saying that
-             * TODO: Create class to handle views?
-             */
-            userInstitutionCard.visibility = View.GONE
-            haventReviewedCard.visibility = View.VISIBLE
-        }
 
     }
 

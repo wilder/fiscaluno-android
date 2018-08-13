@@ -31,30 +31,4 @@ class MainPresenter : MainContract.Presenter{
         view.showTopInstitutions(topInstitutions!!)
     }
 
-    /**
-     * TODO: handle multiple institutions
-     * Loads the id of the user's institution
-     *
-     * The view will handle when the institution is null
-     * and display a card informing the user that he doesn'
-     * have a institution yet
-     */
-    override fun loadUserInstitutionInfo(institutionId: String){
-
-        var institution: Institution? = null
-
-        if (!institutionId.isEmpty()) {
-
-            //TODO: Get user's institution
-            institution = Institution()
-            institution.name = "Faculdade Impacta de Tecnologia"
-            institution.averageRating = 3.12f * 0.9f
-            institution.id = "2"
-            institution.reviewdBy = 132 * 5
-
-        }
-
-        view.showUserInstitutionInfo(institution)
-
-    }
 }

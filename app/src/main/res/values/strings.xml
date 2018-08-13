@@ -45,6 +45,10 @@
     <string name="password">Senha</string>
     <string name="not_registered_register">Not registered yet?\nSign in</string>
     <string name="must_select_institution">An institution must be selected</string>
+    <string name="courses">Courses</string>
+    <string name="exams">Exams</string>
+    <string name="search">Search</string>
+    <string name="ideal_institution_by_you">The ideal educational institution, rated by students like you</string>
 
 
 </resources>

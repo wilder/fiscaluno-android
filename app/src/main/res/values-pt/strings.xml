@@ -27,6 +27,10 @@
     <string name="password">Senha</string>
     <string name="not_registered_register">Ainda não sou cadastrado\nCriar conta</string>
     <string name="must_select_institution">Selecione uma instituição!</string>
+    <string name="courses">Cursos</string>
+    <string name="exams">Vestibulares</string>
+    <string name="search">Pesquisar</string>
+    <string name="ideal_institution_by_you">A instituição de ensino ideal, avaliada por estudantes como você</string>
 
 
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/toggle_institutions"
+        android:title="@string/institutions" />
+
+    <item
+        android:id="@+id/toggle_courses"
+        android:title="@string/courses" />
+
+    <item
+        android:id="@+id/toggle_exams"
+        android:title="@string/exams" />
+
+</menu>
