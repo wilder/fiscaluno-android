@@ -21,6 +21,7 @@ import com.fiscaluno.rating.RatingActivity
 import com.fiscaluno.view.adapter.TopCoursesAdapter
 import com.fiscaluno.view.adapter.TopInstitutionsAdapter
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.search_panel.*
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
 
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
+
+        toggleButtonLayout.setToggled(R.id.toggle_institutions,  true)
 
         presenter = MainPresenter()
         presenter?.bindView(this)

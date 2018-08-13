@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_search_panel_title"
         app:menu="@menu/toggle_search_panel_options"
-        app:selectedColor="@color/colorPrimary"
+        app:selectedColor="@android:color/darker_gray"
         app:toggleMode="even" />
 
     <LinearLayout
