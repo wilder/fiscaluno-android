@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.R
+import com.fiscaluno.R.id.toggleButtonLayout
 import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Course
