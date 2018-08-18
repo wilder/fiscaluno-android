@@ -8,12 +8,12 @@ import com.google.gson.annotations.SerializedName
  * Created by Wilder on 11/07/17.
  */
 
-class Institution() : Parcelable {
+class Institution : RateableEntity, Parcelable {
     @SerializedName("ID")
     var id: String? = null
 
     @SerializedName("Name")
-    var name: String? = null
+    override var name: String? = null
 
     @SerializedName("Address")
     var address: String? = null
@@ -33,12 +33,12 @@ class Institution() : Parcelable {
     @SerializedName("ImageUri")
     var imageUri: String? = null
 
-    var averageRating: Float? = null
-    var reviewdBy: Int? = null
     var detailedReviews: List<DetailedReview>? = null
     var generalReviews: List<GeneralReview>? = null
 
-    constructor(parcel: Parcel) : this() {
+    constructor() {}
+
+    constructor(parcel: Parcel) {
         id = parcel.readString()
         name = parcel.readString()
         address = parcel.readString()
@@ -47,8 +47,8 @@ class Institution() : Parcelable {
         website = parcel.readString()
         phoneNumber = parcel.readString()
         imageUri = parcel.readString()
-        averageRating = parcel.readValue(Float::class.java.classLoader) as? Float
-        reviewdBy = parcel.readValue(Int::class.java.classLoader) as? Int
+        averageRating = parcel.readValue(Float::class.java.classLoader) as Float
+        reviewdBy = parcel.readValue(Int::class.java.classLoader) as Int
         detailedReviews = parcel.createTypedArrayList(DetailedReview.CREATOR)
         generalReviews = parcel.createTypedArrayList(GeneralReview.CREATOR)
     }
@@ -68,18 +68,12 @@ class Institution() : Parcelable {
         parcel.writeTypedList(generalReviews)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Parcelable.Creator<Institution> {
-        override fun createFromParcel(parcel: Parcel): Institution {
-            return Institution(parcel)
-        }
+        override fun createFromParcel(parcel: Parcel): Institution = Institution(parcel)
 
-        override fun newArray(size: Int): Array<Institution?> {
-            return arrayOfNulls(size)
-        }
+        override fun newArray(size: Int): Array<Institution?> = arrayOfNulls(size)
     }
 
 }
