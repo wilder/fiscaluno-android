@@ -16,12 +16,29 @@ interface FiscalunoApi {
     fun authenticate(@Body authenticationBody: AuthenticationBody): Observable<Response<AuthenticationResponse>>
 
     @GET("institutions")
-    fun findInstitutions(): Observable<Response<StandardApiResponse<List<Institution>>>>
+    fun findInstitutions(
+            @Query("name") name: String? = null,
+            @Query("city") city: String? = null,
+            @Query("state") state: String? = null,
+            @Query("rate") rate: Float? = 0f,
+            @Query("page") page: Int = 0,
+            @Query("size") pageSize: Int = 5,
+            @Query("sort") sortBy: String? = null): Observable<Response<StandardApiResponse<List<Institution>>>>
 
     @GET("institutions/{id}")
     fun findInstitutionsById(@Path("id") id: String): Observable<Response<StandardApiResponse<Institution>>>
 
     @GET("courses")
-    fun findCourses(): Observable<Response<StandardApiResponse<List<Course>>>>
+    fun findCourses(
+            @Query("name") name: String? = null,
+            @Query("institution") institution: String? = null,
+            @Query("city") city: String? = null,
+            @Query("state") state: String? = null,
+            @Query("rate") rate: Float? = 0f,
+            @Query("page") page: Int = 0,
+            @Query("size") pageSize: Int = 5,
+            @Query("sort") sortBy: String? = null): Observable<Response<StandardApiResponse<List<Course>>>>
+
+
 
 }

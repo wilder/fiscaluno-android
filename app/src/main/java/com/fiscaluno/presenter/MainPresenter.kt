@@ -2,7 +2,6 @@ package com.fiscaluno.presenter
 
 import android.util.Log
 import com.fiscaluno.contracts.MainContract
-import com.fiscaluno.model.Course
 import com.fiscaluno.network.FiscalunoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +25,7 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
      */
     override fun loadTopInstitutions() {
         //TODO: Load top Institutions
-        api.findInstitutions()
+        api.findInstitutions(sortBy = "rate", pageSize = 4)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -50,7 +49,7 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
     }
 
     override fun loadTopCourses() {
-        api.findCourses()
+        api.findCourses(sortBy = "rate", pageSize = 4)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
