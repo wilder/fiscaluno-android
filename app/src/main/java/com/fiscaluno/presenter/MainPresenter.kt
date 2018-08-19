@@ -50,18 +50,26 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
     }
 
     override fun loadTopCourses() {
-        //TODO: Load top courses
-        val topCourses: ArrayList<Course> = ArrayList()
-        for (i in 0..5) {
-            val course = Course()
-            course.name = "test $i"
-            course.averageRating = i * 0.9f
-            course.id = i.toString()
-            course.ratedByCount = 132 * i
-            course.institution = null
-            topCourses.add(course)
-        }
-        view.showTopCourses(topCourses)
+        api.findCourses()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    when {
+                        it.code() == 401 ->
+                            //TODO: view.badRequest("Login expirado")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                        it.code() == 500 ->
+                            //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                        else -> {
+                            val courses = it.body()?.result
+                            view.showTopCourses(courses)
+                        }
+                    }
+                },{
+                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
+                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                })
     }
 
 }

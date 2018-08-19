@@ -9,7 +9,7 @@ import com.fiscaluno.model.Institution
 interface MainContract {
     interface View {
         fun showTopInstitutions(institutions: List<Institution>?)
-        fun showTopCourses(courses: List<Course>)
+        fun showTopCourses(courses: List<Course>?)
     }
     interface Presenter {
         fun bindView(view: MainContract.View)

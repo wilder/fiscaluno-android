@@ -1,5 +1,8 @@
 package com.fiscaluno.network
 
+import com.fiscaluno.model.Course
+import com.fiscaluno.serializers.CourseSerializer
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,7 +15,7 @@ object ServiceHolder {
         return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson()))
                 .client(okHttpClient(logger(), authInterceptor))
                 .build()
     }
@@ -27,4 +30,9 @@ object ServiceHolder {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
+
+    private fun gson() =  GsonBuilder().run {
+        registerTypeAdapter(Course::class.java, CourseSerializer())
+                .create()
+    }
 }

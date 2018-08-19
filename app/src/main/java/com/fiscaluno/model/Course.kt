@@ -2,15 +2,18 @@ package com.fiscaluno.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 class Course : RateableEntity, Parcelable {
 
-    override var name: String = ""
-    override var averageRating: Float = 0f
-    override var ratedByCount: Int = 0
+    @SerializedName("course_name") override var name: String = ""
+    @SerializedName("course_type") var courseType: String = ""
+    @SerializedName("course_average_rating") override var averageRating: Float = 0f
+    @SerializedName("course_rated_by_count") override var ratedByCount: Int = 0
 
     var id: String? = null
-    var institution: Institution? = null
+
+    @SerializedName("institution") var institution: Institution? = null
 
 
     constructor() {}
@@ -18,6 +21,7 @@ class Course : RateableEntity, Parcelable {
     constructor(`in`: Parcel) {
         this.id = `in`.readString()
         this.name = `in`.readString()
+        this.courseType = `in`.readString()
         this.ratedByCount = `in`.readInt()
         this.averageRating = `in`.readFloat()
         this.institution = `in`.readParcelable(Institution::class.java.classLoader)
@@ -27,6 +31,7 @@ class Course : RateableEntity, Parcelable {
         dest.writeValue(this.averageRating)
         dest.writeValue(this.ratedByCount)
         dest.writeString(this.name)
+        dest.writeString(this.courseType)
         dest.writeString(this.id)
         dest.writeParcelable(this.institution, flags)
     }

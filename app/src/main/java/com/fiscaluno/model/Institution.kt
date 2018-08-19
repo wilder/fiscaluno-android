@@ -9,20 +9,22 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class Institution (
-        val id: String,
-        override var name: String,
-        val address: String,
-        val cnpj: String,
-        val emails: List<String>,
-        val phones: List<String>,
-        val province: String,
-        val website: String,
-        @SerializedName("image_url") val imageUri: String,
-        @SerializedName("average_rating") override var averageRating: Float,
-        @SerializedName("rated_by_count") override var ratedByCount: Int,
-        val detailedReviews: List<DetailedReview>,
-        val generalReviews: List<GeneralReview>
+        var id: String = "",
+        override var name: String = "",
+        val address: String = "",
+        val cnpj: String = "",
+        val emails: List<String> = emptyList(),
+        val phones: List<String> = emptyList(),
+        val province: String = "",
+        val website: String = "",
+        @SerializedName("image_url") var imageUri: String = "",
+        @SerializedName("average_rating") override var averageRating: Float = 0f,
+        @SerializedName("rated_by_count") override var ratedByCount: Int = 0,
+        val detailedReviews: List<DetailedReview> = emptyList(),
+        val generalReviews: List<GeneralReview> = emptyList()
 ) : RateableEntity(), Parcelable {
+
+
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),

@@ -3,6 +3,7 @@ package com.fiscaluno.network
 import com.fiscaluno.model.Institution
 import com.fiscaluno.login.AuthenticationBody
 import com.fiscaluno.login.AuthenticationResponse
+import com.fiscaluno.model.Course
 import com.fiscaluno.model.StandardApiResponse
 import io.reactivex.Observable
 import retrofit2.Response
@@ -20,6 +21,7 @@ interface FiscalunoApi {
     @GET("institutions/{id}")
     fun findInstitutionsById(@Path("id") id: String): Observable<Response<StandardApiResponse<Institution>>>
 
-
+    @GET("courses")
+    fun findCourses(): Observable<Response<StandardApiResponse<List<Course>>>>
 
 }

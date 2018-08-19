@@ -13,7 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.App
 import com.fiscaluno.R
-import com.fiscaluno.R.id.toggleButtonLayout
+import com.fiscaluno.R.id.*
 import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Course
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         topInstitutionsRv.adapter = topInstitutionsAdapter
     }
 
-    override fun showTopCourses(courses: List<Course>) {
+    override fun showTopCourses(courses: List<Course>?) {
         val topCoursesAdapter = TopCoursesAdapter(ArrayList(courses), this)
         topCoursesRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         topCoursesRv.adapter = topCoursesAdapter
