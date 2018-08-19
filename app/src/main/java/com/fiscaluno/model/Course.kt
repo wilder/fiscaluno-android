@@ -5,6 +5,10 @@ import android.os.Parcelable
 
 class Course : RateableEntity, Parcelable {
 
+    override var name: String = ""
+    override var averageRating: Float = 0f
+    override var ratedByCount: Int = 0
+
     var id: String? = null
     var institution: Institution? = null
 
@@ -14,14 +18,14 @@ class Course : RateableEntity, Parcelable {
     constructor(`in`: Parcel) {
         this.id = `in`.readString()
         this.name = `in`.readString()
-        this.reviewdBy = `in`.readInt()
+        this.ratedByCount = `in`.readInt()
         this.averageRating = `in`.readFloat()
-        this.institution = `in`.readParcelable<Institution>(Institution::class.java.classLoader)
+        this.institution = `in`.readParcelable(Institution::class.java.classLoader)
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeValue(this.averageRating)
-        dest.writeValue(this.reviewdBy)
+        dest.writeValue(this.ratedByCount)
         dest.writeString(this.name)
         dest.writeString(this.id)
         dest.writeParcelable(this.institution, flags)

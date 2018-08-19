@@ -8,62 +8,48 @@ import com.google.gson.annotations.SerializedName
  * Created by Wilder on 11/07/17.
  */
 
-class Institution : RateableEntity, Parcelable {
-    @SerializedName("ID")
-    var id: String? = null
-
-    @SerializedName("Name")
-    override var name: String? = null
-
-    @SerializedName("Address")
-    var address: String? = null
-
-    @SerializedName("Cnpj")
-    var cnpj: String? = null
-
-    @SerializedName("Email")
-    var email: String? = null
-
-    @SerializedName("Website")
-    var website: String? = null
-
-    @SerializedName("Phone")
-    var phoneNumber: String? = null
-
-    @SerializedName("ImageUri")
-    var imageUri: String? = null
-
-    var detailedReviews: List<DetailedReview>? = null
-    var generalReviews: List<GeneralReview>? = null
-
-    constructor() {}
-
-    constructor(parcel: Parcel) {
-        id = parcel.readString()
-        name = parcel.readString()
-        address = parcel.readString()
-        cnpj = parcel.readString()
-        email = parcel.readString()
-        website = parcel.readString()
-        phoneNumber = parcel.readString()
-        imageUri = parcel.readString()
-        averageRating = parcel.readValue(Float::class.java.classLoader) as Float
-        reviewdBy = parcel.readValue(Int::class.java.classLoader) as Int
-        detailedReviews = parcel.createTypedArrayList(DetailedReview.CREATOR)
-        generalReviews = parcel.createTypedArrayList(GeneralReview.CREATOR)
-    }
+data class Institution (
+        val id: String,
+        override var name: String,
+        val address: String,
+        val cnpj: String,
+        val emails: List<String>,
+        val phones: List<String>,
+        val province: String,
+        val website: String,
+        @SerializedName("image_url") val imageUri: String,
+        @SerializedName("average_rating") override var averageRating: Float,
+        @SerializedName("rated_by_count") override var ratedByCount: Int,
+        val detailedReviews: List<DetailedReview>,
+        val generalReviews: List<GeneralReview>
+) : RateableEntity(), Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.createStringArrayList(),
+            parcel.createStringArrayList(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readFloat(),
+            parcel.readInt(),
+            parcel.createTypedArrayList(DetailedReview.CREATOR),
+            parcel.createTypedArrayList(GeneralReview.CREATOR))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(id)
+        parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(address)
         parcel.writeString(cnpj)
-        parcel.writeString(email)
+        parcel.writeStringList(emails)
+        parcel.writeStringList(phones)
+        parcel.writeString(province)
         parcel.writeString(website)
-        parcel.writeString(phoneNumber)
         parcel.writeString(imageUri)
-        parcel.writeValue(averageRating)
-        parcel.writeValue(reviewdBy)
+        parcel.writeFloat(averageRating)
+        parcel.writeInt(ratedByCount)
         parcel.writeTypedList(detailedReviews)
         parcel.writeTypedList(generalReviews)
     }
@@ -75,5 +61,4 @@ class Institution : RateableEntity, Parcelable {
 
         override fun newArray(size: Int): Array<Institution?> = arrayOfNulls(size)
     }
-
 }

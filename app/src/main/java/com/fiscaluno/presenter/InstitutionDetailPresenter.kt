@@ -18,18 +18,6 @@ class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
     }
 
     override fun loadInstitution(institutionId: String) {
-        val institution = Institution()
-        institution.address = "Avenida Rudge, 215"
-        institution.cnpj = "1239123912"
-        institution.id = "0"
-        institution.name = "Faculdade Impacta Tecnologia"
-        institution.imageUri = "http://faculdadeimpacta.edu/logo.png"
-        institution.website = "http://faculdadeimpacta.edu/"
-        institution.phoneNumber = "+551112381234"
-        institution.email = "contato@impacta.edu.br"
-        institution.averageRating = 4.5f
-        institution.reviewdBy = 432
-
         //TODO: Load average detailed review ratings from the institution
         val detailedReviews  = java.util.ArrayList<DetailedReview>()
 
@@ -40,7 +28,6 @@ class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
             detailedReviews.add(review)
         }
 
-        institution.detailedReviews = detailedReviews
 
         val generalReviews  = java.util.ArrayList<GeneralReview>()
 
@@ -55,8 +42,21 @@ class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
             generalReview.payment = 400.toDouble()
             generalReviews.add(generalReview)
         }
-        institution.generalReviews = generalReviews
-        institution.detailedReviews = detailedReviews
+        val institution = Institution(
+                "asfoasdfha",
+                "Faculdade Impacta Tecnologia",
+                "1239123912",
+                "0",
+                listOf("contato@impacta.edu.br"),
+                listOf("+551112381234"),
+                "São Paulo",
+                "http://faculdadeimpacta.edu/",
+                "http://faculdadeimpacta.edu/logo.png",
+                4.5f,
+                300,
+                detailedReviews,
+                generalReviews)
+
 
         view?.setupInstitutionDetails(institution)
     }

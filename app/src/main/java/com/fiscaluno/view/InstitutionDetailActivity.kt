@@ -35,7 +35,7 @@ class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract
         institution_institution_name.text = institution.name
         rating_average.rating = institution.averageRating!!
         average_tv.text = institution.averageRating!!.toString()
-        val reviewdBy = institution.reviewdBy
+        val reviewdBy = institution.ratedByCount
         reviews_count_tv.text = "Avaliado por $reviewdBy alunos"
         setupDetailedReviewsList(ArrayList(institution.detailedReviews))
         setupGeneralReviewsList(ArrayList(institution.generalReviews))

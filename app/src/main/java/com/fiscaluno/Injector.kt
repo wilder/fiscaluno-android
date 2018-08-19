@@ -21,7 +21,7 @@ class Injector(val context: Context) {
         }
 
         bind<String>() with singleton {
-            "https://fiscaluno.herokuapp.com/"
+            "https://private-f15175-fiscalunoapi.apiary-mock.com/"
         }
 
         bind<UserRepository>() with singleton {

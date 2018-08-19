@@ -34,8 +34,8 @@ class SelectInstitutionPresenter(val kodein: Kodein) : SelectInstitutionContract
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
                             Log.e("SelectInstPresenter", "unable to authenticate user - 500")
                         else -> {
-                            view?.updateInstitutionList(it.body())
-                            view?.setupInstitutionAutocomplete(it.body())
+                            view?.updateInstitutionList(it.body()?.result)
+                            view?.setupInstitutionAutocomplete(it.body()?.result)
                         }
                     }
                 },{

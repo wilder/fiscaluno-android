@@ -10,11 +10,12 @@ class TopCoursesAdapter(override val rateableEntities: ArrayList<Course>, overri
         val rateableEntity = rateableEntities[position]
 
         rateableEntity.let {
+            holder.rateableEntityImage.setImageURI(it.institution?.imageUri)
             holder.rateableEntityName.text = it.name
             holder.subRareableEntityName.text = it.institution?.name
             holder.averageRating.text = it.averageRating.toString()
             holder.rating.rating = it.averageRating
-            holder.ratedByCount.text = it.reviewdBy.toString()
+            holder.ratedByCount.text = it.ratedByCount.toString()
         }
 
         //TODO: Set imagedrawable

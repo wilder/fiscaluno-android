@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
+import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.R.id.toggleButtonLayout
 import com.fiscaluno.contracts.MainContract
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val kodein = (application as App).kodein
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -49,7 +52,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         toggleButtonLayout.setToggled(R.id.toggle_institutions,  true)
 
-        presenter = MainPresenter()
+        presenter = MainPresenter(kodein)
         presenter?.bindView(this)
         //TODO: Call in different threads?
         presenter?.loadTopInstitutions()
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         preferences = PreferencesManager(this)
     }
 
-    override fun showTopInstitutions(institutions: List<Institution>) {
+    override fun showTopInstitutions(institutions: List<Institution>?) {
         topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions), this)
         topInstitutionsRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         topInstitutionsRv.adapter = topInstitutionsAdapter

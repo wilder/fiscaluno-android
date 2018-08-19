@@ -1,6 +1,7 @@
 package com.fiscaluno
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 
 import com.google.firebase.FirebaseApp
 import org.kodein.di.Kodein
@@ -17,5 +18,6 @@ class App : Application(), KodeinAware {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+        Fresco.initialize(this)
     }
 }

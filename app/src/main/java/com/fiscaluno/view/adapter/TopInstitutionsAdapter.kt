@@ -5,7 +5,7 @@ import android.view.View
 import com.fiscaluno.model.Institution
 import java.util.ArrayList
 
-class TopInstitutionsAdapter(rateableEntities: ArrayList<Institution>, context: Context) : TopRateableEntitiesAdapter(rateableEntities, context) {
+class TopInstitutionsAdapter(override val rateableEntities: ArrayList<Institution>, context: Context) : TopRateableEntitiesAdapter(rateableEntities, context) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val rateableEntity = rateableEntities[position]
@@ -13,10 +13,11 @@ class TopInstitutionsAdapter(rateableEntities: ArrayList<Institution>, context: 
         holder.subRareableEntityName.visibility = View.GONE
 
         rateableEntity.let {
+            holder.rateableEntityImage.setImageURI(it.imageUri)
             holder.rateableEntityName.text = it.name
             holder.averageRating.text = it.averageRating.toString()
             holder.rating.rating = it.averageRating
-            holder.ratedByCount.text = it.reviewdBy.toString()
+            holder.ratedByCount.text = it.ratedByCount.toString()
         }
 
         //TODO: Set imagedrawable

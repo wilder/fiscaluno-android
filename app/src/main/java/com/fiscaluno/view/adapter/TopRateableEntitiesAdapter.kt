@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.fiscaluno.R
 import com.fiscaluno.model.RateableEntity
 import java.util.ArrayList
@@ -29,7 +29,7 @@ abstract class TopRateableEntitiesAdapter (open val rateableEntities: ArrayList<
         val subRareableEntityName: TextView = v.findViewById(R.id.subRareableEntityNameTv)
         val rateableEntityName: TextView = v.findViewById(R.id.rateableEntityNameTv)
         val rating: RatingBar = v.findViewById(R.id.courseRating)
-        val rateableEntityImage : ImageView = v.findViewById(R.id.rateableEntityIv)
+        val rateableEntityImage : SimpleDraweeView = v.findViewById(R.id.rateableEntityIv)
         val ratedByCount: TextView = v.findViewById(R.id.ratedBy)
         val averageRating: TextView = v.findViewById(R.id.average)
         val institutionCard: CardView = v.findViewById(R.id.courseCard)
