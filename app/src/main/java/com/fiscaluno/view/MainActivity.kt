@@ -25,10 +25,8 @@ import com.fiscaluno.view.adapter.TopCoursesAdapter
 import com.fiscaluno.view.adapter.TopInstitutionsAdapter
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.search_panel.*
-import android.content.DialogInterface
-import android.R.string.ok
-import android.view.LayoutInflater
-
+import kotlinx.android.synthetic.main.dialog_search_filter.view.*
+import android.widget.SeekBar
 
 
 
@@ -101,8 +99,18 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         //TODO: move to dialog manager class
         val builder = AlertDialog.Builder(this)
 
+        val dialogView = layoutInflater.inflate(R.layout.dialog_search_filter, null)
 
-        builder.setView(layoutInflater.inflate(R.layout.dialog_search_filter, null))
+        dialogView.ratingBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int,
+                                           fromUser: Boolean) {
+                dialogView.tvMinRating.text = progress.toString()
+            }
+        });
+
+        builder.setView(dialogView)
                 .setPositiveButton(R.string.ok, { dialog, id ->
 
 
