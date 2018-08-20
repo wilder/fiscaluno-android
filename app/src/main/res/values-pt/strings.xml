@@ -33,6 +33,8 @@
     <string name="ideal_institution_by_you">A instituição de ensino ideal, avaliada por estudantes como você</string>
     <string name="top_rated_institutions">Top instituições</string>
     <string name="top_rated_courses">Top cursos</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancelar</string>
 
 
 </resources>

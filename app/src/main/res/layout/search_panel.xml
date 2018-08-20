@@ -77,9 +77,11 @@
         <Button
             android:id="@+id/btn_add_filter"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
+            android:padding="16dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:onClick="showFilterDialog"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:background="@drawable/ic_filter_list_black_24dp" />
 

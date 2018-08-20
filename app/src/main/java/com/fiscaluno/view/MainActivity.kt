@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.view.GravityCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +25,13 @@ import com.fiscaluno.view.adapter.TopCoursesAdapter
 import com.fiscaluno.view.adapter.TopInstitutionsAdapter
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.search_panel.*
+import android.content.DialogInterface
+import android.R.string.ok
+import android.view.LayoutInflater
+
+
+
+
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
 
@@ -87,6 +95,24 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         //TODO: Go to search passing type as course
         val intent = Intent(this, RatingActivity::class.java)
         startActivity(intent)
+    }
+
+    fun showFilterDialog(view: View) {
+        //TODO: move to dialog manager class
+        val builder = AlertDialog.Builder(this)
+
+
+        builder.setView(layoutInflater.inflate(R.layout.dialog_search_filter, null))
+                .setPositiveButton(R.string.ok, { dialog, id ->
+
+
+                })
+                .setNegativeButton(R.string.cancel, { dialog, id ->
+                    dialog.cancel()
+                })
+
+        builder.create()
+                .show()
     }
 
     fun goToUserInstitution(view: View){

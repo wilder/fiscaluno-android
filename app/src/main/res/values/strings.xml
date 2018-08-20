@@ -51,6 +51,8 @@
     <string name="ideal_institution_by_you">The ideal educational course, rated by students like you</string>
     <string name="top_rated_institutions">Top rated institutions</string>
     <string name="top_rated_courses">Top rated courses</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
