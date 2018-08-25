@@ -23,7 +23,7 @@
     <string name="close">close</string>
     <string name="top_rated">Top Rated</string>
     <string name="rated_by">Rated By:</string>
-    <string name="your_rating">Your Rating</string>
+    <string name="your_rating">Rating</string>
     <string name="average">Average</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -53,6 +53,7 @@
     <string name="top_rated_courses">Top rated courses</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="results_for">Results for</string>
 
 
 </resources>

@@ -2,53 +2,57 @@ package com.fiscaluno.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.fiscaluno.contracts.SearchContract
 import com.google.gson.annotations.SerializedName
 
-class Course : RateableEntity, Parcelable {
-
-    @SerializedName("course_name") override var name: String = ""
-    @SerializedName("course_type") var courseType: String = ""
-    @SerializedName("course_average_rating") override var averageRating: Float = 0f
-    @SerializedName("course_rated_by_count") override var ratedByCount: Int = 0
-
-    var id: String? = null
-
+data class Course  (
+    @SerializedName("course_name") override var name: String = "",
+    @SerializedName("course_type") var courseType: String = "",
+    @SerializedName("course_average_rating") override var averageRating: Float = 0f,
+    @SerializedName("course_rated_by_count") override var ratedByCount: Int = 0,
+    var id: String? = null,
     @SerializedName("institution") var institution: Institution? = null
+) : RateableEntity() {
 
-
-    constructor() {}
-
-    constructor(`in`: Parcel) {
-        this.id = `in`.readString()
-        this.name = `in`.readString()
-        this.courseType = `in`.readString()
-        this.ratedByCount = `in`.readInt()
-        this.averageRating = `in`.readFloat()
-        this.institution = `in`.readParcelable(Institution::class.java.classLoader)
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readFloat(),
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readParcelable(Institution::class.java.classLoader)) {
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeValue(this.averageRating)
-        dest.writeValue(this.ratedByCount)
-        dest.writeString(this.name)
-        dest.writeString(this.courseType)
-        dest.writeString(this.id)
-        dest.writeParcelable(this.institution, flags)
+    override fun search(searchPresenter: SearchContract.Presenter, searchFilter: SearchFilter) {
+        searchPresenter.searchCourse(searchFilter)
     }
 
-    override fun describeContents(): Int =
-            0
+    override fun setValue(name: String) {
+        this.name = name
+    }
 
-    companion object {
+    override fun getValue() = this.name
 
-        val CREATOR: Parcelable.Creator<Course> = object : Parcelable.Creator<Course> {
-            override fun createFromParcel(source: Parcel): Course {
-                return Course(source)
-            }
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(courseType)
+        parcel.writeFloat(averageRating)
+        parcel.writeInt(ratedByCount)
+        parcel.writeString(id)
+        parcel.writeParcelable(institution, flags)
+    }
 
-            override fun newArray(size: Int): Array<Course?> {
-                return arrayOfNulls(size)
-            }
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Course> {
+        override fun createFromParcel(parcel: Parcel): Course {
+            return Course(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Course?> {
+            return arrayOfNulls(size)
         }
     }
 

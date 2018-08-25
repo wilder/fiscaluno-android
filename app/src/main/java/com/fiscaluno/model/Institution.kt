@@ -2,6 +2,7 @@ package com.fiscaluno.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.fiscaluno.contracts.SearchContract
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -23,7 +24,6 @@ data class Institution (
         val detailedReviews: List<DetailedReview> = emptyList(),
         val generalReviews: List<GeneralReview> = emptyList()
 ) : RateableEntity(), Parcelable {
-
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
@@ -63,4 +63,15 @@ data class Institution (
 
         override fun newArray(size: Int): Array<Institution?> = arrayOfNulls(size)
     }
+
+    override fun search(searchPresenter: SearchContract.Presenter, searchFilter: SearchFilter) {
+        searchPresenter.searchInstitution(searchFilter)
+    }
+
+    override fun setValue(name: String) {
+        this.name = name
+    }
+
+    override fun getValue(): String = this.name
+
 }

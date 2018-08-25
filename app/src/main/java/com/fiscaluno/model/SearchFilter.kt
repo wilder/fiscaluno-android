@@ -4,21 +4,21 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class SearchFilter(
-        private val entityName: String,
-        private val city: String,
-        private val state: String,
-        private val rate: Float,
-        private val sort: String
+        var searchableEntity: SearchableEntity? = null,
+        private val city: String? = null,
+        private val state: String? = null,
+        private val rate: Float = 0f,
+        private val sort: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
+            parcel.readParcelable<SearchableEntity>(SearchableEntity::class.java.classLoader),
             parcel.readString(),
             parcel.readString(),
             parcel.readFloat(),
             parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(entityName)
+        parcel.writeParcelable(searchableEntity, flags)
         parcel.writeString(city)
         parcel.writeString(state)
         parcel.writeFloat(rate)

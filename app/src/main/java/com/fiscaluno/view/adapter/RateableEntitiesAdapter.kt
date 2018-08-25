@@ -16,13 +16,13 @@ import java.util.ArrayList
 /**
  * Created by Wilder on 14/08/17.
  */
-abstract class TopRateableEntitiesAdapter (open val rateableEntities: ArrayList<out RateableEntity>, open var context: Context) : RecyclerView.Adapter<com.fiscaluno.view.adapter.TopRateableEntitiesAdapter.ViewHolder>() {
+abstract class RateableEntitiesAdapter (open val rateableEntities: ArrayList<out RateableEntity>, open var context: Context) : RecyclerView.Adapter<com.fiscaluno.view.adapter.RateableEntitiesAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = rateableEntities.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TopRateableEntitiesAdapter.ViewHolder(layoutInflater.inflate(R.layout.item_rateable_main, parent, false))
+        return RateableEntitiesAdapter.ViewHolder(layoutInflater.inflate(R.layout.item_rateable_main, parent, false))
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {

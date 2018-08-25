@@ -14,29 +14,31 @@ import android.view.MenuItem
 import android.view.View
 import com.fiscaluno.App
 import com.fiscaluno.R
-import com.fiscaluno.R.id.*
 import com.fiscaluno.contracts.MainContract
 import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Course
 import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.MainPresenter
 import com.fiscaluno.rating.RatingActivity
-import com.fiscaluno.view.adapter.TopCoursesAdapter
-import com.fiscaluno.view.adapter.TopInstitutionsAdapter
+import com.fiscaluno.view.adapter.CoursesAdapter
+import com.fiscaluno.view.adapter.InstitutionsAdapter
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.search_panel.*
 import kotlinx.android.synthetic.main.dialog_search_filter.view.*
 import android.widget.SeekBar
-
-
+import com.fiscaluno.model.SearchFilter
+import com.fiscaluno.model.SearchableEntity
 
 
 class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNavigationItemSelectedListener{
 
     private var presenter: MainContract.Presenter? =  null
-    private var topInstitutionsAdapter: TopInstitutionsAdapter? = null
+    private var institutionsAdapter: InstitutionsAdapter? = null
     private var userInstitution: Institution? = null
     private var preferences: PreferencesManager? = null
+    private var searchFilter: SearchFilter = SearchFilter()
+    private var selectedToggleFilter = R.id.toggle_institutions
+    var searchableEntity: SearchableEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,9 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         navigationView.setNavigationItemSelectedListener(this)
 
         toggleButtonLayout.setToggled(R.id.toggle_institutions,  true)
+        toggleButtonLayout.onToggledListener = { toggle, selected ->
+            selectedToggleFilter = toggle.id
+        }
 
         presenter = MainPresenter(kodein)
         presenter?.bindView(this)
@@ -67,13 +72,13 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     }
 
     override fun showTopInstitutions(institutions: List<Institution>?) {
-        topInstitutionsAdapter = TopInstitutionsAdapter(ArrayList(institutions), this)
+        institutionsAdapter = InstitutionsAdapter(ArrayList(institutions), this)
         topInstitutionsRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        topInstitutionsRv.adapter = topInstitutionsAdapter
+        topInstitutionsRv.adapter = institutionsAdapter
     }
 
     override fun showTopCourses(courses: List<Course>?) {
-        val topCoursesAdapter = TopCoursesAdapter(ArrayList(courses), this)
+        val topCoursesAdapter = CoursesAdapter(ArrayList(courses), this)
         topCoursesRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         topCoursesRv.adapter = topCoursesAdapter
     }
@@ -101,6 +106,10 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         val dialogView = layoutInflater.inflate(R.layout.dialog_search_filter, null)
 
+        if (selectedToggleFilter == R.id.toggle_institutions) {
+            dialogView.textInputLayout.visibility = View.GONE
+        }
+
         dialogView.ratingBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -112,8 +121,23 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         builder.setView(dialogView)
                 .setPositiveButton(R.string.ok, { dialog, id ->
+                    with(dialogView){
 
+                        if (selectedToggleFilter == R.id.toggle_courses){
+                            val course = Course()
+                            course.institution = Institution(name = tip_institution_name.text.toString())
+                            course.name = et_search.text.toString()
+                            searchableEntity = course
+                        }
 
+                        searchFilter = SearchFilter(
+                                searchableEntity = searchableEntity,
+                                city = etCity.text.toString(),
+                                state = etState.text.toString(),
+                                rate = tvMinRating.text.toString().toFloat()
+                        )
+
+                    }
                 })
                 .setNegativeButton(R.string.cancel, { dialog, id ->
                     dialog.cancel()
@@ -121,6 +145,23 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
 
         builder.create()
                 .show()
+    }
+
+    fun search(view: View) {
+        val intent = Intent(this, SearchActivity::class.java)
+        if(searchableEntity == null){
+            if (selectedToggleFilter == R.id.toggle_courses){
+                val course = Course()
+                course.name = et_search.text.toString()
+                searchableEntity = course
+            } else if (selectedToggleFilter == R.id.toggle_institutions) {
+                searchableEntity = Institution(name = et_search.text.toString())
+            }
+        }
+        searchableEntity?.setValue(et_search.text.toString())
+        searchFilter.searchableEntity = searchableEntity
+        intent.putExtra("searchFilterExtra", searchFilter)
+        startActivity(intent)
     }
 
     fun goToUserInstitution(view: View){

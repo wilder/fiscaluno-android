@@ -1,20 +1,18 @@
 package com.fiscaluno.view.adapter
 
 import android.content.Context
-import android.view.View
-import com.fiscaluno.model.Institution
+import com.fiscaluno.model.Course
 import java.util.ArrayList
 
-class TopInstitutionsAdapter(override val rateableEntities: ArrayList<Institution>, context: Context) : TopRateableEntitiesAdapter(rateableEntities, context) {
+class CoursesAdapter(override val rateableEntities: ArrayList<Course>, override var context: Context) : RateableEntitiesAdapter(rateableEntities, context) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val rateableEntity = rateableEntities[position]
 
-        holder.subRareableEntityName.visibility = View.GONE
-
         rateableEntity.let {
-            holder.rateableEntityImage.setImageURI(it.imageUri)
+            holder.rateableEntityImage.setImageURI(it.institution?.imageUri)
             holder.rateableEntityName.text = it.name
+            holder.subRareableEntityName.text = it.institution?.name
             holder.averageRating.text = it.averageRating.toString()
             holder.rating.rating = it.averageRating
             holder.ratedByCount.text = it.ratedByCount.toString()
@@ -23,7 +21,7 @@ class TopInstitutionsAdapter(override val rateableEntities: ArrayList<Institutio
         //TODO: Set imagedrawable
         //holder.rateableEntityImage.setImageDrawable()
         holder.institutionCard.setOnClickListener {
-            // TODO: Go to rateableEntities tab on rateableEntity screen
+            // TODO: Go to courses tab on rateableEntity screen
         }
     }
 

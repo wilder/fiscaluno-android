@@ -21,7 +21,7 @@
     <string name="students_satisfaction">Satisfação dos Estudantes</string>
     <string name="top_rated">Melhores Avaliadas</string>
     <string name="rated_by">Avaliada Por:</string>
-    <string name="your_rating">Sua Avaliação</string>
+    <string name="your_rating">Avaliação</string>
     <string name="average">Média</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
@@ -35,6 +35,7 @@
     <string name="top_rated_courses">Top cursos</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancelar</string>
+    <string name="results_for">Resultados para</string>
 
 
 </resources>
