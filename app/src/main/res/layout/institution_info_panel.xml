@@ -78,7 +78,8 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
-            android:background="@drawable/fab_add" />
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_star_black_24dp" />
 
     </LinearLayout>
 
