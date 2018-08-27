@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fiscaluno.App
 
 import com.fiscaluno.R
 import com.fiscaluno.contracts.InstitutionDetailContract
@@ -15,7 +16,7 @@ import com.fiscaluno.model.Institution
 import com.fiscaluno.presenter.InstitutionDetailPresenter
 import com.fiscaluno.rating.detailedReview.DetailedReviewAdapter
 import com.fiscaluno.view.adapter.InstitutionDetailGeneralReviewsAdapter
-import kotlinx.android.synthetic.main.activity_institution_detail.*
+import kotlinx.android.synthetic.main.fragment_institution.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,21 +39,29 @@ class InstitutionFragment : Fragment(), InstitutionDetailContract.View {
     private var detailedReviewAdapter: DetailedReviewAdapter? = null
     private var generalReviewAdapter: InstitutionDetailGeneralReviewsAdapter? = null
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_institution, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             institution = it.getParcelable(INSTITUTION_PARAM)
         }
 
-        presenter = InstitutionDetailPresenter()
+        presenter = InstitutionDetailPresenter((activity?.application as App).kodein)
         presenter.bindView(this)
 
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_institution, container, false)
+        ratingAverageRb.rating = institution.averageRating
+
+        // TODO: coroutines
+        presenter.loadDetailedReviews(institution.id)
+        presenter.loadGeneralReviews(institution.id)
     }
 
     override fun setupInstitutionDetails(institution: Institution) {

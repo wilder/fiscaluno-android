@@ -1,63 +1,54 @@
 package com.fiscaluno.presenter
 
+import android.util.Log
 import com.fiscaluno.contracts.InstitutionDetailContract
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
+import com.fiscaluno.network.FiscalunoApi
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 import java.util.*
 
 /**
  * Created by Wilder on 30/07/17.
  */
-class InstitutionDetailPresenter : InstitutionDetailContract.Presenter {
+class InstitutionDetailPresenter(val kodein: Kodein) : InstitutionDetailContract.Presenter {
 
+    private val api: FiscalunoApi by kodein.instance()
     private var view: InstitutionDetailContract.View? = null
 
     override fun bindView(view: InstitutionDetailContract.View) {
         this.view = view
     }
 
-    override fun loadInstitution(institutionId: String) {
-        //TODO: Load average detailed review ratings from the institution
-        val detailedReviews  = java.util.ArrayList<DetailedReview>()
-
-        for(i in 0..4){
-            var review = DetailedReview()
-            review.type = "Test $i"
-            review.rate = i+(0.03f*i)
-            detailedReviews.add(review)
-        }
-
-
-        val generalReviews  = java.util.ArrayList<GeneralReview>()
-
-        for(i in 0..4){
-            var generalReview = GeneralReview()
-            generalReview.pros = "pros pros pros pros $i"
-            generalReview.cons = "Cons cons cons cons $i"
-            generalReview.rate = i+(0.03f*i)
-            generalReview.createdAt = Date()
-            generalReview.startYear = 2000 + i
-            generalReview.suggestion = "Suggestion, Suggestion, Suggestion, Suggestion"
-            generalReview.payment = 400.toDouble()
-            generalReviews.add(generalReview)
-        }
-        val institution = Institution(
-                "asfoasdfha",
-                "Faculdade Impacta Tecnologia",
-                "1239123912",
-                "0",
-                listOf("contato@impacta.edu.br"),
-                listOf("+551112381234"),
-                "São Paulo",
-                "http://faculdadeimpacta.edu/",
-                "http://faculdadeimpacta.edu/logo.png",
-                4.5f,
-                300,
-                detailedReviews,
-                generalReviews)
-
-
-        view?.setupInstitutionDetails(institution)
+    override fun loadDetailedReviews(institutionId: String) {
+        api.getInstitutionsDetailedReviewsAverage(institutionId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    when {
+                        it.code() == 401 ->
+                            //TODO: view.badRequest("Login expirado")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                        it.code() == 500 ->
+                            //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                        else -> {
+                            val detailedReviews = it.body()?.result
+                            view?.setupDetailedReviews(detailedReviews)
+                        }
+                    }
+                },{
+                    Log.e("InstDetailPresenter", "unable to authenticate user - ${it.message}")
+                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                })
     }
+
+    override fun loadGeneralReviews(institutionId: String) {
+
+    }
+
 }

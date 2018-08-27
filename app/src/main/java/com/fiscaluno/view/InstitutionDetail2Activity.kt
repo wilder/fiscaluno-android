@@ -11,8 +11,8 @@ import com.fiscaluno.model.Institution
 import com.fiscaluno.view.institutionDetail.InstitutionFragment
 import kotlinx.android.synthetic.main.institution_info_panel.*
 import android.support.design.widget.AppBarLayout
-
-
+import com.fiscaluno.view.institutionDetail.ExamsFragment
+import com.fiscaluno.view.institutionDetail.InstitutionCourseFragment
 
 
 class InstitutionDetail2Activity : AppCompatActivity() {
@@ -64,8 +64,8 @@ class InstitutionDetail2Activity : AppCompatActivity() {
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.add(InstitutionFragment.newInstance(institution), getString(R.string.review_title))
-        adapter.add(InstitutionFragment(), getString(R.string.course))
-        adapter.add(InstitutionFragment(), getString(R.string.exams))
+        adapter.add(InstitutionCourseFragment(), getString(R.string.course))
+        adapter.add(ExamsFragment(), getString(R.string.exams))
         viewPager.adapter = adapter
     }
 

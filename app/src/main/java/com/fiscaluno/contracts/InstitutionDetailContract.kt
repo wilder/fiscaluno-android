@@ -17,6 +17,7 @@ interface InstitutionDetailContract {
 
     interface Presenter {
         fun bindView(view: InstitutionDetailContract.View)
-        fun loadInstitution(institutionId: String)
+        fun loadGeneralReviews(institutionId: String)
+        fun loadDetailedReviews(institutionId: String)
     }
 }

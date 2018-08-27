@@ -4,6 +4,7 @@ import com.fiscaluno.model.Institution
 import com.fiscaluno.login.AuthenticationBody
 import com.fiscaluno.login.AuthenticationResponse
 import com.fiscaluno.model.Course
+import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.StandardApiResponse
 import io.reactivex.Observable
 import retrofit2.Response
@@ -39,6 +40,9 @@ interface FiscalunoApi {
             @Query("size") pageSize: Int = 5,
             @Query("sort") sortBy: String? = null): Observable<Response<StandardApiResponse<List<Course>>>>
 
+    //institutions/1/reviews/details/average
 
+    @GET("institutions/{institutionId}/reviews/details/average")
+    fun getInstitutionsDetailedReviewsAverage(@Path("institutionId") institutionId: String): Observable<Response<StandardApiResponse<List<DetailedReview>>>>
 
 }

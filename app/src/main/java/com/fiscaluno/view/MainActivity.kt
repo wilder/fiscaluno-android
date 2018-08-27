@@ -164,13 +164,6 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         startActivity(intent)
     }
 
-    fun goToUserInstitution(view: View){
-        val intent = Intent(this, InstitutionDetailActivity::class.java)
-        intent.putExtra("institution", userInstitution)
-        startActivity(intent)
-    }
-
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var intent: Intent? = null
         when (item.itemId) {
