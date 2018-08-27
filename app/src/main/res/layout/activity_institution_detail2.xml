@@ -8,20 +8,21 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/htab_appbar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/htab_collapse_toolbar"
+            android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:titleEnabled="false">
+            app:titleEnabled="true">
 
             <include
                 layout="@layout/institution_info_panel"
@@ -37,8 +38,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
                 android:layout_marginBottom="48dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:titleTextColor="@android:color/white"
+                app:layout_collapseMode="pin" />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"

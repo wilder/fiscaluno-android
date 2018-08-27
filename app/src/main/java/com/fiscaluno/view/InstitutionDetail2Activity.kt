@@ -25,6 +25,24 @@ class InstitutionDetail2Activity : AppCompatActivity() {
             }
         })
 
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            internal var isShow = true
+            internal var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset * 1.5 <= 0) {
+                    collapsingToolbar.title = institution.name
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbar.title = " "
+                    isShow = false
+                }
+            }
+        })
+
         setupViewPager(institutionDetailViewPager)
     }
 
