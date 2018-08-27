@@ -89,12 +89,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/rated_by"
         android:textColor="@android:color/secondary_text_dark"
         app:layout_constraintEnd_toStartOf="@+id/ratedByTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/rating_ll"
-        app:layout_constraintTop_toTopOf="@+id/rating_ll" />
+        app:layout_constraintTop_toBottomOf="@+id/institutionNameTv" />
 
     <TextView
         android:id="@+id/ratedByTv"
@@ -115,7 +116,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Review It"
+        android:text="@string/review_it"
         android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
