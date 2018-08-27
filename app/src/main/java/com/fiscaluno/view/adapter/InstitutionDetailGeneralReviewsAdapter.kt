@@ -15,9 +15,9 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: ArrayList<GeneralReview>) : RecyclerView.Adapter<InstitutionDetailGeneralReviewsAdapter.ViewHolder>() {
+class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: List<GeneralReview>) : RecyclerView.Adapter<InstitutionDetailGeneralReviewsAdapter.ViewHolder>() {
 
-    var mDataset: ArrayList<GeneralReview> = mDataset
+    var mDataset: List<GeneralReview> = mDataset
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -45,7 +45,7 @@ class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: ArrayList<Gen
         var starsBar: RatingBar = v.findViewById(R.id.rating_item)
     }
 
-    fun getGeneralReviews(): ArrayList<GeneralReview> {
+    fun getGeneralReviews(): List<GeneralReview> {
         return mDataset
     }
 

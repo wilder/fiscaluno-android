@@ -17,6 +17,6 @@ interface DetailedReviewContract {
         fun bindView(view: DetailedReviewContract.View)
         fun loadReviewTypes()
         fun loadReviewsByInstitutionId(institutionId: String)
-        fun saveDetailedReviews(detailedReviews: ArrayList<DetailedReview>, generalReview: GeneralReview)
+        fun saveDetailedReviews(detailedReviews: List<DetailedReview>, generalReview: GeneralReview)
     }
 }

@@ -16,9 +16,9 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>, clickable: Boolean) : RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>() {
+class DetailedReviewAdapter constructor(mDataset: List<DetailedReview>, clickable: Boolean) : RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>() {
 
-    var mDataset: ArrayList<DetailedReview> = mDataset
+    var mDataset: List<DetailedReview> = mDataset
     var clickable: Boolean = clickable
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -71,7 +71,7 @@ class DetailedReviewAdapter constructor(mDataset: ArrayList<DetailedReview>, cli
         var starsBar: RatingBar = v.findViewById(R.id.rating_stars_dr_item)
     }
 
-    fun getDetailedReviews(): ArrayList<DetailedReview> {
+    fun getDetailedReviews(): List<DetailedReview> {
         return mDataset
     }
 

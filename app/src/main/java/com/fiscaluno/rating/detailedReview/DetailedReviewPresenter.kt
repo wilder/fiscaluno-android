@@ -60,7 +60,7 @@ class DetailedReviewPresenter : DetailedReviewContract.Presenter {
 
     }
 
-    override fun saveDetailedReviews(detailedReviews: ArrayList<DetailedReview>, generalReview: GeneralReview) {
+    override fun saveDetailedReviews(detailedReviews: List<DetailedReview>, generalReview: GeneralReview) {
         detailedReviews.forEach { review ->
             review.createdAt = Date()
             review.course = generalReview.course;

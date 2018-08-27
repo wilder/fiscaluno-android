@@ -7,14 +7,29 @@ import com.fiscaluno.R
 import kotlinx.android.synthetic.main.activity_institution_detail2.*
 import com.fiscaluno.view.adapter.ViewPagerAdapter
 import android.support.v4.view.ViewPager
+import com.fiscaluno.model.Institution
 import com.fiscaluno.view.institutionDetail.InstitutionFragment
+import kotlinx.android.synthetic.main.institution_info_panel.*
+import android.support.design.widget.AppBarLayout
+
+
 
 
 class InstitutionDetail2Activity : AppCompatActivity() {
 
+    lateinit var institution: Institution
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_institution_detail2)
+
+        institution = intent.extras.getParcelable("institution")
+        institution.let {
+            institutionNameTv.text = it.name
+            ratedByTv.text = it.ratedByCount.toString()
+            institutionIv.setImageURI(it.imageUri)
+            averageRatingTv.text = it.averageRating.toString()
+        }
 
         tabLayout.setupWithViewPager(institutionDetailViewPager)
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -48,7 +63,7 @@ class InstitutionDetail2Activity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.add(InstitutionFragment(), getString(R.string.institutions))
+        adapter.add(InstitutionFragment.newInstance(institution), getString(R.string.review_title))
         adapter.add(InstitutionFragment(), getString(R.string.course))
         adapter.add(InstitutionFragment(), getString(R.string.exams))
         viewPager.adapter = adapter

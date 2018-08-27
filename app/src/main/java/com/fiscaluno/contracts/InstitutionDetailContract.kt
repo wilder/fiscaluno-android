@@ -1,5 +1,7 @@
 package com.fiscaluno.contracts
 
+import com.fiscaluno.model.DetailedReview
+import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
 
 /**
@@ -9,6 +11,8 @@ import com.fiscaluno.model.Institution
 interface InstitutionDetailContract {
     interface View {
         fun setupInstitutionDetails(institution: Institution)
+        fun setupGeneralReviews(generalReviews: List<GeneralReview>?)
+        fun setupDetailedReviews(detailedReviews: List<DetailedReview>?)
     }
 
     interface Presenter {

@@ -13,7 +13,6 @@ import com.fiscaluno.presenter.InstitutionDetailPresenter
 import com.fiscaluno.rating.detailedReview.DetailedReviewAdapter
 import com.fiscaluno.view.adapter.InstitutionDetailGeneralReviewsAdapter
 import kotlinx.android.synthetic.main.activity_institution_detail.*
-import kotlin.collections.ArrayList
 
 class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract.View {
 
@@ -28,29 +27,30 @@ class InstitutionDetailActivity : AppCompatActivity(), InstitutionDetailContract
         presenter = InstitutionDetailPresenter()
         presenter?.bindView(this)
         //TODO: pass whole institution?
-        presenter?.loadInstitution(institution.id.toString())
+        presenter?.loadInstitution(institution.id)
     }
 
     override fun setupInstitutionDetails(institution: Institution) {
-        institution_institution_name.text = institution.name
-        rating_average.rating = institution.averageRating!!
-        average_tv.text = institution.averageRating!!.toString()
-        val reviewdBy = institution.ratedByCount
-        reviews_count_tv.text = "Avaliado por $reviewdBy alunos"
-        setupDetailedReviewsList(ArrayList(institution.detailedReviews))
-        setupGeneralReviewsList(ArrayList(institution.generalReviews))
+//        institution_institution_name.text = institution.name
+//        rating_average.rating = institution.averageRating!!
+//        average_tv.text = institution.averageRating!!.toString()
+//        val reviewdBy = institution.ratedByCount
+//        reviews_count_tv.text = "Avaliado por $reviewdBy alunos"
+//        setupDetailedReviewsList(ArrayList(institution.detailedReviews))
+//        setupGeneralReviewsList(ArrayList(institution.generalReviews))
     }
 
-    private fun setupDetailedReviewsList(reviews: ArrayList<DetailedReview>){
-        detailedReviewAdapter = DetailedReviewAdapter(reviews, false)
+    override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {
+        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(generalReviews!!)
+        generalReviewsRv.adapter = generalReviewAdapter
+        generalReviewsRv.layoutManager = LinearLayoutManager(baseContext)
+    }
+
+    override fun setupDetailedReviews(detailedReviews: List<DetailedReview>?) {
+        detailedReviewAdapter = DetailedReviewAdapter(detailedReviews!!, false)
         detailedReviewsRv.adapter = detailedReviewAdapter
         detailedReviewsRv.layoutManager = LinearLayoutManager(baseContext)
     }
 
-    private fun setupGeneralReviewsList(reviews: ArrayList<GeneralReview>){
-        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(reviews)
-        generalReviewsRv.adapter = generalReviewAdapter
-        generalReviewsRv.layoutManager = LinearLayoutManager(baseContext)
-    }
 
 }
