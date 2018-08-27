@@ -2,6 +2,7 @@ package com.fiscaluno.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 import java.util.Date
 
@@ -11,7 +12,7 @@ import java.util.Date
 
 open class Review : Parcelable {
     var id: String? = null
-    var createdAt: Date? = null
+    @SerializedName("created_at") var createdAt: Date? = null
     var rate: Float? = null //from 1 to 5 -
     var course: String ? = null
     var institutionId: String? = null

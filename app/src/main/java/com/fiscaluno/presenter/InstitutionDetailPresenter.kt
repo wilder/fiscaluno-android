@@ -2,15 +2,11 @@ package com.fiscaluno.presenter
 
 import android.util.Log
 import com.fiscaluno.contracts.InstitutionDetailContract
-import com.fiscaluno.model.DetailedReview
-import com.fiscaluno.model.GeneralReview
-import com.fiscaluno.model.Institution
 import com.fiscaluno.network.FiscalunoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
-import java.util.*
 
 /**
  * Created by Wilder on 30/07/17.
@@ -48,7 +44,26 @@ class InstitutionDetailPresenter(val kodein: Kodein) : InstitutionDetailContract
     }
 
     override fun loadGeneralReviews(institutionId: String) {
-
+        api.getInstitutionsGeneralReviewsAverage(institutionId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    when {
+                        it.code() == 401 ->
+                            //TODO: view.badRequest("Login expirado")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                        it.code() == 500 ->
+                            //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                        else -> {
+                            val generalReviews = it.body()?.result
+                            view?.setupGeneralReviews(generalReviews)
+                        }
+                    }
+                },{
+                    Log.e("InstDetailPresenter", "unable to authenticate user - ${it.message}")
+                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
+                })
     }
 
 }
