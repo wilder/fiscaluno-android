@@ -10,7 +10,6 @@ import com.fiscaluno.model.Institution
 
 interface InstitutionDetailContract {
     interface View {
-        fun setupInstitutionDetails(institution: Institution)
         fun setupGeneralReviews(generalReviews: List<GeneralReview>?)
         fun setupDetailedReviews(detailedReviews: List<DetailedReview>?)
     }

@@ -64,11 +64,6 @@ class InstitutionFragment : Fragment(), InstitutionDetailContract.View {
         presenter.loadGeneralReviews(institution.id)
     }
 
-    override fun setupInstitutionDetails(institution: Institution) {
-
-    }
-
-
     override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {
         generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(generalReviews!!)
         generalReviewsRv.adapter = generalReviewAdapter
