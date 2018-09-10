@@ -9,43 +9,36 @@ import android.view.ViewGroup
 import com.fiscaluno.App
 
 import com.fiscaluno.R
-import com.fiscaluno.contracts.SearchContract
+import com.fiscaluno.contracts.CourseContract
 import com.fiscaluno.model.Course
 import com.fiscaluno.model.Institution
-import com.fiscaluno.model.SearchFilter
-import com.fiscaluno.presenter.SearchPresenter
+import com.fiscaluno.presenter.CoursePresenter
 import com.fiscaluno.view.adapter.CoursesAdapter
 import kotlinx.android.synthetic.main.fragment_institution_course.*
 
 private const val INSTITUTION_PARAM = "param1"
 
-class InstitutionCourseFragment : Fragment(), SearchContract.View {
-
-    override fun displayInstitutions(searchResult: List<Institution>?) {
-        // TODO: remove!
-    }
+class InstitutionCourseFragment : Fragment(), CourseContract.View {
 
     private lateinit var institution: Institution
-    private lateinit var presenter: SearchContract.Presenter
-    private lateinit var searchFilter: SearchFilter
+    private lateinit var presenter: CourseContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             institution = it.getParcelable(INSTITUTION_PARAM)
-            searchFilter = SearchFilter(Course(institution = institution))
         }
 
         val kodein = (activity?.application as App).kodein
 
-        presenter = SearchPresenter(kodein)
+        presenter = CoursePresenter(kodein)
         presenter.bindView(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //TODO: handle pagination
-        presenter.searchCourse(searchFilter, 0)
+        presenter.findInstitutionCourses(institution.id)
 
     }
 
@@ -55,7 +48,7 @@ class InstitutionCourseFragment : Fragment(), SearchContract.View {
         return inflater.inflate(R.layout.fragment_institution_course, container, false)
     }
 
-    override fun displayCourses(searchResult: List<Course>?) {
+    override fun showInstitutionCourses(searchResult: List<Course>?) {
         val coursesAdapter = CoursesAdapter(ArrayList(searchResult), context!!)
         rvCourses.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvCourses.adapter = coursesAdapter

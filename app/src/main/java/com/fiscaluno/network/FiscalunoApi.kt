@@ -33,6 +33,9 @@ interface FiscalunoApi {
     @GET("institutions/{id}")
     fun findInstitutionsById(@Path("id") id: String): Observable<Response<StandardApiResponse<Institution>>>
 
+    @GET("/institution/{id}/courses")
+    fun findInstitutionCourses(@Path("id") institutionId: String): Observable<Response<StandardApiResponse<List<Course>>>>
+
     @GET("courses")
     fun findCourses(
             @Query("name") name: String? = null,
