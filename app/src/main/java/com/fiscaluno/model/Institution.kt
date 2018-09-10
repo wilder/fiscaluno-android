@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Institution (
         var id: String = "",
-        override var name: String = "",
+        override var name: String? = null,
         val address: String = "",
         val cnpj: String = "",
         val emails: List<String> = emptyList(),
@@ -72,6 +72,6 @@ data class Institution (
         this.name = name
     }
 
-    override fun getValue(): String = this.name
+    override fun getValue(): String = this.name ?: ""
 
 }

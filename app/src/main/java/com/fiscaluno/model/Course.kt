@@ -6,7 +6,7 @@ import com.fiscaluno.contracts.SearchContract
 import com.google.gson.annotations.SerializedName
 
 data class Course  (
-    @SerializedName("course_name") override var name: String = "",
+    @SerializedName("course_name") override var name: String? = "",
     @SerializedName("course_type") var courseType: String = "",
     @SerializedName("course_average_rating") override var averageRating: Float = 0f,
     @SerializedName("course_rated_by_count") override var ratedByCount: Int = 0,
@@ -39,7 +39,7 @@ data class Course  (
         this.name = name
     }
 
-    override fun getValue() = this.name
+    override fun getValue() = this.name ?: ""
 
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

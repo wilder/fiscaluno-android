@@ -1,34 +1,34 @@
-package com.fiscaluno.serializers;
+package com.fiscaluno.serializers
 
-import com.fiscaluno.model.Course;
-import com.fiscaluno.model.Institution;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.fiscaluno.model.Course
+import com.fiscaluno.model.Institution
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.JsonParseException
 
-import java.lang.reflect.Type;
+import java.lang.reflect.Type
 
-public class CourseSerializer implements JsonDeserializer<Course> {
-    @Override
-    public Course deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+class CourseSerializer : JsonDeserializer<Course> {
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): Course {
 
-        JsonObject jsonObject = json.getAsJsonObject();
+        val jsonObject = json.asJsonObject
 
-        Course course = new Course();
-        course.setAverageRating(jsonObject.get("course_average_rating").getAsFloat());
-        course.setRatedByCount(jsonObject.get("course_rated_by_count").getAsInt());
-        course.setName(jsonObject.get("course_name").getAsString());
-        course.setCourseType(jsonObject.get("course_type").getAsString());
+        val course = Course()
+        course.averageRating = jsonObject.get("course_average_rating").asFloat
+        course.ratedByCount = jsonObject.get("course_rated_by_count").asInt
+        course.name = jsonObject.get("course_name").asString
+        course.courseType = jsonObject.get("course_type").asString
 
-        Institution institution = new Institution();
-        institution.setId(jsonObject.get("institution_id").getAsString());
-        institution.setName(jsonObject.get("institution_name").getAsString());
-        institution.setImageUri(jsonObject.get("institution_image_url").getAsString());
+        val institution = Institution()
+        institution.id = jsonObject.get("institution_id").asString
+        institution.name = jsonObject.get("institution_name")?.asString
+        institution.imageUri = jsonObject.get("institution_image_url")?.asString.toString()
 
-        course.setInstitution(institution);
+        course.institution = institution
 
-        return course;
+        return course
     }
 }
