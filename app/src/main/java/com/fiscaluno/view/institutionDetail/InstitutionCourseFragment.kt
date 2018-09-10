@@ -1,41 +1,52 @@
 package com.fiscaluno.view.institutionDetail
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fiscaluno.App
 
 import com.fiscaluno.R
+import com.fiscaluno.contracts.SearchContract
+import com.fiscaluno.model.Course
+import com.fiscaluno.model.Institution
+import com.fiscaluno.model.SearchFilter
+import com.fiscaluno.presenter.SearchPresenter
+import com.fiscaluno.view.adapter.CoursesAdapter
+import kotlinx.android.synthetic.main.fragment_institution_course.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val INSTITUTION_PARAM = "param1"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [InstitutionCourseFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [InstitutionCourseFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class InstitutionCourseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+class InstitutionCourseFragment : Fragment(), SearchContract.View {
+
+    override fun displayInstitutions(searchResult: List<Institution>?) {
+        // TODO: remove!
+    }
+
+    private lateinit var institution: Institution
+    private lateinit var presenter: SearchContract.Presenter
+    private lateinit var searchFilter: SearchFilter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            institution = it.getParcelable(INSTITUTION_PARAM)
+            searchFilter = SearchFilter(Course(institution = institution))
         }
+
+        val kodein = (activity?.application as App).kodein
+
+        presenter = SearchPresenter(kodein)
+        presenter.bindView(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //TODO: handle pagination
+        presenter.searchCourse(searchFilter, 0)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -44,56 +55,18 @@ class InstitutionCourseFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_institution_course, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    override fun displayCourses(searchResult: List<Course>?) {
+        val coursesAdapter = CoursesAdapter(ArrayList(searchResult), context!!)
+        rvCourses.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvCourses.adapter = coursesAdapter
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InstitutionCourseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(institution: Institution) =
                 InstitutionCourseFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+                        putParcelable(INSTITUTION_PARAM, institution)
                     }
                 }
     }
