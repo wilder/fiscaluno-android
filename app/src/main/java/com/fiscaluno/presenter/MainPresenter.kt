@@ -32,17 +32,17 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
                     when {
                         it.code() == 401 ->
                             //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                            Log.e("MainPresenter", "unable to authenticate user - 401")
                         it.code() == 500 ->
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                            Log.e("MainPresenter", "unable to authenticate user - 500")
                         else -> {
                             val institutions = it.body()?.result
                             view.showTopInstitutions(institutions)
                         }
                     }
                 },{
-                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
+                    Log.e("MainPresenter", "unable to authenticate user - ${it.message}")
                     //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
                 })
 
@@ -56,17 +56,17 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
                     when {
                         it.code() == 401 ->
                             //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                            Log.e("MainPresenter", "unable to authenticate user - 401")
                         it.code() == 500 ->
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                            Log.e("MainPresenter", "unable to authenticate user - 500")
                         else -> {
                             val courses = it.body()?.result
                             view.showTopCourses(courses)
                         }
                     }
                 },{
-                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
+                    Log.e("MainPresenter", "unable to authenticate user - ${it.message}")
                     //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
                 })
     }

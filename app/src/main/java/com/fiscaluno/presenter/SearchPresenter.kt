@@ -27,16 +27,16 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
                     when {
                         it.code() == 401 ->
                             //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                            Log.e("SearchPresenter", "unable to authenticate user - 401")
                         it.code() == 500 ->
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                            Log.e("SearchPresenter", "unable to authenticate user - 500")
                         else -> {
                             view.displayCourses(it.body()?.result)
                         }
                     }
                 },{
-                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
+                    Log.e("SearchPresenter", "unable to authenticate user - ${it.message}")
                     //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
                 })
     }
@@ -49,16 +49,16 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
                     when {
                         it.code() == 401 ->
                             //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                            Log.e("SearchPresenter", "unable to authenticate user - 401")
                         it.code() == 500 ->
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                            Log.e("SearchPresenter", "unable to authenticate user - 500")
                         else -> {
                             view.displayInstitutions(it.body()?.result)
                         }
                     }
                 },{
-                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
+                    Log.e("SearchPresenter", "unable to authenticate user - ${it.message}")
                     //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
                 })
     }

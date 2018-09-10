@@ -28,10 +28,10 @@ class InstitutionDetailPresenter(val kodein: Kodein) : InstitutionDetailContract
                     when {
                         it.code() == 401 ->
                             //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                            Log.e("InstDetailPresenter", "unable to authenticate user - 401")
                         it.code() == 500 ->
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                            Log.e("InstDetailPresenter", "unable to authenticate user - 500")
                         else -> {
                             val detailedReviews = it.body()?.result
                             view?.setupDetailedReviews(detailedReviews)
@@ -51,10 +51,10 @@ class InstitutionDetailPresenter(val kodein: Kodein) : InstitutionDetailContract
                     when {
                         it.code() == 401 ->
                             //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
+                            Log.e("InstDetailPresenter", "unable to authenticate user - 401")
                         it.code() == 500 ->
                             //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
+                            Log.e("InstDetailPresenter", "unable to authenticate user - 500")
                         else -> {
                             val generalReviews = it.body()?.result
                             view?.setupGeneralReviews(generalReviews)
