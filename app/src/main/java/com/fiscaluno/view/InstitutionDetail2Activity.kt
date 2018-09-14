@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.institution_info_panel.*
 import android.support.design.widget.AppBarLayout
 import com.fiscaluno.view.institutionDetail.ExamsFragment
 import com.fiscaluno.view.institutionDetail.InstitutionCourseFragment
+import kotlinx.android.synthetic.main.institution_info_card_content.*
 
 
 class InstitutionDetail2Activity : AppCompatActivity() {
