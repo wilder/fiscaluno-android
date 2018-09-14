@@ -26,9 +26,7 @@ data class Course  (
             duration = parcel.readInt(),
             id = parcel.readString(),
             institution = parcel.readParcelable(Institution::class.java.classLoader)) {
-
         parcel.readList(monthlyValueRange, Float::class.java.classLoader)
-
     }
 
     override fun search(searchPresenter: SearchContract.Presenter, searchFilter: SearchFilter) {
@@ -48,10 +46,10 @@ data class Course  (
         parcel.writeFloat(averageRating)
         parcel.writeInt(ratedByCount)
         parcel.writeStringList(coursePeriods)
-        parcel.writeList(monthlyValueRange)
         parcel.writeInt(duration)
         parcel.writeString(id)
         parcel.writeParcelable(institution, flags)
+        parcel.writeList(monthlyValueRange)
     }
 
     override fun describeContents(): Int {
