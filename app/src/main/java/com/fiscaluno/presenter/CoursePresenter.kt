@@ -18,7 +18,7 @@ class CoursePresenter(val kodein: Kodein) : CourseContract.Presenter {
     }
 
     override fun findInstitutionCourses(institutionId: String) {
-        api.findInstitutionCourses(institutionId)
+        api.findCourses(institutionId = institutionId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
