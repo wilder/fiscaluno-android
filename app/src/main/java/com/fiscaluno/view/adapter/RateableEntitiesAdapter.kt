@@ -30,8 +30,6 @@ abstract class RateableEntitiesAdapter (open val rateableEntities: ArrayList<out
         val rateableEntityName: TextView = v.findViewById(R.id.rateableEntityNameTv)
         val rating: RatingBar = v.findViewById(R.id.courseRating)
         val rateableEntityImage : SimpleDraweeView = v.findViewById(R.id.rateableEntityIv)
-        val ratedByCount: TextView = v.findViewById(R.id.ratedBy)
-        val averageRating: TextView = v.findViewById(R.id.average)
         val institutionCard: CardView = v.findViewById(R.id.courseCard)
     }
 

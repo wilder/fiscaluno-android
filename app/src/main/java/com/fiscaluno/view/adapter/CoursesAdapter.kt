@@ -20,9 +20,7 @@ class CoursesAdapter(override val rateableEntities: ArrayList<Course>, override 
                 holder.subRareableEntityName.text = it.institution?.name
             }
 
-            holder.averageRating.text = it.averageRating.toString()
             holder.rating.rating = it.averageRating
-            holder.ratedByCount.text = it.ratedByCount.toString()
         }
 
         //TODO: Set imagedrawable

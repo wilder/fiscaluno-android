@@ -17,9 +17,7 @@ class InstitutionsAdapter(override val rateableEntities: ArrayList<Institution>,
         institution.let {
             holder.rateableEntityImage.setImageURI(it.imageUri)
             holder.rateableEntityName.text = it.name
-            holder.averageRating.text = it.averageRating.toString()
             holder.rating.rating = it.averageRating
-            holder.ratedByCount.text = it.ratedByCount.toString()
         }
 
         holder.institutionCard.setOnClickListener {
