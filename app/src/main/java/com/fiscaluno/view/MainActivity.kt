@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         toggleButtonLayout.setToggled(R.id.toggle_institutions,  true)
         toggleButtonLayout.onToggledListener = { toggle, selected ->
             selectedToggleFilter = toggle.id
+            searchableEntity = null
         }
 
         presenter = MainPresenter(kodein)
@@ -162,6 +163,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         searchFilter.searchableEntity = searchableEntity
         intent.putExtra("searchFilterExtra", searchFilter)
         startActivity(intent)
+        searchableEntity = null
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
