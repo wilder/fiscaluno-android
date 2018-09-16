@@ -1,4 +1,4 @@
-package com.fiscaluno.view
+package com.fiscaluno.view.institutionDetail
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,14 +8,11 @@ import kotlinx.android.synthetic.main.activity_institution_detail2.*
 import com.fiscaluno.view.adapter.ViewPagerAdapter
 import android.support.v4.view.ViewPager
 import com.fiscaluno.model.Institution
-import com.fiscaluno.view.institutionDetail.InstitutionFragment
 import kotlinx.android.synthetic.main.institution_info_panel.*
 import android.support.design.widget.AppBarLayout
-import com.fiscaluno.view.institutionDetail.ExamsFragment
-import com.fiscaluno.view.institutionDetail.InstitutionCourseFragment
 
 
-class InstitutionDetail2Activity : AppCompatActivity() {
+class InstitutionDetailActivity : AppCompatActivity() {
 
     lateinit var institution: Institution
 

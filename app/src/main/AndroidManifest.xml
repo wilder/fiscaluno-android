@@ -57,7 +57,7 @@
         </activity>
         <activity android:name=".view.SearchActivity" />
         <activity
-            android:name=".view.InstitutionDetail2Activity"
+            android:name=".view.institutionDetail.InstitutionDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
