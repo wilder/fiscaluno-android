@@ -11,7 +11,8 @@ data class Course  (
     @SerializedName("course_average_rating") override var averageRating: Float = 0f,
     @SerializedName("course_rated_by_count") override var ratedByCount: Int = 0,
     @SerializedName("course_periods") var coursePeriods: List<String> = emptyList(),
-    @SerializedName("course_monthly_value_range") var monthlyValueRange: List<Float> = emptyList(),
+    @SerializedName("course_monthly_value_range") var monthlyValueRange: List<Float> = mutableListOf(),
+    @SerializedName("course_time_to_graduate_range") var timeToGraduateRange: List<Int> = mutableListOf(),
     @SerializedName("course_duration") var duration: Int = 0, // duration in semester
     var id: String? = null,
     @SerializedName("institution") var institution: Institution? = null
@@ -27,6 +28,7 @@ data class Course  (
             id = parcel.readString(),
             institution = parcel.readParcelable(Institution::class.java.classLoader)) {
         parcel.readList(monthlyValueRange, Float::class.java.classLoader)
+        parcel.readList(timeToGraduateRange, Int::class.java.classLoader)
     }
 
     override fun search(searchPresenter: SearchContract.Presenter, searchFilter: SearchFilter) {
@@ -50,6 +52,7 @@ data class Course  (
         parcel.writeString(id)
         parcel.writeParcelable(institution, flags)
         parcel.writeList(monthlyValueRange)
+        parcel.writeList(timeToGraduateRange)
     }
 
     override fun describeContents(): Int {

@@ -22,6 +22,16 @@ class CourseSerializer : JsonDeserializer<Course> {
         course.name = jsonObject.get("course_name").asString
         course.courseType = jsonObject.get("course_type").asString
 
+        course.coursePeriods = jsonObject.get("course_periods").asJsonArray.asJsonArray
+                .map { it.asString }
+
+        course.monthlyValueRange = jsonObject.get("course_monthly_value_range").asJsonArray
+                .map { it.asFloat }
+
+        course.timeToGraduateRange = jsonObject.get("course_time_to_graduate_range").asJsonArray
+                .map { it.asInt }
+
+
         val institution = Institution()
         institution.id = jsonObject.get("institution_id").asString
         institution.name = jsonObject.get("institution_name")?.asString
