@@ -20,7 +20,7 @@ class InstitutionsAdapter(override val rateableEntities: ArrayList<Institution>,
             holder.rating.rating = it.averageRating
         }
 
-        holder.institutionCard.setOnClickListener {
+        holder.rateableEntityCard.setOnClickListener {
             val intent = Intent(context, InstitutionDetailActivity::class.java)
             intent.putExtra("institution", institution)
             context.startActivity(intent)

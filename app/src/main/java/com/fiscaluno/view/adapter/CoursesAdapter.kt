@@ -1,16 +1,18 @@
 package com.fiscaluno.view.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import com.fiscaluno.model.Course
+import com.fiscaluno.view.courseDetail.CourseDetailActivity
 import java.util.ArrayList
 
 class CoursesAdapter(override val rateableEntities: ArrayList<Course>, override var context: Context) : RateableEntitiesAdapter(rateableEntities, context) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val rateableEntity = rateableEntities[position]
+        val course = rateableEntities[position]
 
-        rateableEntity.let {
+        course.let {
             holder.rateableEntityImage.setImageURI(it.institution?.imageUri)
             holder.rateableEntityName.text = it.name
 
@@ -25,8 +27,10 @@ class CoursesAdapter(override val rateableEntities: ArrayList<Course>, override 
 
         //TODO: Set imagedrawable
         //holder.rateableEntityImage.setImageDrawable()
-        holder.institutionCard.setOnClickListener {
-            // TODO: Go to courses tab on rateableEntity screen
+        holder.rateableEntityCard.setOnClickListener {
+            val intent = Intent(context, CourseDetailActivity::class.java)
+            intent.putExtra("course", course)
+            context.startActivity(intent)
         }
     }
 
