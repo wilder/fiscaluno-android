@@ -22,7 +22,7 @@
         <activity
             android:name=".rating.RatingActivity"
             android:label="@string/title_activity_rating" />
-        <activity android:name=".view.InstitutionDetailActivity" />
+
         <activity
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -58,7 +58,11 @@
         <activity android:name=".view.SearchActivity" />
         <activity
             android:name=".view.institutionDetail.InstitutionDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".view.courseDetail.CourseDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

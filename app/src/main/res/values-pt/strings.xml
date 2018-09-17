@@ -38,6 +38,8 @@
     <string name="cancel">Cancelar</string>
     <string name="results_for">Resultados para</string>
     <string name="review_it">Avalie</string>
+    <string name="course_type">Tipo de Curso</string>
+    <string name="details">Detalhes</string>
 
 
 </resources>

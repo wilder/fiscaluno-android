@@ -59,6 +59,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="review_it">Review It</string>
+    <string name="course_type">Course Type</string>
+    <string name="details">Details</string>
 
 
 </resources>

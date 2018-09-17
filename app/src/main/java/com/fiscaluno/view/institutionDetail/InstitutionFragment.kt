@@ -18,20 +18,8 @@ import com.fiscaluno.rating.detailedReview.DetailedReviewAdapter
 import com.fiscaluno.view.adapter.InstitutionDetailGeneralReviewsAdapter
 import kotlinx.android.synthetic.main.fragment_institution.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val INSTITUTION_PARAM = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [InstitutionFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [InstitutionFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class InstitutionFragment : Fragment(), InstitutionDetailContract.View {
 
     private lateinit var institution: Institution
@@ -54,6 +42,7 @@ class InstitutionFragment : Fragment(), InstitutionDetailContract.View {
         presenter.bindView(this)
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
