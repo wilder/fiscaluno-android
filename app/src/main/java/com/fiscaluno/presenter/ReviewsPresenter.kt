@@ -21,7 +21,7 @@ class ReviewsPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
     }
 
     override fun loadDetailedReviews(institutionId: String) {
-        api.getInstitutionsDetailedReviewsAverage(institutionId)
+        api.getDetailedReviews(institutionId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -44,7 +44,7 @@ class ReviewsPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
     }
 
     override fun loadGeneralReviews(institutionId: String) {
-        api.getInstitutionsGeneralReviewsAverage(institutionId)
+        api.getGeneralReviews(institutionId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

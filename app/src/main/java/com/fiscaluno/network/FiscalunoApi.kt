@@ -13,11 +13,21 @@ interface FiscalunoApi {
     @POST("https://fiscaluno-mu.herokuapp.com/users")
     fun authenticate(@Body authenticationBody: AuthenticationBody): Observable<Response<AuthenticationResponse>>
 
-    @GET("institutions/{institutionId}/reviews/details/average")
-    fun getInstitutionsDetailedReviewsAverage(@Path("institutionId") institutionId: String): Observable<Response<StandardApiResponse<List<DetailedReview>>>>
+    @GET("reviews/details/average")
+    fun getDetailedReviews(
+            @Query("institutionId") institutionId: String,
+            @Query("course") course: String? = null,
+            @Query("page") page: Int = 0,
+            @Query("size") pageSize: Int = 5
+    ): Observable<Response<StandardApiResponse<List<DetailedReview>>>>
 
-    @GET("institutions/{institutionId}/reviews")
-    fun getInstitutionsGeneralReviewsAverage(@Path("institutionId") institutionId: String): Observable<Response<StandardApiResponse<List<GeneralReview>>>>
+    @GET("reviews")
+    fun getGeneralReviews(
+            @Query("institutionId") institutionId: String,
+            @Query("course") course: String? = null,
+            @Query("page") page: Int = 0,
+            @Query("size") pageSize: Int = 5
+    ): Observable<Response<StandardApiResponse<List<GeneralReview>>>>
 
 
     @GET("institutions")
