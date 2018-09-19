@@ -13,7 +13,7 @@ import com.fiscaluno.contracts.ReviewsContract
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
-import com.fiscaluno.presenter.InstitutionDetailPresenter
+import com.fiscaluno.presenter.ReviewsPresenter
 import com.fiscaluno.rating.detailedReview.DetailedReviewAdapter
 import com.fiscaluno.view.adapter.InstitutionDetailGeneralReviewsAdapter
 import kotlinx.android.synthetic.main.fragment_institution.*
@@ -38,7 +38,7 @@ class InstitutionFragment : Fragment(), ReviewsContract.View {
             institution = it.getParcelable(INSTITUTION_PARAM)
         }
 
-        presenter = InstitutionDetailPresenter((activity?.application as App).kodein)
+        presenter = ReviewsPresenter((activity?.application as App).kodein)
         presenter.bindView(this)
 
     }

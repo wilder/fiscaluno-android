@@ -20,8 +20,8 @@ class ReviewsPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
         this.view = view
     }
 
-    override fun loadDetailedReviews(institutionId: String) {
-        api.getDetailedReviews(institutionId)
+    override fun loadDetailedReviews(institutionId: String, courseId: String?) {
+        api.getDetailedReviews(institutionId, courseId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -43,8 +43,8 @@ class ReviewsPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
                 })
     }
 
-    override fun loadGeneralReviews(institutionId: String) {
-        api.getGeneralReviews(institutionId)
+    override fun loadGeneralReviews(institutionId: String, courseId: String?) {
+        api.getGeneralReviews(institutionId, courseId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
