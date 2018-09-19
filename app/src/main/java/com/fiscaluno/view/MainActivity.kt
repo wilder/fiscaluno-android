@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            this.moveTaskToBack(true)
         }
     }
 
