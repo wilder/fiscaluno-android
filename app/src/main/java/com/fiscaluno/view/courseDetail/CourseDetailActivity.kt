@@ -61,7 +61,7 @@ class CourseDetailActivity : AppCompatActivity() {
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.add(CourseInfoFragment.newInstance(course), getString(R.string.details))
-        adapter.add(CourseInfoFragment.newInstance(course), getString(R.string.reviews))
+        adapter.add(CourseReviewFragment.newInstance(course), getString(R.string.reviews))
 //        adapter.add(CourseRatingFragment.newInstance(course), getString(R.string.reviews))
         viewPager.adapter = adapter
     }
