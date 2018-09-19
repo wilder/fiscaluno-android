@@ -11,7 +11,7 @@ import org.kodein.di.generic.instance
 /**
  * Created by Wilder on 30/07/17.
  */
-class InstitutionDetailPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
+class ReviewsPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
 
     private val api: FiscalunoApi by kodein.instance()
     private var view: ReviewsContract.View? = null

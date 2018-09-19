@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.fiscaluno.App
 
 import com.fiscaluno.R
-import com.fiscaluno.contracts.InstitutionDetailContract
+import com.fiscaluno.contracts.ReviewsContract
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
@@ -20,10 +20,10 @@ import kotlinx.android.synthetic.main.fragment_institution.*
 
 private const val INSTITUTION_PARAM = "param1"
 
-class InstitutionFragment : Fragment(), InstitutionDetailContract.View {
+class InstitutionFragment : Fragment(), ReviewsContract.View {
 
     private lateinit var institution: Institution
-    private lateinit var presenter: InstitutionDetailContract.Presenter
+    private lateinit var presenter: ReviewsContract.Presenter
     private var detailedReviewAdapter: DetailedReviewAdapter? = null
     private var generalReviewAdapter: InstitutionDetailGeneralReviewsAdapter? = null
 
