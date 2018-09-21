@@ -64,6 +64,7 @@ class InstitutionDetailActivity : AppCompatActivity() {
         adapter.add(InstitutionCourseFragment.newInstance(institution), getString(R.string.course))
         adapter.add(ExamsFragment(), getString(R.string.exams))
         viewPager.adapter = adapter
+        viewPager.offscreenPageLimit = adapter.count
     }
 
 }

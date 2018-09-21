@@ -62,8 +62,8 @@ class CourseDetailActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.add(CourseInfoFragment.newInstance(course), getString(R.string.details))
         adapter.add(CourseReviewFragment.newInstance(course), getString(R.string.reviews))
-//        adapter.add(CourseRatingFragment.newInstance(course), getString(R.string.reviews))
         viewPager.adapter = adapter
+        viewPager.offscreenPageLimit = adapter.count
     }
 
 }
