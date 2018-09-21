@@ -35,6 +35,6 @@ class IntroActivity : AppIntro() {
     override fun onDonePressed(currentFragment: Fragment) {
         super.onDonePressed(currentFragment)
         PreferencesManager(this).haveSeenIntro = true
-        startActivity(Intent(this@IntroActivity, RatingActivity::class.java))
+        startActivity(Intent(this@IntroActivity, MainActivity::class.java))
     }
 }
