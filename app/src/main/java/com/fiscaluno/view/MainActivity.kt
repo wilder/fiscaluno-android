@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
     private var preferences: PreferencesManager? = null
     private var searchFilter: SearchFilter = SearchFilter()
     private var selectedToggleFilter = R.id.toggle_institutions
-    private val snapHelper = PagerSnapHelper()
     var searchableEntity: SearchableEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,14 +80,14 @@ class MainActivity : AppCompatActivity(), MainContract.View, NavigationView.OnNa
         institutionsAdapter = InstitutionsAdapter(ArrayList(institutions), this)
         topInstitutionsRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         topInstitutionsRv.adapter = institutionsAdapter
-        snapHelper.attachToRecyclerView(topInstitutionsRv)
+        PagerSnapHelper().attachToRecyclerView(topInstitutionsRv)
     }
 
     override fun showTopCourses(courses: List<Course>?) {
         val topCoursesAdapter = CoursesAdapter(ArrayList(courses), this)
         topCoursesRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         topCoursesRv.adapter = topCoursesAdapter
-        snapHelper.attachToRecyclerView(topInstitutionsRv)
+        PagerSnapHelper().attachToRecyclerView(topCoursesRv)
     }
 
     fun fbReviewClick(view: View) {
