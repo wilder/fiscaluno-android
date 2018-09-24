@@ -9,7 +9,7 @@
     <string name="course">Course</string>
     <string name="course_name">Course Name</string>
     <string name="type">Type</string>
-    <string name="Anual">Annual</string>
+    <string name="Anual">Annually</string>
     <string name="semiannually">semiannually</string>
     <string name="continueTxt">Continue</string>
     <string name="rate_it">Rate it</string>
@@ -63,6 +63,14 @@
     <string name="details">Details</string>
     <string name="overall_satisfaction">Overall satisfaction</string>
     <string name="recommend_to_friend">Would recommend to a friend?</string>
+    <string name="start_year">Start year</string>
+    <string name="average_paid_value">Average paid value</string>
+    <string name="bachelor">Bachelor</string>
+    <string name="technician">Technician</string>
+    <string name="course_period">Course Period</string>
+    <string name="diurnal">Diurnal</string>
+    <string name="nightly">Nightly</string>
+    <string name="fulltime">Full-time</string>
 
 
 </resources>

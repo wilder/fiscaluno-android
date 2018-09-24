@@ -37,78 +37,135 @@
             android:layout_height="0.5dp"
             android:background="@color/cardview_dark_background"/>
 
-
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="horizontal"
+        <TextView
+            android:drawableStart="@drawable/ic_school_black_24dp"
+            android:drawableLeft="@drawable/ic_school_black_24dp"
+            android:drawablePadding="4sp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/course"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputLayout
-                android:hint="@string/course_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/course_et_ci"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/course_et_ci"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="@string/type"
+            android:drawableStart="@drawable/ic_school_black_24dp"
+            android:drawableLeft="@drawable/ic_school_black_24dp"
+            android:drawablePadding="4sp"
+            android:gravity="center_vertical"
+            android:text="@string/course_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"/>
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
         <RadioGroup
-            android:id="@+id/type_group_ci"
+            android:id="@+id/courseType"
             android:orientation="horizontal"
+            android:weightSum="10"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
-                android:text="@string/Anual"
+                android:text="@string/bachelor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <RadioButton
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="@string/semiannually"
+                android:text="@string/technician"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin" />
         </RadioGroup>
 
         <TextView
+            android:drawableStart="@drawable/ic_access_time_black_24dp"
+            android:drawableLeft="@drawable/ic_access_time_black_24dp"
+            android:drawablePadding="4sp"
+            android:gravity="center_vertical"
+            android:text="@string/course_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+
+        <RadioGroup
+            android:id="@+id/coursePeriod"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:text="@string/nightly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:text="@string/diurnal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin" />
+            <RadioButton
+                android:text="@string/fulltime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin" />
+        </RadioGroup>
+
+        <TextView
+            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="4sp"
+            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:id="@+id/year_or_semester_tv"
-            android:text="Ano de Inicio"
+            android:text="@string/start_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/start_year_et_ci"
-            android:inputType="number"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content" />
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
+            android:drawableStart="@drawable/ic_attach_money_black_24dp"
+            android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:id="@+id/value_tv"
-            android:text="Valor Mensal"
+            android:text="@string/average_paid_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/payed_value_et_ci"
             android:inputType="numberDecimal"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_width="80dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin" />
 
     </LinearLayout>
 

@@ -42,6 +42,13 @@
     <string name="details">Detalhes</string>
     <string name="overall_satisfaction">Satisfação geral</string>
     <string name="recommend_to_friend">Recomendaria a um amigo?</string>
+    <string name="average_paid_value">Valor pago em média / mês</string>
+    <string name="bachelor">Bacharelado</string>
+    <string name="technician">Tecnólogo</string>
+    <string name="course_period">Período</string>
+    <string name="diurnal">Diurno</string>
+    <string name="nightly">Noturno</string>
+    <string name="fulltime">Full-time</string>
 
 
 </resources>
