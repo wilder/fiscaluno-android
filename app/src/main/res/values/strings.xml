@@ -61,6 +61,8 @@
     <string name="review_it">Review It</string>
     <string name="course_type">Course Type</string>
     <string name="details">Details</string>
+    <string name="overall_satisfaction">Overall satisfaction</string>
+    <string name="recommend_to_friend">Would recommend to a friend?</string>
 
 
 </resources>

@@ -40,6 +40,8 @@
     <string name="review_it">Avalie</string>
     <string name="course_type">Tipo de Curso</string>
     <string name="details">Detalhes</string>
+    <string name="overall_satisfaction">Satisfação geral</string>
+    <string name="recommend_to_friend">Recomendaria a um amigo?</string>
 
 
 </resources>

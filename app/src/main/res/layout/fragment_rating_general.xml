@@ -10,6 +10,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:weightSum="10"
             android:layout_margin="@dimen/activity_horizontal_margin"
@@ -51,7 +52,7 @@
 
         <TextView
             android:gravity="center"
-            android:text="@string/rate_it"
+            android:text="@string/overall_satisfaction"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
@@ -77,6 +78,10 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/pros"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_thumb_up_black_24dp"
+            android:drawableStart="@drawable/ic_thumb_up_black_24dp"
+            android:drawablePadding="4sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -92,6 +97,9 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/cons"
+            android:drawableLeft="@drawable/ic_thumb_down_black_24dp"
+            android:drawableStart="@drawable/ic_thumb_down_black_24dp"
+            android:drawablePadding="4sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -107,6 +115,9 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/suggestions"
+            android:drawableLeft="@drawable/ic_feedback_black_24dp"
+            android:drawableStart="@drawable/ic_feedback_black_24dp"
+            android:drawablePadding="4sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -123,7 +134,41 @@
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/recommend_to_friend"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_thumbs_up_down_black_24dp"
+            android:drawableStart="@drawable/ic_thumbs_up_down_black_24dp"
+            android:drawablePadding="4sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Switch
+                android:id="@+id/switchRecommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin" />
+
+            <TextView
+                android:id="@+id/txtRecommend"
+                android:text="Yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4sp"
+                android:layout_marginStart="4sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
 
 
 </android.support.v4.widget.NestedScrollView>
