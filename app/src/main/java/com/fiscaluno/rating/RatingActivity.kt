@@ -27,6 +27,8 @@ class RatingActivity : AppCompatActivity(), DataManager {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rating)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
         institution = savedInstanceState?.getParcelable(INSTITUTION)
         generalReview = savedInstanceState?.getParcelable(GENERALREVIEW)
@@ -80,6 +82,10 @@ class RatingActivity : AppCompatActivity(), DataManager {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
+        if (id == android.R.id.home) {
+            super.onBackPressed()
+            return true
+        }
 
         if (id == R.id.action_settings) {
             return true
@@ -87,6 +93,5 @@ class RatingActivity : AppCompatActivity(), DataManager {
 
         return super.onOptionsItemSelected(item)
     }
-
 
 }

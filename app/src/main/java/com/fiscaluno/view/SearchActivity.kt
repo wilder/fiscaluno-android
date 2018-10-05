@@ -3,6 +3,7 @@ package com.fiscaluno.view
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.contracts.SearchContract
@@ -19,6 +20,8 @@ class SearchActivity : AppCompatActivity(), SearchContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val kodein = (application as App).kodein
         presenter = SearchPresenter(kodein)
@@ -41,6 +44,16 @@ class SearchActivity : AppCompatActivity(), SearchContract.View {
         val topInstitutionsAdapter = InstitutionsAdapter(ArrayList(searchResult), this)
         searchResultRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         searchResultRv.adapter = topInstitutionsAdapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                super.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

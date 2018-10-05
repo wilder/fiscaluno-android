@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
+import android.view.MenuItem
 import com.fiscaluno.R
 import com.fiscaluno.model.Course
 import com.fiscaluno.view.adapter.ViewPagerAdapter
@@ -18,6 +19,9 @@ class CourseDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_detail)
+
+        setSupportActionBar(htab_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         course = intent.extras.getParcelable("course")
         course.let {
@@ -64,6 +68,16 @@ class CourseDetailActivity : AppCompatActivity() {
         adapter.add(CourseReviewFragment.newInstance(course), getString(R.string.reviews))
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                super.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

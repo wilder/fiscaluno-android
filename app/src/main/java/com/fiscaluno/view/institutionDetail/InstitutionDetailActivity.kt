@@ -10,7 +10,10 @@ import android.support.v4.view.ViewPager
 import com.fiscaluno.model.Institution
 import kotlinx.android.synthetic.main.institution_info_panel.*
 import android.support.design.widget.AppBarLayout
-
+import android.view.MenuItem
+import android.support.v4.app.NavUtils
+import android.support.v7.app.ActionBar
+import android.widget.Toolbar
 
 class InstitutionDetailActivity : AppCompatActivity() {
 
@@ -19,6 +22,9 @@ class InstitutionDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_institution_detail2)
+
+        setSupportActionBar(htab_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         institution = intent.extras.getParcelable("institution")
         institution.let {
@@ -65,6 +71,16 @@ class InstitutionDetailActivity : AppCompatActivity() {
         adapter.add(ExamsFragment(), getString(R.string.exams))
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                super.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
