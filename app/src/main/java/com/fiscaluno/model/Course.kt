@@ -13,7 +13,7 @@ data class Course  (
     @SerializedName("course_periods") var coursePeriods: List<String> = emptyList(),
     @SerializedName("course_monthly_value_range") var monthlyValueRange: List<Float> = mutableListOf(),
     @SerializedName("course_time_to_graduate_range") var timeToGraduateRange: List<Int> = mutableListOf(),
-    @SerializedName("course_duration") var duration: Int = 0, // duration in semester
+    @SerializedName("course_duration") var duration: Int = 0, // duration in startYear
     var id: String? = null,
     @SerializedName("institution") var institution: Institution? = null
 ) : RateableEntity() {
