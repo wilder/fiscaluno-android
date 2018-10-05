@@ -9,17 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.facebook.drawee.view.SimpleDraweeView
+import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
-import com.fiscaluno.model.CourseInfo
-import com.fiscaluno.model.GeneralReview
-import com.fiscaluno.model.Institution
+import com.fiscaluno.contracts.SearchContract
+import com.fiscaluno.model.*
+import com.fiscaluno.presenter.SearchPresenter
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
 import java.util.*
 
-class RatingCourseInfoFragment : Fragment(), BlockingStep {
+class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
 
     private var instParam: Institution? = null
     private var institutionName: TextView? = null
@@ -30,18 +31,19 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
     private var paymentValue: EditText? = null
     private var startYearSpinner: Spinner? = null
     private lateinit var dataManager: DataManager
+    private lateinit var presenter: SearchContract.Presenter
 
     companion object {
-        fun newInstance(): RatingCourseInfoFragment {
-            val fragment = RatingCourseInfoFragment()
-            return fragment
-        }
+        fun newInstance(): RatingCourseInfoFragment = RatingCourseInfoFragment()
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is DataManager) {
             dataManager = context
+            val kodein = (activity?.application as App).kodein
+            presenter = SearchPresenter(kodein)
+            presenter.bindView(this)
         } else {
             throw IllegalStateException("Activity must implement DataManager interface!")
         }
@@ -59,14 +61,18 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
         startYearSpinner = view.findViewById(R.id.startYearSp)
 
         institutionImage!!.setImageURI(instParam?.imageUri)
+        presenter.searchCourse(SearchFilter(instParam))
         setupYears(getAvailableYears())
-        setupCourses(listOf("Sistemas de Informação", "Análise e Desenvolvimento de Sistemas"))
-
 
         return view
     }
 
-    fun setupCourses(availableCourses: List<String>) {
+    override fun displayCourses(searchResult: List<Course>?) {
+        val courses = searchResult?.map { it.name!! }?.toList()
+        setupCourses(courses)
+    }
+
+    private fun setupCourses(availableCourses: List<String>?) {
         courseSpinner!!.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item,
                 availableCourses)
     }
@@ -144,6 +150,9 @@ class RatingCourseInfoFragment : Fragment(), BlockingStep {
     }
 
     override fun onError(error: VerificationError) {
+    }
+
+    override fun displayInstitutions(searchResult: List<Institution>?) {
     }
 
 }
