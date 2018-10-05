@@ -49,6 +49,7 @@
     <string name="diurnal">Diurno</string>
     <string name="nightly">Noturno</string>
     <string name="fulltime">Full-time</string>
+    <string name="detailed_review_call">Dê uma nota para as seguintes categorias da sua instituição!</string>
 
 
 </resources>
