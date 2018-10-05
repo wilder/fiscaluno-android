@@ -14,8 +14,6 @@ data class GeneralReview (
     var pros: String? = null,
     var cons: String? = null,
     var description: String? = null,
-    var payment: Double? = null,
-    var startYear: Int? = null,
     @SerializedName("course_info") var courseInfo: CourseInfo? = null
 ) : Review() {
     constructor(parcel: Parcel) : this(
@@ -24,8 +22,6 @@ data class GeneralReview (
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readValue(Double::class.java.classLoader) as? Double,
-            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readParcelable(CourseInfo::class.java.classLoader)) {
     }
 
@@ -36,8 +32,6 @@ data class GeneralReview (
         parcel.writeString(pros)
         parcel.writeString(cons)
         parcel.writeString(description)
-        parcel.writeValue(payment)
-        parcel.writeValue(startYear)
         parcel.writeParcelable(courseInfo, flags)
     }
 

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class CourseInfo (
         @SerializedName("course_type") val courseType: String? = null,
         @SerializedName("period") val period: String? = null,
-        @SerializedName("semester") val semester: Int? = null,
+        @SerializedName("start_year") val startYear: Int? = null,
         @SerializedName("course_name") val courseName: String,
         @SerializedName("monthly_payment_value") val monthlyPaymentValue: Float? = null
 ) : Parcelable {
@@ -22,7 +22,7 @@ data class CourseInfo (
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(courseType)
         parcel.writeString(period)
-        parcel.writeValue(semester)
+        parcel.writeValue(startYear)
         parcel.writeString(courseName)
         parcel.writeValue(monthlyPaymentValue)
     }
