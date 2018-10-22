@@ -13,6 +13,9 @@ interface FiscalunoApi {
     @POST("/auth")
     fun authenticate(@Body authenticationBody: AuthenticationBody): Observable<Response<AuthenticationResponse>>
 
+    @POST("/users")
+    fun createOrUpdateUser(@Body user: Student): Observable<Response<AuthenticationResponse>>
+
     @GET("reviews/details/average")
     fun getDetailedReviews(
             @Query("institutionId") institutionId: String,

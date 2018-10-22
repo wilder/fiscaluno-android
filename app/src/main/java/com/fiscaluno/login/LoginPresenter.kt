@@ -18,6 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 
 
 class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
@@ -38,29 +39,39 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
 
     override fun doLogin(student: Student, token: String) {
         api.authenticate(AuthenticationBody(student.fbId!!, token))
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .flatMap ({ authenticationResponse: Response<AuthenticationResponse> ->
                     when {
-                        it.code() in 400..500 -> {
-                            view.loginError("Não foi possível realizar o login")
-                            Log.e("LoginPresenter", "unable to authenticate user - ${it.code()}")
+                        authenticationResponse.code() in 400..500 -> {
+                            Log.e("LoginPresenter", "unable to authenticate user - ${authenticationResponse.code()}")
+                            throw Exception("Não foi possível realizar o login")
                         }
-                        it.code() in 200..299 -> {
-
-                            it.body()?.body?.token?.let {
-                                userRepository.saveUserToken(it)
+                        authenticationResponse.code() in 200..299 -> {
+                            if(authenticationResponse.body()?.body?.token == null) {
+                                throw Exception("Token not present")
+                            } else {
+                                userRepository.saveUserToken(authenticationResponse.body()?.body?.token!!)
+                                api.createOrUpdateUser(student)
                             }
-
-                            firebaseStudentRepository.saveUser(student) //TODO: Remove
-                            view.successfulLogin(student)
-
                         }
                         else -> {
-                            view.loginError(it.message())
+                            throw Exception("Unknown error")
                         }
                     }
-                },{
+                }, { authenticationResponse, creationResponse: Response<AuthenticationResponse> ->
+                    when {
+                        authenticationResponse.code() in 200..299 -> {
+                            firebaseStudentRepository.saveUser(student) //TODO: Remove
+                            view.successfulLogin(student)
+                        }
+                        else -> {
+                            Log.e("LoginPresenter", "unable to create user - ${authenticationResponse.code()}")
+                            throw Exception("Não foi possível realizar o login")
+                        }
+                    }
+                })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({},{
                     Log.e("LoginPresenter", "unable to authenticate user - ${it.message}")
                     view.loginError("Não foi possível Realizar o Login.\nTente novamente mais tarde.")
                 })
