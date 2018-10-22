@@ -36,8 +36,8 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
         this.firebaseStudentRepository = FirebaseStudentRepository()
     }
 
-    override fun doLogin(student: Student) {
-        api.authenticate(AuthenticationBody(student.fbId!!))
+    override fun doLogin(student: Student, token: String) {
+        api.authenticate(AuthenticationBody(student.fbId!!, token))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -88,7 +88,7 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
 
                 val student = getUserFromResponse(jsonObject)
 
-                doLogin(student)
+                doLogin(student, loginResult.accessToken.token)
 
             }
 

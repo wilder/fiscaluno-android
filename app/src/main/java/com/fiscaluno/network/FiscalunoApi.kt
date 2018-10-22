@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface FiscalunoApi {
 
     @Headers("@: NoAuth")
-    @POST("https://fiscaluno-mu.herokuapp.com/users")
+    @POST("/auth")
     fun authenticate(@Body authenticationBody: AuthenticationBody): Observable<Response<AuthenticationResponse>>
 
     @GET("reviews/details/average")

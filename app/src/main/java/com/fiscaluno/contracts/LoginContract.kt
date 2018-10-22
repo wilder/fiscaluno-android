@@ -13,7 +13,7 @@ interface LoginContract {
 
     interface Presenter {
         fun bindView(view: View)
-        fun doLogin(student: Student)
+        fun doLogin(student: Student, token: String)
         fun prepareForLogin()
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
     }
