@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.fiscaluno.App
 import com.fiscaluno.R
 import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.helper.PreferencesManager
@@ -44,6 +45,9 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
         super.onAttach(context)
         if (context is DataManager) {
             dataManager = context
+            val kodein = (activity?.application as App).kodein
+            presenter = GeneralReviewPresenter(kodein)
+            presenter.bindView(this)
         } else {
             throw IllegalStateException("Activity must implement DataManager interface!")
         }
@@ -51,10 +55,7 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        presenter = GeneralReviewPresenter()
-        presenter!!.bindView(this)
-
-        val view = inflater!!.inflate(R.layout.fragment_rating_general, container, false)
+        val view = inflater.inflate(R.layout.fragment_rating_general, container, false)
 
         institutionImage = view.findViewById(R.id.institution_small_image_gn)
         institutionNameTv = view.findViewById(R.id.institution_name_tv_gn)
@@ -67,15 +68,21 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
         return view
     }
 
-    override fun error(message: String) {
-        //TODO: display error message
-    }
-
     override fun onSelected() {
         review = dataManager.getGeneralReview()
         institution = dataManager.getInstitution()!!
         institutionImage?.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher)) //TODO: Get institution image
         institutionNameTv?.text = institution.name
+    }
+
+    override fun error(message: String) {
+        Toast.makeText(context, "Unable to save review", Toast.LENGTH_SHORT)
+                .show()
+    }
+
+    override fun success(review: GeneralReview, callback: StepperLayout.OnNextClickedCallback?) {
+        (activity as RatingActivity).saveInstanceStateGeneralReview(review)
+        callback?.goToNextStep()
     }
 
     override fun verifyStep(): VerificationError? {
@@ -123,12 +130,8 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
         review?.createdAt = Date()
         review?.studentId = PreferencesManager(context!!).user?.id
         review?.institutionId = institution.id
-        (activity as RatingActivity).saveInstanceStateGeneralReview(review)
 
-        presenter.saveGeneralReview(generalReview = review!!)
-
-        Toast.makeText(this.context, review?.toString(), Toast.LENGTH_LONG).show()
-        callback.goToNextStep()
+        presenter.saveGeneralReview(review!!, callback)
     }
 
     override fun onBackClicked(callback: StepperLayout.OnBackClickedCallback?) {

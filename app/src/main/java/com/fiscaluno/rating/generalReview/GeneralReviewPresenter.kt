@@ -2,38 +2,46 @@ package com.fiscaluno.rating.generalReview
 
 import android.util.Log
 import com.fiscaluno.model.GeneralReview
+import com.fiscaluno.network.FiscalunoApi
 import com.google.firebase.firestore.FirebaseFirestore
+import com.stepstone.stepper.StepperLayout
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 
 
 /**
  * Created by Wilder on 12/10/17.
  */
 
-class GeneralReviewPresenter : GeneralReviewContract.Presenter{
+class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Presenter{
 
     private lateinit var view: GeneralReviewContract.View
-    private lateinit var db: FirebaseFirestore
-    private val GENERAL_REVIEWS = "GeneralReviews"
+    private val api: FiscalunoApi by kodein.instance()
 
     override fun bindView(view: GeneralReviewContract.View) {
         this.view = view
-        db = FirebaseFirestore.getInstance()
     }
 
-    //TODO: return error
-    override fun saveGeneralReview(generalReview: GeneralReview) {
-        //TODO: get the preferences and set the reviewedBy and createdAt here?
-        db.collection(GENERAL_REVIEWS)
-                .add(generalReview)
-                .addOnSuccessListener {
-                    Log.d(GENERAL_REVIEWS, "Review successfully written!")
-                }
-                .addOnFailureListener {
-                    e ->
-                    run {
-                        Log.w(GENERAL_REVIEWS, "Error writing general review", e)
-                        view.error(e.message!!)
+    override fun saveGeneralReview(generalReview: GeneralReview, callback: StepperLayout.OnNextClickedCallback?) {
+        api.postGeneralReview(generalReview)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    when {
+                        it.code() in 400..503 -> {
+                            Log.e("GeneralReviewPresenter", "unable to save review ${it.code()} " +
+                                    it.message())
+                            view.error("Unable to save review")
+                        }
+
+                        it.code() in 200..204 -> {
+                            view.success(it.body()?.result!!, callback)
+                        }
                     }
-                }
+                },{
+                    view.error("Unable to save review")
+                })
     }
 }

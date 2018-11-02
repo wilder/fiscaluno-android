@@ -1,9 +1,7 @@
 package com.fiscaluno.contracts
 
-import com.fiscaluno.model.Course
-import com.fiscaluno.model.Institution
-import com.fiscaluno.model.RateableEntity
-import com.fiscaluno.model.SearchFilter
+import com.fiscaluno.model.*
+import com.stepstone.stepper.StepperLayout
 
 interface SearchContract {
 

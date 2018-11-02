@@ -32,6 +32,9 @@ interface FiscalunoApi {
             @Query("size") pageSize: Int = 5
     ): Observable<Response<StandardApiResponse<List<GeneralReview>>>>
 
+    @POST("reviews")
+    fun postGeneralReview(@Body generalReview: GeneralReview):
+            Observable<Response<StandardApiResponse<GeneralReview>>>
 
     @GET("institutions")
     fun findInstitutions(

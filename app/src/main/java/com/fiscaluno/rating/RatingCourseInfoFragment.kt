@@ -15,6 +15,8 @@ import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.SearchContract
 import com.fiscaluno.model.*
 import com.fiscaluno.presenter.SearchPresenter
+import com.fiscaluno.rating.generalReview.GeneralReviewContract
+import com.fiscaluno.rating.generalReview.GeneralReviewPresenter
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
@@ -67,6 +69,7 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
         return view
     }
 
+
     override fun displayCourses(searchResult: List<Course>?) {
         val courses = searchResult?.map { it.name!! }?.toList()
         setupCourses(courses)
@@ -99,7 +102,7 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
                 monthlyPaymentValue = paymentValue?.text.toString().toFloat(),
                 courseName = courseSpinner?.selectedItem.toString()
         )
-        Log.d("rtCourseInfo", review.courseInfo.toString())
+
         dataManager.saveInstitution(instParam)
         (activity as RatingActivity).saveInstanceStateGeneralReview(review)
         callback?.goToNextStep()
