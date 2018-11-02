@@ -1,7 +1,5 @@
 package com.fiscaluno.view.courseDetail
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +10,7 @@ import com.fiscaluno.App
 
 import com.fiscaluno.R
 import com.fiscaluno.contracts.ReviewsContract
+import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.Course
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
@@ -48,7 +47,8 @@ class CourseReviewFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {
-        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(generalReviews!!)
+        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(PreferencesManager(context!!)
+                        .isUserLoggedIn(), generalReviews!!)
         rvCourseReview.adapter = generalReviewAdapter
         rvCourseReview.layoutManager = LinearLayoutManager(context)
     }

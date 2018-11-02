@@ -4,8 +4,7 @@ import android.support.v7.widget.RecyclerView
 
 abstract class LoggedInAwareAdapter<E, T : RecyclerView.ViewHolder> : RecyclerView.Adapter<T>() {
 
-    val maxItems: Int
-        get() = 4
+    open val maxItems: Int = 4
 
     abstract val isUserLogged: Boolean
     abstract val dataSet: List<E>

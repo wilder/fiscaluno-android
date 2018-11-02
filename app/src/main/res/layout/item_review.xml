@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/activity_horizontal_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -95,5 +96,19 @@
             android:id="@+id/cons_tv"/>
 
     </LinearLayout>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:background="@color/faded_item_color"
+        android:id="@+id/fadeLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.AppCompatTextView
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:text="@string/login_to_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
 </android.support.v7.widget.CardView>

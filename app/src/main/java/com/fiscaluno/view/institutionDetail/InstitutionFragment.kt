@@ -55,7 +55,8 @@ class InstitutionFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {
-        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(generalReviews!!)
+        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(PreferencesManager(context!!)
+                .isUserLoggedIn(), generalReviews!!)
         generalReviewsRv.adapter = generalReviewAdapter
         generalReviewsRv.layoutManager = LinearLayoutManager(context)
     }
