@@ -1,10 +1,12 @@
 package com.fiscaluno.repository
 
+import android.app.Activity
 import android.content.Context
-import android.content.Intent
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 
 import com.fiscaluno.helper.PreferencesManager
-import com.fiscaluno.login.LoginActivity
+import com.fiscaluno.login.LoginFragment
 
 object AnonymousUserTracker {
 
@@ -14,20 +16,19 @@ object AnonymousUserTracker {
      * Tracks user usage in app to ask for login after a determined number of access
      * @param context
      */
-    fun trackAccessIfNotLoggedIn(context: Context) {
-        val preferencesManager = PreferencesManager(context)
+    fun trackAccessIfNotLoggedIn(activity: Activity) {
+        val preferencesManager = PreferencesManager(activity)
         if (!preferencesManager.isUserLoggedIn()) {
-            trackAccess(context, preferencesManager)
+            trackAccess((activity as FragmentActivity).supportFragmentManager, preferencesManager)
         }
     }
 
-    private fun trackAccess(context: Context, preferencesManager: PreferencesManager) {
+    private fun trackAccess(fragmentManager: FragmentManager, preferencesManager: PreferencesManager) {
         val currentAccess = preferencesManager.detailsSeenCount + 1
         preferencesManager.detailsSeenCount = currentAccess
 
         if (currentAccess >= MAX_OFFLINE_ACCESS) {
-            //TODO: SHOW DIALOG
-            context.startActivity(Intent(context, LoginActivity::class.java))
+            LoginFragment().showNow(fragmentManager, "dialog")
         }
     }
 
