@@ -12,7 +12,7 @@ import android.view.MotionEvent
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import com.fiscaluno.contracts.LoggedInAwareAdapter
-import com.fiscaluno.login.LoginActivity
+import com.fiscaluno.login.LoginFragment
 import com.fiscaluno.model.DetailedReview
 
 
@@ -34,7 +34,8 @@ class DetailedReviewAdapter constructor(val context: Context, override val dataS
         holder.starsBar.setIsIndicator(true)
         holder.container.setBackgroundColor(context.resources.getColor(R.color.faded_item_color))
         holder.container.setOnClickListener {
-            context.startActivity(Intent(context, LoginActivity::class.java))
+            //TODO: show dialog
+            context.startActivity(Intent(context, LoginFragment::class.java))
         }
     }
 

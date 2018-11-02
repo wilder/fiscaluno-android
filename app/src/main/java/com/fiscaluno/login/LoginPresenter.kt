@@ -2,6 +2,7 @@ package com.fiscaluno.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.util.Log
 import com.facebook.*
 import com.facebook.login.LoginResult
@@ -9,7 +10,6 @@ import com.fiscaluno.contracts.LoginContract
 import com.fiscaluno.model.Student
 import org.json.JSONObject
 import com.facebook.login.LoginManager
-import android.app.Activity
 import com.facebook.FacebookCallback
 import com.fiscaluno.network.FiscalunoApi
 import com.fiscaluno.repository.FirebaseStudentRepository
@@ -81,7 +81,7 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
     override fun prepareForLogin() {
         callbackManager = CallbackManager.Factory.create()
         val callback = LoginCallback()
-        LoginManager.getInstance().logInWithReadPermissions(view as Activity, facebookReadPermissions)
+        LoginManager.getInstance().logInWithReadPermissions(view as Fragment, facebookReadPermissions)
         LoginManager.getInstance().registerCallback(callbackManager, callback)
     }
 

@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.fiscaluno.R
 import com.fiscaluno.helper.PreferencesManager
-import com.fiscaluno.login.LoginActivity
-import com.fiscaluno.model.Student
 
 class SplashActivity : AppCompatActivity() {
 
