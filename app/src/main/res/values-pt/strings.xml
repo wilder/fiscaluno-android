@@ -50,6 +50,7 @@
     <string name="nightly">Noturno</string>
     <string name="fulltime">Full-time</string>
     <string name="detailed_review_call">Dê uma nota para as seguintes categorias da sua instituição!</string>
+    <string name="login_to_view">Faça login para ver mais</string>
 
 
 </resources>

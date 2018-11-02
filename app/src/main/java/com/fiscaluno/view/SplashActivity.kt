@@ -14,24 +14,12 @@ class SplashActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        val student = PreferencesManager(this).user
-
         //TODO: change to local database
-        if (isValidUser(student)) {
-            if (PreferencesManager(this).haveSeenIntro) {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            } else {
-                startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
-            }
+        if (PreferencesManager(this).haveSeenIntro) {
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         } else {
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
         }
     }
 
-    /**
-     * TODO: Check if user is valid on database
-     */
-    private fun isValidUser(student: Student?) : Boolean{
-        return student != null
-    }
 }

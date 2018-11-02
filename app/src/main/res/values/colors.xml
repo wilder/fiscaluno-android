@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#246EB9</color>
     <color name="colorAccent">#F46036</color>
     <color name="white">#e1e6e1</color>
+    <color name="faded_item_color">#acd7d7d7</color>
 </resources>

@@ -26,7 +26,7 @@ class Injector(val context: Context) {
 
         bind<UserRepository>() with singleton {
             object : UserRepository {
-                override fun getUserToken(): String? =
+                override fun getUserToken(): String =
                         PreferencesManager(this@Injector.context).token
 
                 override fun saveUserToken(token: String) {

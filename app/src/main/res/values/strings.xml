@@ -72,6 +72,7 @@
     <string name="nightly">Nightly</string>
     <string name="fulltime">Full-time</string>
     <string name="detailed_review_call">Rate the following aspects of your institution!</string>
+    <string name="login_to_view">Log in to see more</string>
 
 
 </resources>
