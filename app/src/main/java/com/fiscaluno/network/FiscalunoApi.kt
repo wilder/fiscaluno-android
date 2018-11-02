@@ -3,6 +3,7 @@ package com.fiscaluno.network
 import com.fiscaluno.login.AuthenticationBody
 import com.fiscaluno.login.AuthenticationResponse
 import com.fiscaluno.model.*
+import com.fiscaluno.rating.detailedReview.DetailedReviewBody
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.*
@@ -35,6 +36,10 @@ interface FiscalunoApi {
     @POST("reviews")
     fun postGeneralReview(@Body generalReview: GeneralReview):
             Observable<Response<StandardApiResponse<GeneralReview>>>
+
+    @POST("reviews/{reviewId}/details")
+    fun postDetailedReview(@Path("reviewId") id: String, @Body detailedReview: DetailedReviewBody):
+            Observable<Response<Any?>>
 
     @GET("institutions")
     fun findInstitutions(

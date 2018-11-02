@@ -15,7 +15,7 @@ open class Review : Parcelable {
     @SerializedName("created_at") var createdAt: Date? = null
     var rate: Float? = null //from 1 to 5 -
     var course: String ? = null
-    var institutionId: String? = null
+    @SerializedName("institution_id") var institutionId: String? = null
     var studentId: String? = null
 
     constructor() {}

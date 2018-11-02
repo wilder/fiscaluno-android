@@ -4,20 +4,24 @@ import android.util.Log
 import com.fiscaluno.contracts.DetailedReviewContract
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
+import com.fiscaluno.network.FiscalunoApi
 import com.google.firebase.firestore.FirebaseFirestore
+import com.stepstone.stepper.StepperLayout
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 import java.util.*
 
 /**
  * Created by Wilder on 25/07/17.
  */
-class DetailedReviewPresenter : DetailedReviewContract.Presenter {
+class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter {
 
-    private val DETAILED_REVIEWS = "DetailedReview"
-    val DETAILED_REVIEW_TYPES_REFERENCE = "DetailedReviewTypes"
-    val TAG = "DetailedReviewPresenter"
-
-    var view: DetailedReviewContract.View? = null
-
+    private val DETAILED_REVIEW_TYPES_REFERENCE = "DetailedReviewTypes"
+    private val TAG = "DetailedReviewPresenter"
+    private val api: FiscalunoApi by kodein.instance()
+    private lateinit var view: DetailedReviewContract.View
     private lateinit var db: FirebaseFirestore
 
     override fun bindView(view: DetailedReviewContract.View) {
@@ -47,38 +51,35 @@ class DetailedReviewPresenter : DetailedReviewContract.Presenter {
                 }
     }
 
-    override fun loadReviewsByInstitutionId(institutionId: String) {
-        //TODO: Load average detailed review ratings from the institution
-        val reviews  = java.util.ArrayList<DetailedReview>()
+    override fun saveDetailedReviews(detailedReviews: List<DetailedReview>,
+                                     generalReview: GeneralReview,
+                                     callback: StepperLayout.OnCompleteClickedCallback?) {
 
-        for(i in 0..4){
-            var review = DetailedReview()
-            review.type = "Test $i"
-            review.rate = i+(0.03f*i)
-            reviews.add(review)
-        }
+        val detailedReviewBody =
+                DetailedReviewBody(
+                        generalReview.institutionId!!,
+                        generalReview.courseInfo!!.courseName,
+                        detailedReviews
+                )
 
-    }
+        api.postDetailedReview(generalReview.id!!, detailedReviewBody)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    when {
+                        it.code() in 400..503 -> {
+                            Log.e(TAG, "unable to save review ${it.code()} " +
+                                    it.message())
+                            view.error("Unable to save review")
+                        }
 
-    override fun saveDetailedReviews(detailedReviews: List<DetailedReview>, generalReview: GeneralReview) {
-        detailedReviews.forEach { review ->
-            review.createdAt = Date()
-            review.course = generalReview.course;
-            review.institutionId = generalReview.institutionId;
-            review.studentId = generalReview.studentId;
-            db.collection(DETAILED_REVIEWS)
-                    .add(review)
-                    .addOnSuccessListener {
-                        Log.d(DETAILED_REVIEWS, "Review successfully written!")
-                    }
-                    .addOnFailureListener {
-                        e ->
-                        run {
-                            Log.w(DETAILED_REVIEWS, "Error writing general review", e)
-                            //view.error(e.message!!) TODO: display error
+                        it.code() in 200..204 -> {
+                            view.success(callback)
                         }
                     }
-        }
+                },{
+                    view.error("Unable to save review")
+                })
     }
 
 }

@@ -9,12 +9,12 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class GeneralReview (
-    var title: String? = null,
-    var suggestion: String? = null,
-    var pros: String? = null,
-    var cons: String? = null,
-    var description: String? = null,
-    @SerializedName("course_info") var courseInfo: CourseInfo? = null
+        var title: String? = null,
+        var suggestion: String? = null,
+        var pros: String? = null,
+        var cons: String? = null,
+        var description: String? = null,
+        @SerializedName("course_info") var courseInfo: CourseInfo? = null
 ) : Review() {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
