@@ -22,39 +22,36 @@ import com.fiscaluno.model.DetailedReview
 
 class DetailedReviewAdapter constructor(val context: Context, override val dataSet: List<DetailedReview>,
                                         var clickable: Boolean, override val isUserLogged: Boolean) :
-        RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>(), LoggedInAwareAdapter<DetailedReview> {
+        LoggedInAwareAdapter<DetailedReview, DetailedReviewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(layoutInflater.inflate(R.layout.item_detailed_review, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val review = dataSet[position]
-        if (shouldFadeCurrentItem(position)) {
-            holder.starsBar.setIsIndicator(true)
-            holder.container.setBackgroundColor(context.resources.getColor(R.color.faded_item_color))
-            holder.container.setOnClickListener {
-                context.startActivity(Intent(context, LoginActivity::class.java))
-            }
-        } else {
-            setupRegularItem(holder, review)
+    override fun setupFadedItem(holder: RecyclerView.ViewHolder, item: DetailedReview) {
+        holder as DetailedReviewAdapter.ViewHolder
+        holder.starsBar.setIsIndicator(true)
+        holder.container.setBackgroundColor(context.resources.getColor(R.color.faded_item_color))
+        holder.container.setOnClickListener {
+            context.startActivity(Intent(context, LoginActivity::class.java))
         }
-
     }
 
-    private fun setupRegularItem(holder: ViewHolder, review: DetailedReview) {
-        holder.reviewName.text = review.type
+    override fun setupRegularItem(holder: RecyclerView.ViewHolder, item: DetailedReview) {
+        holder as DetailedReviewAdapter.ViewHolder
 
-        if (review.rate != null) {
-            holder.starsBar.rating = review.rate!!
+        holder.reviewName.text = item.type
+
+        if (item.rate != null) {
+            holder.starsBar.rating = item.rate!!
         } else {
             holder.starsBar.rating = 0.0f
         }
 
         holder.starsBar.setIsIndicator(!clickable)
         if (clickable) {
-            setOnTouchListener(holder, review)
+            setOnTouchListener(holder, item)
         }
     }
 
@@ -79,8 +76,6 @@ class DetailedReviewAdapter constructor(val context: Context, override val dataS
             true
         }
     }
-
-    override fun getItemCount(): Int = getComputedItemCount()
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var reviewName: TextView = v.findViewById(R.id.review_title_tv_dr_item)
