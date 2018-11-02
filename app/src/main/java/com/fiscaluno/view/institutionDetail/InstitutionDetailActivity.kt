@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.support.v4.app.NavUtils
 import android.support.v7.app.ActionBar
 import android.widget.Toolbar
+import com.fiscaluno.repository.AnonymousUserTracker
 
 class InstitutionDetailActivity : AppCompatActivity() {
 
@@ -62,6 +63,7 @@ class InstitutionDetailActivity : AppCompatActivity() {
         })
 
         setupViewPager(institutionDetailViewPager)
+        AnonymousUserTracker.trackAccessIfNotLoggedIn(this)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {

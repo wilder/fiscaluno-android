@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager
 import android.view.MenuItem
 import com.fiscaluno.R
 import com.fiscaluno.model.Course
+import com.fiscaluno.repository.AnonymousUserTracker
 import com.fiscaluno.view.adapter.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_course_detail.*
 import kotlinx.android.synthetic.main.course_info_panel.*
@@ -60,6 +61,7 @@ class CourseDetailActivity : AppCompatActivity() {
         })
 
         setupViewPager(courseDetailViewPager)
+        AnonymousUserTracker.trackAccessIfNotLoggedIn(this)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
