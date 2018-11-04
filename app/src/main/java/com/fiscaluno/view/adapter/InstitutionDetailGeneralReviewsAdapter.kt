@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.fiscaluno.R
 import android.widget.RatingBar
+import com.fiscaluno.extensions.format
 import com.fiscaluno.model.GeneralReview
 import java.util.ArrayList
 
@@ -29,7 +30,7 @@ class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: List<GeneralR
 
         holder.prosTv.text = review.pros
         holder.consTv.text = review.cons
-        holder.timeTv.text = review.createdAt?.time.toString() //TODO: Format time
+        holder.timeTv.text = review.createdAt?.format()
         holder.starsBar.rating = review.rate!!
 
     }
