@@ -72,6 +72,8 @@
     <string name="nightly">Nightly</string>
     <string name="fulltime">Full-time</string>
     <string name="detailed_review_call">Rate the following aspects of your institution!</string>
+    <string name="average_time_to_graduate">Average time to graduate</string>
+    <string name="average_detailed_reviews">Average Detailed Reviews</string>
 
 
 </resources>

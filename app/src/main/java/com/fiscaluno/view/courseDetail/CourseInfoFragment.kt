@@ -54,6 +54,7 @@ class CourseInfoFragment : Fragment() {
         availablePeriods.text = coursePeriod
 
         if(coursePeriod.equals("nightly", ignoreCase = true)) {
+            availablePeriods.text = getString(R.string.nightly)
             ivCoursePeriod.setImageDrawable(getDrawable(context!!, R.drawable.ic_night))
         } else {
             ivCoursePeriod.setImageDrawable(getDrawable(context!!, R.drawable.ic_sun))

@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Average time to graduate"
+            android:text="@string/average_time_to_graduate"
             app:layout_constraintStart_toStartOf="@+id/cardViewPeriod"
             app:layout_constraintTop_toBottomOf="@+id/cardViewPeriod" />
 
@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Average paid value"
+            android:text="@string/average_paid_value"
             app:layout_constraintStart_toStartOf="@+id/cardViewDuration"
             app:layout_constraintTop_toBottomOf="@+id/cardViewDuration" />
 
@@ -229,18 +229,6 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Reviews Graph"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewPrice" />
-
 
     </android.support.constraint.ConstraintLayout>
 

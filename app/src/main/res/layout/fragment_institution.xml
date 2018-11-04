@@ -78,7 +78,7 @@
                     android:layout_marginRight="@dimen/activity_vertical_margin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Average Detailed Reviews"/>
+                    android:text="@string/average_detailed_reviews"/>
 
                 <!--TODO: Add to item layout-->
                 <android.support.v7.widget.RecyclerView
@@ -101,7 +101,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reviews"/>
+                android:text="@string/reviews"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_marginBottom="@dimen/activity_vertical_margin"

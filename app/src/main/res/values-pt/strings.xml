@@ -50,6 +50,8 @@
     <string name="nightly">Noturno</string>
     <string name="fulltime">Full-time</string>
     <string name="detailed_review_call">Dê uma nota para as seguintes categorias da sua instituição!</string>
+    <string name="average_time_to_graduate">Tempo médio para graduação</string>
+    <string name="average_detailed_reviews">Média de avaliações detalhadas</string>
 
 
 </resources>
