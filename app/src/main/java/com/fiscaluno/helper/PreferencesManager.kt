@@ -21,13 +21,13 @@ class PreferencesManager (context: Context) {
         get() = prefs.getString(TOKEN, null)
         set(value) = prefs.edit().putString(TOKEN, value).apply()
 
-    var userInstitutionId: String
-        get() = prefs.getString(USER_INSTITUTION_ID, "")
+    var userInstitutionId: Int
+        get() = prefs.getInt(USER_INSTITUTION_ID, 0)
 
         /**
          * This property is set after the user review a institution
          */
-        set(value) = prefs.edit().putString(USER_INSTITUTION_ID, value).apply()
+        set(value) = prefs.edit().putInt(USER_INSTITUTION_ID, value).apply()
 
     var user: Student?
     //TODO: check if null is a problem

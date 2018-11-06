@@ -49,8 +49,8 @@ class InstitutionFragment : Fragment(), ReviewsContract.View {
         ratingAverageRb.rating = institution.averageRating
 
         // TODO: coroutines
-        presenter.loadDetailedReviews(institution.id)
-        presenter.loadGeneralReviews(institution.id)
+        presenter.loadDetailedReviews(institution.id!!)
+        presenter.loadGeneralReviews(institution.id!!)
     }
 
     override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {

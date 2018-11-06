@@ -15,7 +15,7 @@ interface ReviewsContract {
 
     interface Presenter {
         fun bindView(view: ReviewsContract.View)
-        fun loadGeneralReviews(institutionId: String, courseId: String? = null)
-        fun loadDetailedReviews(institutionId: String, courseId: String? = null)
+        fun loadGeneralReviews(institutionId: Int, courseId: Int? = null)
+        fun loadDetailedReviews(institutionId: Int, courseId: Int? = null)
     }
 }

@@ -38,7 +38,7 @@ class InstitutionCourseFragment : Fragment(), CourseContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //TODO: handle pagination
-        presenter.findInstitutionCourses(institution.id)
+        presenter.findInstitutionCourses(institution.id!!)
 
     }
 

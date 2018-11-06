@@ -19,16 +19,16 @@ interface FiscalunoApi {
 
     @GET("reviews/details/average")
     fun getDetailedReviews(
-            @Query("institutionId") institutionId: String,
-            @Query("course") course: String? = null,
+            @Query("institutionId") institutionId: Int,
+            @Query("course") course: Int? = null,
             @Query("page") page: Int = 0,
             @Query("size") pageSize: Int = 5
     ): Observable<Response<StandardApiResponse<List<DetailedReview>>>>
 
     @GET("reviews")
     fun getGeneralReviews(
-            @Query("institutionId") institutionId: String,
-            @Query("course") course: String? = null,
+            @Query("institutionId") institutionId: Int,
+            @Query("course") course: Int? = null,
             @Query("page") page: Int = 0,
             @Query("size") pageSize: Int = 5
     ): Observable<Response<StandardApiResponse<List<GeneralReview>>>>
@@ -38,7 +38,7 @@ interface FiscalunoApi {
             Observable<Response<StandardApiResponse<GeneralReview>>>
 
     @POST("reviews/{reviewId}/details")
-    fun postDetailedReview(@Path("reviewId") id: String, @Body detailedReview: DetailedReviewBody):
+    fun postDetailedReview(@Path("reviewId") id: Int, @Body detailedReview: DetailedReviewBody):
             Observable<Response<Any?>>
 
     @GET("institutions")
@@ -58,7 +58,7 @@ interface FiscalunoApi {
     fun findCourses(
             @Query("name") name: String? = null,
             @Query("institutionName") institutionName: String? = null,
-            @Query("institutionId") institutionId: String? = null,
+            @Query("institutionId") institutionId: Int? = null,
             @Query("city") city: String? = null,
             @Query("state") state: String? = null,
             @Query("rate") rate: Float? = 0f,

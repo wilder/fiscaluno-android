@@ -96,10 +96,11 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback?) {
         val review = GeneralReview()
         review.courseInfo = CourseInfo(
+                courseId = 1, // TODO: Get course id
                 courseType = getSelectedRadioButtonValue(courseTypeRadioGroup!!),
                 period = getSelectedRadioButtonValue(coursePeriodRadioGroup!!),
                 startYear = startYearSpinner?.selectedItem.toString().toInt(),
-                monthlyPaymentValue = paymentValue?.text.toString().toFloat(),
+                monthlyPaymentValue = paymentValue?.text.toString().toInt(),
                 courseName = courseSpinner?.selectedItem.toString()
         )
 

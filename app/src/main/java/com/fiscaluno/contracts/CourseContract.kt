@@ -6,7 +6,7 @@ interface CourseContract {
 
     interface Presenter {
         fun bindView(view: View)
-        fun findInstitutionCourses(institutionId: String)
+        fun findInstitutionCourses(institutionId: Int)
     }
 
     interface View {

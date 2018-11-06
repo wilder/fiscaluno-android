@@ -98,7 +98,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     }
 
     override fun success(callback: StepperLayout.OnCompleteClickedCallback?) {
-        PreferencesManager(context!!).userInstitutionId = institution.id
+        PreferencesManager(context!!).userInstitutionId = institution.id!!
         startActivity(Intent(activity, MainActivity::class.java))
     }
 

@@ -4,7 +4,7 @@ import com.fiscaluno.model.DetailedReview
 import com.google.gson.annotations.SerializedName
 
 data class DetailedReviewBody(
-        @SerializedName("institution_id") val institutionId: String,
-        @SerializedName("course_id") val courseId: String,
+        @SerializedName("institution_id") val institutionId: Int,
+        @SerializedName("course_id") val courseId: Int,
         @SerializedName("detailed_reviews") val detailedReviews: List<DetailedReview>
 )

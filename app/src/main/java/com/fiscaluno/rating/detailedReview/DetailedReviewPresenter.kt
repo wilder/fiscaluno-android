@@ -58,7 +58,7 @@ class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter
         val detailedReviewBody =
                 DetailedReviewBody(
                         generalReview.institutionId!!,
-                        generalReview.courseInfo!!.courseName,
+                        generalReview.courseInfo!!.courseId!!,
                         detailedReviews
                 )
 

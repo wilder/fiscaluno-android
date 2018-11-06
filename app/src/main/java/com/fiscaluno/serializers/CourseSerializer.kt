@@ -33,7 +33,7 @@ class CourseSerializer : JsonDeserializer<Course> {
 
 
         val institution = Institution()
-        institution.id = jsonObject.get("institution_id").asString
+        institution.id = jsonObject.get("institution_id").asInt
         institution.name = jsonObject.get("institution_name")?.asString
         institution.imageUri = jsonObject.get("institution_image_url")?.asString.toString()
 

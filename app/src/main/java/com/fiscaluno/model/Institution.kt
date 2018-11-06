@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class Institution (
-        var id: String = "",
+        var id: Int = 0,
         override var name: String? = null,
         val address: String = "",
         val cnpj: String = "",
@@ -26,7 +26,7 @@ data class Institution (
 ) : RateableEntity(), Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
+            parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -41,7 +41,7 @@ data class Institution (
             parcel.createTypedArrayList(GeneralReview.CREATOR))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
+        parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(address)
         parcel.writeString(cnpj)

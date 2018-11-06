@@ -43,8 +43,8 @@ class CourseReviewFragment : Fragment(), ReviewsContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.loadDetailedReviews(course.institution!!.id, course.id)
-        presenter.loadGeneralReviews(course.institution!!.id, course.id)
+        presenter.loadDetailedReviews(course.institution!!.id!!, course.id)
+        presenter.loadGeneralReviews(course.institution!!.id!!, course.id)
     }
 
     override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {
