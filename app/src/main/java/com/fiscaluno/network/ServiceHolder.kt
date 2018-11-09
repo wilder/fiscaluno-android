@@ -2,6 +2,7 @@ package com.fiscaluno.network
 
 import com.fiscaluno.model.Course
 import com.fiscaluno.serializers.CourseSerializer
+import com.fiscaluno.serializers.FiscalunoExclusionStrategy
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -37,9 +38,12 @@ object ServiceHolder {
 
 
     private fun gson() =  GsonBuilder().run {
+        setDateFormat("yyyy-MM-dd'T'HH:mm:ssz" )
+        setExclusionStrategies(FiscalunoExclusionStrategy())
+        setPrettyPrinting()
         registerTypeAdapter(Course::class.java, CourseSerializer())
-        registerTypeAdapter(Date::class.java,
-                JsonDeserializer<Date> { json, _, _ -> Date(json?.asJsonPrimitive!!.asLong) })
+//        registerTypeAdapter(Date::class.java,
+//                JsonDeserializer<Date> { json, _, _ -> Date(json?.asJsonPrimitive!!.asLong) })
                 .create()
     }
 }
