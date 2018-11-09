@@ -17,9 +17,9 @@ interface FiscalunoApi {
     @POST("/users")
     fun createOrUpdateUser(@Body user: Student): Observable<Response<AuthenticationResponse>>
 
-    @GET("reviews/details/average")
+    @GET("https://athena-bff.herokuapp.com/detailedreviews/average")
     fun getDetailedReviews(
-            @Query("institutionId") institutionId: Int,
+            @Query("institution_id") institutionId: Int,
             @Query("course") course: Int? = null,
             @Query("page") page: Int = 0,
             @Query("size") pageSize: Int = 5
@@ -27,7 +27,7 @@ interface FiscalunoApi {
 
     @GET("https://athena-bff.herokuapp.com/v1/reviews")
     fun getGeneralReviews(
-            @Query("institutionId") institutionId: Int,
+            @Query("institution_id") institutionId: Int,
             @Query("course") course: Int? = null,
             @Query("page") page: Int = 0,
             @Query("size") pageSize: Int = 5
@@ -57,8 +57,8 @@ interface FiscalunoApi {
     @GET("https://athena-bff.herokuapp.com/v1/courses")
     fun findCourses(
             @Query("name") name: String? = null,
-            @Query("institutionName") institutionName: String? = null,
-            @Query("institutionId") institutionId: Int? = null,
+            @Query("institution_name") institutionName: String? = null,
+            @Query("institution_id") institutionId: Int? = null,
             @Query("city") city: String? = null,
             @Query("state") state: String? = null,
             @Query("rate") rate: Float? = 0f,
