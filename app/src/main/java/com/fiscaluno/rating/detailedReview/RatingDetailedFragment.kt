@@ -34,7 +34,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     private var institutionName: TextView? = null
     private var institutionImage: ImageView? = null
     private var reviewsList: RecyclerView? = null
-    private var adapter: DetailedReviewAdapter? = null
+    private var adapter: DetailedReviewTypeAdapter? = null
     private var presenter: DetailedReviewContract.Presenter? = null
     lateinit var dataManager: DataManager
     lateinit var institution: Institution
@@ -88,7 +88,7 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
     }
 
     private fun setupList(reviews: ArrayList<DetailedReview>){
-        adapter = DetailedReviewAdapter(reviews, true)
+        adapter = DetailedReviewTypeAdapter(reviews, true)
         reviewsList?.adapter = adapter
         reviewsList?.layoutManager = LinearLayoutManager(context) as RecyclerView.LayoutManager?
     }

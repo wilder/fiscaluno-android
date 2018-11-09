@@ -9,19 +9,22 @@ import com.google.gson.annotations.SerializedName
  */
 
 class DetailedReview : Review, Parcelable {
-    @SerializedName("review_type") var type: String ? = null
+    @SerializedName("review_type") var type: Int = 0
+    var description: String = "description"
 
     override fun describeContents(): Int = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         super.writeToParcel(dest, flags)
-        dest.writeString(this.type)
+        dest.writeInt(this.type)
+        dest.writeString(this.description)
     }
 
     constructor() {}
 
     protected constructor(`in`: Parcel) : super(`in`) {
-        this.type = `in`.readString()
+        this.type = `in`.readInt()
+        this.description = `in`.readString()
     }
 
     companion object {

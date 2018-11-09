@@ -40,11 +40,13 @@ class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         reviews.clear()
-                        for (type in task.result.toObjects(DetailedReviewTypes::class.java)) {
-                            //task.result.toObjects(DetailedReviewTypes::class.java)
-                            var review = DetailedReview()
-                            review.type = type.description
-                            reviews.add(review)
+                        task.result.toObjects(DetailedReviewTypes::class.java)
+                                .forEachIndexed {
+                                    index, detailedReviewTypes ->
+                                    var review = DetailedReview()
+                                    review.description = detailedReviewTypes.description!!
+                                    review.type = index+1
+                                    reviews.add(review)
                         }
                     }
                     view?.setupDetailedReviewsList(reviews)

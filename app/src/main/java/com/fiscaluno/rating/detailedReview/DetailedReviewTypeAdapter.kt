@@ -16,7 +16,7 @@ import java.util.ArrayList
  * Created by Wilder on 16/07/17.
  */
 
-class DetailedReviewAdapter constructor(mDataset: List<DetailedReview>, clickable: Boolean) : RecyclerView.Adapter<DetailedReviewAdapter.ViewHolder>() {
+class DetailedReviewTypeAdapter constructor(mDataset: List<DetailedReview>, clickable: Boolean) : RecyclerView.Adapter<DetailedReviewTypeAdapter.ViewHolder>() {
 
     var mDataset: List<DetailedReview> = mDataset
     var clickable: Boolean = clickable
@@ -27,15 +27,10 @@ class DetailedReviewAdapter constructor(mDataset: List<DetailedReview>, clickabl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val review = mDataset[position]
+        val reviewtype = mDataset[position]
 
-        holder.reviewName.text = review.description
-
-        if(review.rate != null) {
-            holder.starsBar.rating = review.rate!!
-        } else {
-            holder.starsBar.rating = 0.0f
-        }
+        holder.reviewName.text = reviewtype.description
+        holder.starsBar.rating = 0.0f
 
         holder.starsBar.setIsIndicator(!clickable)
         if(clickable){
@@ -46,7 +41,7 @@ class DetailedReviewAdapter constructor(mDataset: List<DetailedReview>, clickabl
                     val starsf = touchPositionX / width * 5.0f
                     val stars = starsf.toInt() + 1
                     holder.starsBar.rating = stars.toFloat()
-                    review.rate = stars.toFloat()
+                    reviewtype.rate = stars.toFloat()
                     v.isPressed = false
                 }
                 if (event.action == MotionEvent.ACTION_DOWN) {
