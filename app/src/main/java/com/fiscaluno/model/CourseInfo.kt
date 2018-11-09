@@ -10,7 +10,7 @@ data class CourseInfo (
         @SerializedName("period") val period: String? = null,
         @SerializedName("start_year") val startYear: Int? = null,
         @SerializedName("course_name") val courseName: String,
-        @SerializedName("monthly_payment_value") val monthlyPaymentValue: Float? = null
+        @SerializedName("monthly_payment_value") val monthlyPaymentValue: Int? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -18,7 +18,7 @@ data class CourseInfo (
             parcel.readString(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
-            parcel.readValue(Float::class.java.classLoader) as? Float) {
+            parcel.readValue(Int::class.java.classLoader) as? Int) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
