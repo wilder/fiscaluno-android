@@ -25,7 +25,7 @@ interface FiscalunoApi {
             @Query("size") pageSize: Int = 5
     ): Observable<Response<StandardApiResponse<List<DetailedReview>>>>
 
-    @GET("reviews")
+    @GET("https://athena-bff.herokuapp.com/v1/reviews")
     fun getGeneralReviews(
             @Query("institutionId") institutionId: Int,
             @Query("course") course: Int? = null,
@@ -33,15 +33,15 @@ interface FiscalunoApi {
             @Query("size") pageSize: Int = 5
     ): Observable<Response<StandardApiResponse<List<GeneralReview>>>>
 
-    @POST("reviews")
+    @POST("https://athena-bff.herokuapp.com/v1/reviews")
     fun postGeneralReview(@Body generalReview: GeneralReview):
             Observable<Response<StandardApiResponse<GeneralReview>>>
 
-    @POST("reviews/{reviewId}/details")
+    @POST("https://athena-bff.herokuapp.com/v1/reviews/{reviewId}/details")
     fun postDetailedReview(@Path("reviewId") id: Int, @Body detailedReview: DetailedReviewBody):
             Observable<Response<Any?>>
 
-    @GET("institutions")
+    @GET("https://athena-bff.herokuapp.com/v1/institutions")
     fun findInstitutions(
             @Query("name") name: String? = null,
             @Query("city") city: String? = null,
@@ -51,10 +51,10 @@ interface FiscalunoApi {
             @Query("size") pageSize: Int = 5,
             @Query("sort") sortBy: String? = null): Observable<Response<StandardApiResponse<List<Institution>>>>
 
-    @GET("institutions/{id}")
+    @GET("https://athena-bff.herokuapp.com/v1/institutions/{id}")
     fun findInstitutionsById(@Path("id") id: String): Observable<Response<StandardApiResponse<Institution>>>
 
-    @GET("courses")
+    @GET("https://athena-bff.herokuapp.com/v1/courses")
     fun findCourses(
             @Query("name") name: String? = null,
             @Query("institutionName") institutionName: String? = null,

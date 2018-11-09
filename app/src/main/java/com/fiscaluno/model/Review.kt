@@ -16,7 +16,7 @@ open class Review : Parcelable {
     var rate: Float? = null //from 1 to 5 -
     var course: String ? = null
     @SerializedName("institution_id") var institutionId: Int? = null
-    var studentId: Int? = null
+    @SerializedName("student_id") var studentId: Int? = null
 
     constructor() {}
 

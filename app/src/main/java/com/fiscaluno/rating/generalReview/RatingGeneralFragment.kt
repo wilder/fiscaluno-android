@@ -123,7 +123,7 @@ class RatingGeneralFragment : Fragment(), BlockingStep, GeneralReviewContract.Vi
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback) {
         //TODO: move to presenter
         review?.rate = ratingBar?.rating
-        review?.description = reviewTitleEt?.text.toString()
+        review?.title = reviewTitleEt?.text.toString()
         review?.cons = consTv?.text.toString()
         review?.pros = prosTv?.text.toString()
         review?.suggestion = suggestionsEt?.text.toString()
