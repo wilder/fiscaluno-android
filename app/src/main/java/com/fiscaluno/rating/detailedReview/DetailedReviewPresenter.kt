@@ -7,11 +7,10 @@ import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.network.FiscalunoApi
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stepstone.stepper.StepperLayout
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import java.util.*
+
 
 /**
  * Created by Wilder on 25/07/17.
@@ -23,6 +22,8 @@ class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter
     private val api: FiscalunoApi by kodein.instance()
     private lateinit var view: DetailedReviewContract.View
     private lateinit var db: FirebaseFirestore
+    private val GENERAL_REVIEWS = "GeneralReview"
+    private val DETAILED_REVIEWS = "DetailedReview"
 
     override fun bindView(view: DetailedReviewContract.View) {
         this.view = view
@@ -57,31 +58,57 @@ class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter
                                      generalReview: GeneralReview,
                                      callback: StepperLayout.OnCompleteClickedCallback?) {
 
-        val detailedReviewBody =
-                DetailedReviewBody(
-                        generalReview.institutionId!!,
-                        generalReview.courseInfo!!.courseId!!,
-                        detailedReviews
-                )
+        val db = db.collection(DETAILED_REVIEWS)
+        val firestore = db.firestore
 
-        api.postDetailedReview(generalReview.id!!, detailedReviewBody)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    when {
-                        it.code() in 400..503 -> {
-                            Log.e(TAG, "unable to save review ${it.code()} " +
-                                    it.message())
-                            view.error("Unable to save review")
-                        }
+        val batch = firestore.batch()
 
-                        it.code() in 200..204 -> {
-                            view.success(callback)
-                        }
-                    }
-                },{
-                    view.error("Unable to save review")
-                })
+
+        detailedReviews.map {
+            it.courseId = generalReview.courseInfo!!.courseId
+            it.institutionId = generalReview.institutionId
+            it.createdAt = Date()
+            it.studentId = generalReview.studentId
+        }
+
+        detailedReviews.forEach {
+            batch.set(db.document(), it)
+        }
+
+        batch.commit()
+                .addOnCompleteListener {
+                    view.success(callback)
+                }
+                .addOnFailureListener {
+                    Log.e(TAG, "unable to save review " + it.message)
+                    view.error(it.localizedMessage.toString())
+                }
+
+//        val detailedReviewBody =
+//                DetailedReviewBody(
+//                        generalReview.institutionId!!,
+//                        generalReview.courseInfo!!.courseId!!,
+//                        detailedReviews
+//                )
+//
+//        api.postDetailedReview(generalReview.id!!, detailedReviewBody)
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    when {
+//                        it.code() in 400..503 -> {
+//                            Log.e(TAG, "unable to save review ${it.code()} " +
+//                                    it.message())
+//                            view.error("Unable to save review")
+//                        }
+//
+//                        it.code() in 200..204 -> {
+//                            view.success(callback)
+//                        }
+//                    }
+//                },{
+//                    view.error("Unable to save review")
+//                })
     }
 
 }
