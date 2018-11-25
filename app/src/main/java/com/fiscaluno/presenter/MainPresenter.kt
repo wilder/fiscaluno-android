@@ -36,7 +36,7 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
     override fun loadTopInstitutions() {
 
         db.collection(INSTITUTIONS)
-                .orderBy("average_rating", Query.Direction.DESCENDING)
+                .orderBy("averageRating", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
