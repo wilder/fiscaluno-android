@@ -15,6 +15,7 @@ data class Course  (
     @SerializedName("course_time_to_graduate_range") var timeToGraduateRange: List<Int> = mutableListOf(),
     @SerializedName("course_duration") var duration: Int = 0, // duration in startYear
     var id: Int = 0,
+    var institutionId: Int = 0,
     @SerializedName("institution") var institution: Institution? = null
 ) : RateableEntity() {
 
@@ -26,6 +27,7 @@ data class Course  (
             coursePeriods = parcel.createStringArrayList(),
             duration = parcel.readInt(),
             id = parcel.readInt(),
+            institutionId = parcel.readInt(),
             institution = parcel.readParcelable(Institution::class.java.classLoader)) {
         parcel.readList(monthlyValueRange, Float::class.java.classLoader)
         parcel.readList(timeToGraduateRange, Int::class.java.classLoader)
@@ -50,6 +52,7 @@ data class Course  (
         parcel.writeStringList(coursePeriods)
         parcel.writeInt(duration)
         parcel.writeInt(id)
+        parcel.writeInt(institutionId)
         parcel.writeParcelable(institution, flags)
         parcel.writeList(monthlyValueRange)
         parcel.writeList(timeToGraduateRange)

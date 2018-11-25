@@ -3,6 +3,7 @@ package com.fiscaluno.presenter
 import android.support.annotation.NonNull
 import android.util.Log
 import com.fiscaluno.contracts.MainContract
+import com.fiscaluno.model.Course
 import com.fiscaluno.model.Institution
 import com.fiscaluno.network.FiscalunoApi
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +24,7 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
     lateinit var view: MainContract.View
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val INSTITUTIONS = "Institutions"
+    private val COURSES = "courses"
 
     override fun bindView(view: MainContract.View) {
         this.view = view
@@ -49,26 +51,18 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
     }
 
     override fun loadTopCourses() {
-        api.findCourses(sortBy = "rate", pageSize = 4)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    when {
-                        it.code() == 401 ->
-                            //TODO: view.badRequest("Login expirado")
-                            Log.e("MainPresenter", "unable to authenticate user - 401")
-                        it.code() == 500 ->
-                            //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("MainPresenter", "unable to authenticate user - 500")
-                        else -> {
-                            val courses = it.body()?.result
-                            view.showTopCourses(courses)
-                        }
+        db.collection(COURSES)
+                .orderBy("averageRating", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val courses = task.result.toObjects(Course::class.java)
+                        Log.d("topCourses", courses.toString())
+                        view.showTopCourses(courses)
+                    } else {
+                        Log.w("topCourses", "Error getting documents.", task.getException())
                     }
-                },{
-                    Log.e("MainPresenter", "unable to authenticate user - ${it.message}")
-                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                })
+                }
     }
 
 }
