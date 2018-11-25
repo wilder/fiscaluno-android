@@ -1,14 +1,12 @@
 package com.fiscaluno.rating.generalReview
 
-import android.util.Log
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.network.FiscalunoApi
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stepstone.stepper.StepperLayout
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
+import java.util.*
 
 
 /**
@@ -19,30 +17,31 @@ class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Present
 
     private lateinit var view: GeneralReviewContract.View
     private val api: FiscalunoApi by kodein.instance()
+    private lateinit var db: FirebaseFirestore
+    private val GENERAL_REVIEWS = "GeneralReview"
+
 
     override fun bindView(view: GeneralReviewContract.View) {
         this.view = view
+        this.db = FirebaseFirestore.getInstance()
     }
 
     override fun saveGeneralReview(generalReview: GeneralReview, callback: StepperLayout.OnNextClickedCallback?) {
-        generalReview.createdAt = null
-        api.postGeneralReview(generalReview)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    when {
-                        it.code() in 400..503 -> {
-                            Log.e("GeneralReviewPresenter", "unable to save review ${it.code()} " +
-                                    it.message())
-                            view.error("Unable to save review")
-                        }
-
-                        it.code() in 200..204 -> {
-                            view.success(it.body()?.result!!, callback)
-                        }
+        val generalReviewDTO = generalReview.copy()
+        val collection = db.collection(GENERAL_REVIEWS)
+        generalReviewDTO.courseId = generalReview.courseInfo?.courseId!!
+        generalReviewDTO.courseInfo = null
+        generalReviewDTO.institutionId = generalReview.institutionId
+        generalReviewDTO.rate = generalReview.rate
+        generalReviewDTO.createdAt = Date()
+        collection.add(generalReviewDTO)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        view.success(generalReview, callback)
                     }
-                },{
-                    view.error("Unable to save review")
-                })
+                    else {
+                        view.error("Unable to save review")
+                    }
+                }
     }
 }
