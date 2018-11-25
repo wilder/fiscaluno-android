@@ -28,7 +28,7 @@ class CourseDetailActivity : AppCompatActivity() {
             institutionNameTv.text = it.institution?.name
             courseNameTv.text = it.name
             ratedByTv.text = it.ratedByCount.toString()
-            institutionIv.setImageURI(it.institution?.imageUri)
+            institutionIv.setImageURI(it.institution?.imageUrl)
             averageRatingTv.text = it.averageRating.toString()
         }
 

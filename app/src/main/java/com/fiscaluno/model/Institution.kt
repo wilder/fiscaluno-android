@@ -18,7 +18,7 @@ data class Institution (
         val phones: List<String> = emptyList(),
         val province: String = "",
         val website: String = "",
-        @SerializedName("image_url") var imageUri: String = "",
+        @SerializedName("image_url") var imageUrl: String = "",
         @SerializedName("average_rating") override var averageRating: Float = 0f,
         @SerializedName("rated_by_count") override var ratedByCount: Int = 0,
         val detailedReviews: List<DetailedReview> = emptyList(),
@@ -49,7 +49,7 @@ data class Institution (
         parcel.writeStringList(phones)
         parcel.writeString(province)
         parcel.writeString(website)
-        parcel.writeString(imageUri)
+        parcel.writeString(imageUrl)
         parcel.writeFloat(averageRating)
         parcel.writeInt(ratedByCount)
         parcel.writeTypedList(detailedReviews)

@@ -5,7 +5,6 @@ import com.fiscaluno.model.Institution
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
 
 import java.lang.reflect.Type
@@ -35,7 +34,7 @@ class CourseSerializer : JsonDeserializer<Course> {
         val institution = Institution()
         institution.id = jsonObject.get("institution_id").asInt
         institution.name = jsonObject.get("institution_name")?.asString
-        institution.imageUri = jsonObject.get("institution_image_url")?.asString.toString()
+        institution.imageUrl = jsonObject.get("institution_image_url")?.asString.toString()
 
         course.institution = institution
 

@@ -61,7 +61,7 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
         paymentValue = view.findViewById(R.id.payed_value_et_ci)
         startYearSpinner = view.findViewById(R.id.startYearSp)
 
-        institutionImage!!.setImageURI(instParam?.imageUri)
+        institutionImage!!.setImageURI(instParam?.imageUrl)
         presenter.searchCourse(SearchFilter(instParam))
         setupYears(getAvailableYears())
 

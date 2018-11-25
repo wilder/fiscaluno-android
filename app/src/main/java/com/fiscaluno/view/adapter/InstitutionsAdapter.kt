@@ -15,7 +15,7 @@ class InstitutionsAdapter(override val rateableEntities: ArrayList<Institution>,
         holder.subRareableEntityName.visibility = View.GONE
 
         institution.let {
-            holder.rateableEntityImage.setImageURI(it.imageUri)
+            holder.rateableEntityImage.setImageURI(it.imageUrl)
             holder.rateableEntityName.text = it.name
             holder.rating.rating = it.averageRating
         }

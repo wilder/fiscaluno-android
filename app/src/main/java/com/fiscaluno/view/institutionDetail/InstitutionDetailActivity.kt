@@ -11,9 +11,6 @@ import com.fiscaluno.model.Institution
 import kotlinx.android.synthetic.main.institution_info_panel.*
 import android.support.design.widget.AppBarLayout
 import android.view.MenuItem
-import android.support.v4.app.NavUtils
-import android.support.v7.app.ActionBar
-import android.widget.Toolbar
 
 class InstitutionDetailActivity : AppCompatActivity() {
 
@@ -30,7 +27,7 @@ class InstitutionDetailActivity : AppCompatActivity() {
         institution.let {
             institutionNameTv.text = it.name
             ratedByTv.text = it.ratedByCount.toString()
-            institutionIv.setImageURI(it.imageUri)
+            institutionIv.setImageURI(it.imageUrl)
             averageRatingTv.text = it.averageRating.toString()
         }
 

@@ -13,7 +13,7 @@ class CoursesAdapter(override val rateableEntities: ArrayList<Course>, override 
         val course = rateableEntities[position]
 
         course.let {
-            holder.rateableEntityImage.setImageURI(it.institution?.imageUri)
+            holder.rateableEntityImage.setImageURI(it.institution?.imageUrl)
             holder.rateableEntityName.text = it.name
 
             if(it.institution?.name.isNullOrBlank()) {

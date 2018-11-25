@@ -84,31 +84,6 @@ class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter
                     view.error(it.localizedMessage.toString())
                 }
 
-//        val detailedReviewBody =
-//                DetailedReviewBody(
-//                        generalReview.institutionId!!,
-//                        generalReview.courseInfo!!.courseId!!,
-//                        detailedReviews
-//                )
-//
-//        api.postDetailedReview(generalReview.id!!, detailedReviewBody)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({
-//                    when {
-//                        it.code() in 400..503 -> {
-//                            Log.e(TAG, "unable to save review ${it.code()} " +
-//                                    it.message())
-//                            view.error("Unable to save review")
-//                        }
-//
-//                        it.code() in 200..204 -> {
-//                            view.success(callback)
-//                        }
-//                    }
-//                },{
-//                    view.error("Unable to save review")
-//                })
     }
 
 }

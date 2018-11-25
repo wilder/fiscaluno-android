@@ -11,7 +11,6 @@ import com.fiscaluno.R
 import com.fiscaluno.extensions.toUri
 import com.fiscaluno.model.Institution
 import com.fiscaluno.rating.RatingActivity
-import java.util.ArrayList
 
 
 /**
@@ -31,8 +30,8 @@ class InstitutionListAdapter (mDataset: List<Institution>?, ratingActivity: Rati
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val institution = mDataset?.get(position)
         //TODO: Change to simpledraweeview'
-        if (institution?.imageUri != null){
-            holder.icon.setImageURI(institution.imageUri.toUri())
+        if (institution?.imageUrl != null){
+            holder.icon.setImageURI(institution.imageUrl.toUri())
         }
         holder.institutionName.text = institution?.name
 
