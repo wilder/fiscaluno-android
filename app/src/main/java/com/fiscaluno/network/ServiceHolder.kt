@@ -39,11 +39,8 @@ object ServiceHolder {
 
     private fun gson() =  GsonBuilder().run {
         setDateFormat("yyyy-MM-dd'T'HH:mm:ssz" )
-        setExclusionStrategies(FiscalunoExclusionStrategy())
         setPrettyPrinting()
         registerTypeAdapter(Course::class.java, CourseSerializer())
-//        registerTypeAdapter(Date::class.java,
-//                JsonDeserializer<Date> { json, _, _ -> Date(json?.asJsonPrimitive!!.asLong) })
                 .create()
     }
 }

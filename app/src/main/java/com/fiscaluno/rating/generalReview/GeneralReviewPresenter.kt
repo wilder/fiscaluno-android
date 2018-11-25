@@ -25,6 +25,7 @@ class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Present
     }
 
     override fun saveGeneralReview(generalReview: GeneralReview, callback: StepperLayout.OnNextClickedCallback?) {
+        generalReview.createdAt = null
         api.postGeneralReview(generalReview)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

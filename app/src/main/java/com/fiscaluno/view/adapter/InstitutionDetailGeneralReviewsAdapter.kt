@@ -28,6 +28,7 @@ class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: List<GeneralR
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val review = mDataset[position]
 
+        holder.titleTv.text = review.title
         holder.prosTv.text = review.pros
         holder.consTv.text = review.cons
         holder.timeTv.text = review.createdAt?.format()
@@ -40,6 +41,7 @@ class InstitutionDetailGeneralReviewsAdapter constructor(mDataset: List<GeneralR
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        var titleTv: TextView = v.findViewById(R.id.avaliacao_titulo_tv)
         var prosTv: TextView = v.findViewById(R.id.pros_tv)
         var consTv: TextView = v.findViewById(R.id.cons_tv)
         var timeTv: TextView = v.findViewById(R.id.time_tv)

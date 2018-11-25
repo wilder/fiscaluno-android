@@ -53,12 +53,17 @@
         </LinearLayout>
 
         <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/avaliacao_titulo_tv"
             android:typeface="monospace"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin" />
 
         <TextView
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
@@ -68,7 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/cardview_dark_background"
-            android:text="@string/pros"/>
+            android:text="@string/pros"
+            android:layout_marginStart="@dimen/activity_horizontal_margin" />
 
         <TextView
             android:layout_margin="@dimen/activity_horizontal_margin"

@@ -17,7 +17,7 @@ interface FiscalunoApi {
     @POST("/users")
     fun createOrUpdateUser(@Body user: Student): Observable<Response<AuthenticationResponse>>
 
-    @GET("https://athena-bff.herokuapp.com/reviews/details/average")
+    @GET("https://private-f15175-fiscalunoapi.apiary-mock.com/reviews/details/average")
     fun getDetailedReviews(
             @Query("institution_id") institutionId: Int,
             @Query("course") course: Int? = null,

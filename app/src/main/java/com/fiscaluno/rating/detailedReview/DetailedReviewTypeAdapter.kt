@@ -29,6 +29,7 @@ class DetailedReviewTypeAdapter constructor(mDataset: List<DetailedReview>, clic
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val reviewtype = mDataset[position]
 
+        reviewtype.createdAt = null
         holder.reviewName.text = reviewtype.description
         holder.starsBar.rating = 0.0f
 
