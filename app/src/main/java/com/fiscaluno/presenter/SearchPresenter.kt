@@ -22,33 +22,45 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
     }
 
     override fun searchCourse(searchFilter: SearchFilter, page: Int, pageSize: Int) {
-        db.collection(COURSES)
-                .whereEqualTo("name", searchFilter.searchableEntity?.getValue())
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val courses = task.result.toObjects(Course::class.java)
-                        Log.d("topCourses", courses.toString())
-                        view.displayCourses(courses)
-                    } else {
-                        Log.w("topCourses", "Error getting documents.", task.getException())
-                    }
+        val collection = db.collection(COURSES)
+
+        if (searchFilter.searchableEntity != null) {
+            collection.whereEqualTo("name", searchFilter.searchableEntity?.getValue())
+        }
+
+        collection
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val courses = task.result.toObjects(Course::class.java)
+                    Log.d("topCourses", courses.toString())
+                    view.displayCourses(courses)
+                } else {
+                    Log.w("topCourses", "Error getting documents.", task.getException())
                 }
+            }
+
     }
 
     override fun searchInstitution(searchFilter: SearchFilter, page: Int, pageSize: Int) {
-        db.collection(INSTITUTIONS)
-                .whereEqualTo("name", searchFilter.searchableEntity?.getValue())
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val institutions = task.result.toObjects(Institution::class.java)
-                        Log.d("topCourses", institutions.toString())
-                        view.displayInstitutions(institutions)
-                    } else {
-                        Log.w("topCourses", "Error getting documents.", task.getException())
-                    }
+        val collection = db.collection(INSTITUTIONS)
+
+        if (searchFilter.searchableEntity != null) {
+            collection.whereEqualTo("name", searchFilter.searchableEntity?.getValue())
+        }
+
+        collection
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val institutions = task.result.toObjects(Institution::class.java)
+                    Log.d("topCourses", institutions.toString())
+                    view.displayInstitutions(institutions)
+                } else {
+                    Log.w("topCourses", "Error getting documents.", task.getException())
                 }
+            }
+
     }
 
 

@@ -2,9 +2,9 @@ package com.fiscaluno.presenter
 
 import android.util.Log
 import com.fiscaluno.contracts.SelectInstitutionContract
+import com.fiscaluno.model.Institution
 import com.fiscaluno.network.FiscalunoApi
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.google.firebase.firestore.FirebaseFirestore
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
@@ -16,32 +16,26 @@ class SelectInstitutionPresenter(val kodein: Kodein) : SelectInstitutionContract
 
     private val api: FiscalunoApi by kodein.instance()
     var view: SelectInstitutionContract.View? = null
+    private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val INSTITUTIONS = "Institutions"
 
     override fun bindView(view: SelectInstitutionContract.View) {
         this.view = view
     }
 
     override fun loadMainInstitutions() {
-        api.findInstitutions()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    when {
-                        it.code() == 401 ->
-                            //TODO: view.badRequest("Login expirado")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 401")
-                        it.code() == 500 ->
-                            //TODO: view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                            Log.e("SelectInstPresenter", "unable to authenticate user - 500")
-                        else -> {
-                            view?.updateInstitutionList(it.body()?.result)
-                            view?.setupInstitutionAutocomplete(it.body()?.result)
-                        }
+        val collection = db.collection(INSTITUTIONS)
+        collection
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val institutions = task.result.toObjects(Institution::class.java)
+                        view?.updateInstitutionList(institutions)
+                        view?.setupInstitutionAutocomplete(institutions)
+                    } else {
+                        Log.w("loadMainInstitutions", "Error getting documents.", task.getException())
                     }
-                },{
-                    Log.e("SelectInstPresenter", "unable to authenticate user - ${it.message}")
-                    //view.badRequest("Não foi possível buscar as aulas.\nTente novamente mais tarde.")
-                })
+                }
     }
 
 }
