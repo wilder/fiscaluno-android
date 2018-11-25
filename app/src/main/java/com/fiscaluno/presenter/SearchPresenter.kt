@@ -12,8 +12,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
 class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
-
-    private val api: FiscalunoApi by kodein.instance()
     private lateinit var view: SearchContract.View
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val INSTITUTIONS = "Institutions"
@@ -24,9 +22,7 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
     }
 
     override fun searchCourse(searchFilter: SearchFilter, page: Int, pageSize: Int) {
-
         db.collection(COURSES)
-                .orderBy("average_rating", Query.Direction.DESCENDING)
                 .whereEqualTo("name", searchFilter.searchableEntity?.getValue())
                 .get()
                 .addOnCompleteListener { task ->
@@ -38,12 +34,10 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
                         Log.w("topCourses", "Error getting documents.", task.getException())
                     }
                 }
-
     }
 
     override fun searchInstitution(searchFilter: SearchFilter, page: Int, pageSize: Int) {
         db.collection(INSTITUTIONS)
-                .orderBy("average_rating", Query.Direction.DESCENDING)
                 .whereEqualTo("name", searchFilter.searchableEntity?.getValue())
                 .get()
                 .addOnCompleteListener { task ->
