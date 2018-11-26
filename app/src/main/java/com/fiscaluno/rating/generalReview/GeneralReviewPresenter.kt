@@ -1,6 +1,8 @@
 package com.fiscaluno.rating.generalReview
 
+import com.fiscaluno.model.Course
 import com.fiscaluno.model.GeneralReview
+import com.fiscaluno.model.Institution
 import com.fiscaluno.network.FiscalunoApi
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stepstone.stepper.StepperLayout
@@ -37,10 +39,40 @@ class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Present
         collection.add(generalReviewDTO)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        updateInstitutionAverageRating(generalReview)
+                        updateCourseAverageRating(generalReviewDTO)
                         view.success(generalReview, callback)
                     }
                     else {
                         view.error("Unable to save review")
+                    }
+                }
+    }
+
+    private fun updateCourseAverageRating(generalReview: GeneralReview) {
+        val courseReference = db.collection("courses").document(generalReview.courseId.toString())
+        courseReference
+                .get().addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val course = it.result.toObject(Course::class.java)
+                        courseReference.update(
+                                mapOf("ratedByCount" to course!!.ratedByCount + 1,
+                                        "averageRating" to (course.averageRating + generalReview.rate!!) / (course.ratedByCount + 1))
+                        )
+                    }
+                }
+    }
+
+    private fun updateInstitutionAverageRating(generalReview: GeneralReview) {
+        val institutionReference = db.collection("Institutions").document(generalReview.institutionId.toString())
+        institutionReference
+                .get().addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val institution = it.result.toObject(Institution::class.java)
+                        institutionReference.update(
+                                mapOf("ratedByCount" to institution!!.ratedByCount + 1,
+                                        "averageRating" to (institution.averageRating + generalReview.rate!!) / (institution.ratedByCount + 1))
+                        )
                     }
                 }
     }

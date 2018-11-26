@@ -25,7 +25,7 @@ class CourseDetailActivity : AppCompatActivity() {
 
         course = intent.extras.getParcelable("course")
         course.let {
-            institutionNameTv.text = it.institution?.name
+            institutionNameTv.text = it.institutionName
             courseNameTv.text = it.name
             ratedByTv.text = it.ratedByCount.toString()
             institutionIv.setImageURI(it.institution?.imageUrl)

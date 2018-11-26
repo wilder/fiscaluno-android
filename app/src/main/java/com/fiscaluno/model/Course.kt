@@ -3,6 +3,7 @@ package com.fiscaluno.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.fiscaluno.contracts.SearchContract
+import com.google.firebase.firestore.PropertyName
 import com.google.gson.annotations.SerializedName
 
 data class Course  (
@@ -16,6 +17,7 @@ data class Course  (
     @SerializedName("course_duration") var duration: Int = 0, // duration in startYear
     var id: Int = 0,
     var institutionId: Int = 0,
+    var institutionName: String = "",
     @SerializedName("institution") var institution: Institution? = null
 ) : RateableEntity() {
 
@@ -28,6 +30,7 @@ data class Course  (
             duration = parcel.readInt(),
             id = parcel.readInt(),
             institutionId = parcel.readInt(),
+            institutionName = parcel.readString(),
             institution = parcel.readParcelable(Institution::class.java.classLoader)) {
         parcel.readList(monthlyValueRange, Float::class.java.classLoader)
         parcel.readList(timeToGraduateRange, Int::class.java.classLoader)
@@ -53,6 +56,7 @@ data class Course  (
         parcel.writeInt(duration)
         parcel.writeInt(id)
         parcel.writeInt(institutionId)
+        parcel.writeString(institutionName)
         parcel.writeParcelable(institution, flags)
         parcel.writeList(monthlyValueRange)
         parcel.writeList(timeToGraduateRange)

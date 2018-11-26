@@ -16,10 +16,10 @@ class CoursesAdapter(override val rateableEntities: ArrayList<Course>, override 
             holder.rateableEntityImage.setImageURI(it.institution?.imageUrl)
             holder.rateableEntityName.text = it.name
 
-            if(it.institution?.name.isNullOrBlank()) {
+            if(it.institutionName.isNullOrBlank()) {
                 holder.subRareableEntityName.visibility = View.GONE
             } else {
-                holder.subRareableEntityName.text = it.institution?.name
+                holder.subRareableEntityName.text = it.institutionName
             }
 
             holder.rating.rating = it.averageRating

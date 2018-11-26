@@ -42,10 +42,10 @@ class CourseInfoFragment : Fragment() {
     }
 
     fun loadMinAndMaxPrice(monthlyValueRange: List<Float>) {
-        minPrice.text = if (monthlyValueRange[0] == 0.toFloat())
-            "Desconhecido" else monthlyValueRange[0].toString()
-        maxPrice.text = if (monthlyValueRange[1] == 0.toFloat())
-            "Desconhecido" else monthlyValueRange[1].toString()
+        minPrice.text = if (monthlyValueRange.isEmpty())
+            "?" else monthlyValueRange[0].toString()
+        maxPrice.text = if (monthlyValueRange.size < 2)
+            "?" else monthlyValueRange[1].toString()
     }
 
     fun loadCoursePeriod(coursePeriod: String) {
