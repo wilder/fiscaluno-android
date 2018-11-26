@@ -11,10 +11,10 @@ import retrofit2.http.*
 interface FiscalunoApi {
 
     @Headers("@: NoAuth")
-    @POST("/auth")
+    @POST("https://athena-bff.herokuapp.com/v1/auth")
     fun authenticate(@Body authenticationBody: AuthenticationBody): Observable<Response<AuthenticationResponse>>
 
-    @POST("/users")
+    @POST("https://athena-bff.herokuapp.com/v1/users")
     fun createOrUpdateUser(@Body user: Student): Observable<Response<AuthenticationResponse>>
 
     @GET("https://private-f15175-fiscalunoapi.apiary-mock.com/reviews/details/average")
