@@ -36,6 +36,7 @@ class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Present
         generalReviewDTO.institutionId = generalReview.institutionId
         generalReviewDTO.rate = generalReview.rate
         generalReviewDTO.createdAt = Date()
+        generalReviewDTO.studentId = generalReview.studentId
         collection.add(generalReviewDTO)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

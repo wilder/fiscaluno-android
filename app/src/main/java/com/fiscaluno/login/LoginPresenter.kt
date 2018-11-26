@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 import retrofit2.Response
+import java.util.*
 
 
 class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
@@ -60,6 +61,7 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
                 }, { authenticationResponse, creationResponse: Response<AuthenticationResponse> ->
                     when {
                         authenticationResponse.code() in 200..299 -> {
+                            student.id = Random().nextInt()
                             firebaseStudentRepository.saveUser(student) //TODO: Remove
                             view.successfulLogin(student)
                         }
