@@ -3,6 +3,7 @@ package com.fiscaluno.presenter
 import android.util.Log
 import com.fiscaluno.contracts.SearchContract
 import com.fiscaluno.contracts.SelectInstitutionContract
+import com.fiscaluno.model.Course
 import com.fiscaluno.model.SearchFilter
 import com.fiscaluno.network.FiscalunoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +21,7 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
     }
 
     override fun searchCourse(searchFilter: SearchFilter, page: Int, pageSize: Int) {
-        api.findCourses()
+        api.findCourses(name = (searchFilter.searchableEntity as Course?)?.name)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

@@ -3,7 +3,6 @@ package com.fiscaluno.rating
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,7 @@ import com.fiscaluno.contracts.DataManager
 import com.fiscaluno.contracts.SearchContract
 import com.fiscaluno.model.*
 import com.fiscaluno.presenter.SearchPresenter
-import com.fiscaluno.rating.generalReview.GeneralReviewContract
-import com.fiscaluno.rating.generalReview.GeneralReviewPresenter
+import com.fiscaluno.view.adapter.CourseSpinnerAdapter
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
@@ -32,6 +30,7 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
     private var coursePeriodRadioGroup: RadioGroup? = null
     private var paymentValue: EditText? = null
     private var startYearSpinner: Spinner? = null
+    private var selectedCourseId: Int = 0
     private lateinit var dataManager: DataManager
     private lateinit var presenter: SearchContract.Presenter
 
@@ -71,13 +70,30 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
 
 
     override fun displayCourses(searchResult: List<Course>?) {
-        val courses = searchResult?.map { it.name!! }?.toList()
-        setupCourses(courses)
+        if(searchResult != null) {
+            setupCourses(searchResult)
+        }
     }
 
-    private fun setupCourses(availableCourses: List<String>?) {
-        courseSpinner!!.adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item,
-                availableCourses)
+    private fun setupCourses(availableCourses: List<Course>) {
+        selectedCourseId = availableCourses[0].id
+
+        courseSpinner!!.adapter =
+                CourseSpinnerAdapter(availableCourses, context!!, R.id.tvCourse)
+
+        courseSpinner!!.onItemSelectedListener = object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedCourseId = availableCourses[position].id
+            }
+
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedCourseId = availableCourses[position].id
+            }
+
+        }
+
     }
 
     fun setupYears(availableYears: List<Int>) {
@@ -96,7 +112,7 @@ class RatingCourseInfoFragment : Fragment(), SearchContract.View, BlockingStep {
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback?) {
         val review = GeneralReview()
         review.courseInfo = CourseInfo(
-                courseId = 1, // TODO: Get course id
+                courseId = selectedCourseId,
                 courseType = getSelectedRadioButtonValue(courseTypeRadioGroup!!),
                 period = getSelectedRadioButtonValue(coursePeriodRadioGroup!!),
                 startYear = startYearSpinner?.selectedItem.toString().toInt(),
