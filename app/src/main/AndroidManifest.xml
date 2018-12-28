@@ -28,7 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.LoginFragment"
             android:label="@string/title_activity_login" />
         <activity
             android:name="com.facebook.FacebookActivity"

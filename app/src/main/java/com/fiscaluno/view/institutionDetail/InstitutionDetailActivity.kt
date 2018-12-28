@@ -11,6 +11,7 @@ import com.fiscaluno.model.Institution
 import kotlinx.android.synthetic.main.institution_info_panel.*
 import android.support.design.widget.AppBarLayout
 import android.view.MenuItem
+import com.fiscaluno.repository.AnonymousUserTracker
 
 class InstitutionDetailActivity : AppCompatActivity() {
 
@@ -59,6 +60,7 @@ class InstitutionDetailActivity : AppCompatActivity() {
         })
 
         setupViewPager(institutionDetailViewPager)
+        AnonymousUserTracker.trackAccessIfNotLoggedIn(this)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {

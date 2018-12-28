@@ -52,6 +52,7 @@
     <string name="detailed_review_call">Dê uma nota para as seguintes categorias da sua instituição!</string>
     <string name="average_time_to_graduate">Tempo médio para graduação</string>
     <string name="average_detailed_reviews">Média de avaliações detalhadas</string>
+    <string name="login_to_view">Faça login para ver mais</string>
 
 
 </resources>

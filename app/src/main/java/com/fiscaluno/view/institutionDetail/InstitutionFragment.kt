@@ -10,6 +10,7 @@ import com.fiscaluno.App
 
 import com.fiscaluno.R
 import com.fiscaluno.contracts.ReviewsContract
+import com.fiscaluno.helper.PreferencesManager
 import com.fiscaluno.model.DetailedReview
 import com.fiscaluno.model.GeneralReview
 import com.fiscaluno.model.Institution
@@ -54,13 +55,15 @@ class InstitutionFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun setupGeneralReviews(generalReviews: List<GeneralReview>?) {
-        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(generalReviews!!)
+        generalReviewAdapter = InstitutionDetailGeneralReviewsAdapter(PreferencesManager(context!!)
+                .isUserLoggedIn(), generalReviews!!)
         generalReviewsRv.adapter = generalReviewAdapter
         generalReviewsRv.layoutManager = LinearLayoutManager(context)
     }
 
     override fun setupDetailedReviews(detailedReviews: List<DetailedReview>?) {
-        detailedReviewAdapter = DetailedReviewAdapter(detailedReviews!!, false)
+        detailedReviewAdapter = DetailedReviewAdapter(context!!, detailedReviews!!, false,
+                PreferencesManager(context!!).isUserLoggedIn())
         detailedReviewsRv.adapter = detailedReviewAdapter
         detailedReviewsRv.layoutManager = LinearLayoutManager(context)
     }

@@ -110,6 +110,8 @@ class RatingDetailedFragment : Fragment(), DetailedReviewContract.View, Blocking
         if (ratedAllTypes()) {
             //TODO: Move to presenter and Save
             presenter?.saveDetailedReviews(adapter!!.getDetailedReviews(), generalReview!!, callback)
+            PreferencesManager(context!!).userInstitutionId = institution.id
+            startActivity(Intent(activity, MainActivity::class.java))
         }
     }
 
