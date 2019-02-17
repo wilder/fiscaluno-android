@@ -39,7 +39,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    implementation 'com.google.firebase:firebase-firestore:15.0.0'
+    //Firebase
+    implementation 'com.google.firebase:firebase-firestore:18.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
 
     //Layout
     implementation "com.android.support:support-v4:27.1.1"

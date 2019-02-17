@@ -12,12 +12,12 @@ class SplashActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        //TODO: change to local database
         if (PreferencesManager(this).haveSeenIntro) {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         } else {
             startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
         }
+
     }
 
 }

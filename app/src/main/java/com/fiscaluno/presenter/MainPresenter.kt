@@ -40,7 +40,7 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val institutions = task.result.toObjects(Institution::class.java)
+                        val institutions = task.result?.toObjects(Institution::class.java)
                         Log.d("topInstitutions", institutions.toString())
                         view.showTopInstitutions(institutions)
                     } else {
@@ -56,7 +56,7 @@ class MainPresenter(val kodein: Kodein) : MainContract.Presenter {
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val courses = task.result.toObjects(Course::class.java)
+                        val courses = task.result?.toObjects(Course::class.java)
                         Log.d("topCourses", courses.toString())
                         view.showTopCourses(courses)
                     } else {

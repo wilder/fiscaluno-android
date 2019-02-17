@@ -41,8 +41,8 @@ class DetailedReviewPresenter(kodein: Kodein) : DetailedReviewContract.Presenter
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         reviews.clear()
-                        task.result.toObjects(DetailedReviewTypes::class.java)
-                                .forEachIndexed {
+                        task.result?.toObjects(DetailedReviewTypes::class.java)
+                                ?.forEachIndexed {
                                     index, detailedReviewTypes ->
                                     var review = DetailedReview()
                                     review.description = detailedReviewTypes.description!!

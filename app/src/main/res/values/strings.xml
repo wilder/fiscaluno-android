@@ -75,5 +75,9 @@
     <string name="average_time_to_graduate">Average time to graduate</string>
     <string name="average_detailed_reviews">Average Detailed Reviews</string>
     <string name="login_to_view">Log in to see more</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="name">Name</string>
+    <string name="lastname">Last name</string>
+    <string name="login">Login</string>
 
 </resources>

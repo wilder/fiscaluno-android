@@ -53,6 +53,10 @@
     <string name="average_time_to_graduate">Tempo médio para graduação</string>
     <string name="average_detailed_reviews">Média de avaliações detalhadas</string>
     <string name="login_to_view">Faça login para ver mais</string>
+    <string name="confirm_password">Confirme a senha</string>
+    <string name="name">Name</string>
+    <string name="lastname">Last name</string>
+    <string name="login">Login</string>
 
 
 </resources>

@@ -8,7 +8,7 @@ import android.os.Parcelable
  */
 
 class Student : Parcelable {
-    var id: Int = 0
+    var id: String? = null
     var birthday: String? = null
     var name: String? = null
     var email: String? = null
@@ -29,7 +29,7 @@ class Student : Parcelable {
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(this.id)
+        dest.writeString(this.id)
         dest.writeValue(this.birthday)
         dest.writeString(this.name)
         dest.writeString(this.email)
@@ -48,7 +48,7 @@ class Student : Parcelable {
     constructor() {}
 
     protected constructor(`in`: Parcel) {
-        this.id = `in`.readInt()
+        this.id = `in`.readString()
         this.birthday = `in`.readString()
         this.name = `in`.readString()
         this.email = `in`.readString()

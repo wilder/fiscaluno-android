@@ -3,6 +3,7 @@ package com.fiscaluno.helper
 import android.content.Context
 import android.content.SharedPreferences
 import com.fiscaluno.model.Student
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 
 /**
@@ -36,7 +37,7 @@ class PreferencesManager (context: Context) {
          */
         set(value) = prefs.edit().putInt(USER_INSTITUTION_ID, value).apply()
 
-    fun isUserLoggedIn() = this.user != null
+    fun isUserLoggedIn() = this.user != null && FirebaseAuth.getInstance().currentUser != null
 
     var user: Student?
     //TODO: check if null is a problem

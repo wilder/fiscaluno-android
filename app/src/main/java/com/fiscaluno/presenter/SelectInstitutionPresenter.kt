@@ -29,7 +29,7 @@ class SelectInstitutionPresenter(val kodein: Kodein) : SelectInstitutionContract
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val institutions = task.result.toObjects(Institution::class.java)
+                        val institutions = task.result?.toObjects(Institution::class.java)
                         view?.updateInstitutionList(institutions)
                         view?.setupInstitutionAutocomplete(institutions)
                     } else {

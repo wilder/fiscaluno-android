@@ -58,7 +58,7 @@ class ReviewsPresenter(val kodein: Kodein) : ReviewsContract.Presenter {
         db.get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val reviews = task.result.toObjects(GeneralReview::class.java)
+                    val reviews = task.result?.toObjects(GeneralReview::class.java)
                     Log.d("generalReviews", reviews.toString())
                     view?.setupGeneralReviews(reviews)
                 } else {

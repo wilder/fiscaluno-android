@@ -26,7 +26,7 @@ class CoursePresenter(val kodein: Kodein) : CourseContract.Presenter {
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val courses = task.result.toObjects(Course::class.java)
+                        val courses = task.result?.toObjects(Course::class.java)
                         Log.d("Courses", courses.toString())
                         view.showInstitutionCourses(courses)
                     } else {

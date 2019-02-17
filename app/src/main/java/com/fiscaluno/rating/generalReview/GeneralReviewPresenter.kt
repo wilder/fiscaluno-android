@@ -55,7 +55,7 @@ class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Present
         courseReference
                 .get().addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val course = it.result.toObject(Course::class.java)
+                        val course = it.result?.toObject(Course::class.java)
                         courseReference.update(
                                 mapOf("ratedByCount" to course!!.ratedByCount + 1,
                                         "averageRating" to (course.averageRating + generalReview.rate!!) / (course.ratedByCount + 1))
@@ -69,7 +69,7 @@ class GeneralReviewPresenter(val kodein: Kodein) : GeneralReviewContract.Present
         institutionReference
                 .get().addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val institution = it.result.toObject(Institution::class.java)
+                        val institution = it.result?.toObject(Institution::class.java)
                         institutionReference.update(
                                 mapOf("ratedByCount" to institution!!.ratedByCount + 1,
                                         "averageRating" to (institution.averageRating + generalReview.rate!!) / (institution.ratedByCount + 1))

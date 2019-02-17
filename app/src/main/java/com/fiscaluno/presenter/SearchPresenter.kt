@@ -32,7 +32,7 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val courses = task.result.toObjects(Course::class.java)
+                    val courses = task.result?.toObjects(Course::class.java)
                     Log.d("topCourses", courses.toString())
                     view.displayCourses(courses)
                 } else {
@@ -53,7 +53,7 @@ class SearchPresenter(val kodein: Kodein) : SearchContract.Presenter {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val institutions = task.result.toObjects(Institution::class.java)
+                    val institutions = task.result?.toObjects(Institution::class.java)
                     Log.d("topCourses", institutions.toString())
                     view.displayInstitutions(institutions)
                 } else {

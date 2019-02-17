@@ -11,12 +11,12 @@ import java.util.Date
  */
 
 open class Review : Parcelable {
-    var id: Int = 0
+    var id: String? = null
     @SerializedName("created_at") var createdAt: Date? = null
     var rate: Float? = null //from 1 to 5 -
     var courseId: Int = 0
     @SerializedName("institution_id") var institutionId: Int? = null
-    @SerializedName("student_id") var studentId: Int? = null
+    @SerializedName("student_id") var studentId: String? = null
 
     constructor() {}
 
@@ -25,12 +25,12 @@ open class Review : Parcelable {
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(this.id)
+        dest.writeString(this.id)
         dest.writeLong(if (this.createdAt != null) this.createdAt!!.time else -1)
         dest.writeInt(this.courseId)
         dest.writeValue(this.rate)
         dest.writeValue(this.institutionId)
-        dest.writeValue(this.studentId)
+        dest.writeString(this.studentId)
         dest.writeValue(this.courseId)
     }
 
@@ -39,13 +39,13 @@ open class Review : Parcelable {
     }
 
     protected constructor(`in`: Parcel) {
-        this.id = `in`.readInt()
+        this.id = `in`.readString()
         val tmpCreatedAt = `in`.readLong()
         this.rate = `in`.readValue(Float::class.java.classLoader) as Float
         this.createdAt = if (tmpCreatedAt.toInt() == -1) null else Date(tmpCreatedAt)
         this.courseId = `in`.readInt()
         this.institutionId = `in`.readInt()
-        this.studentId = `in`.readInt()
+        this.studentId = `in`.readString()
         this.courseId = `in`.readInt()
     }
 

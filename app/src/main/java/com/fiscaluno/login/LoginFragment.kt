@@ -16,7 +16,9 @@ import com.fiscaluno.view.IntroActivity
 import com.fiscaluno.view.MainActivity
 import org.kodein.di.Kodein
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentManager
 import android.view.Window
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginFragment : DialogFragment(), LoginContract.View {
 
@@ -26,13 +28,32 @@ class LoginFragment : DialogFragment(), LoginContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.activity_login, container, false)
 
+    override fun onResume() {
+        super.onResume()
+        val width = resources.displayMetrics.widthPixels
+        val height = resources.displayMetrics.heightPixels
+        dialog.window.setLayout(width-25, height-60)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         kodein = (activity?.application as App).kodein
 
         presenter = LoginPresenter(kodein)
-        presenter.bindView(this)
-        //presenter.prepareForLogin()
+        presenter.bindView(this, activity!!)
+
+        registerTv.setOnClickListener {
+            this.dismiss()
+            val transaction = fragmentManager?.beginTransaction()
+            SignInFragment().show(transaction, "SignIfFragment")
+        }
+
+    }
+
+    fun emailLogin(view: View?) {
+        val email: String = et_email.text.toString()
+        val pass: String = et_password.text.toString()
+        presenter.loginWithEmail(email, pass)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

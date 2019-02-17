@@ -1,5 +1,7 @@
 package com.fiscaluno.login
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,76 +13,69 @@ import com.fiscaluno.model.Student
 import org.json.JSONObject
 import com.facebook.login.LoginManager
 import com.facebook.FacebookCallback
-import com.fiscaluno.network.FiscalunoApi
+import com.fiscaluno.contracts.StudentRepository
 import com.fiscaluno.repository.FirebaseStudentRepository
 import com.fiscaluno.repository.UserRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
-import retrofit2.Response
-import java.util.*
 
 
 class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
 
     lateinit var view: LoginContract.View
-    private val api: FiscalunoApi by kodein.instance()
-    private val userRepository: UserRepository by kodein.instance()
+    private lateinit var context: Context
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val studentRepository: StudentRepository by kodein.instance()
 
     //TODO: Inject
     lateinit var firebaseStudentRepository: FirebaseStudentRepository
     private var callbackManager: CallbackManager? = null
     private val facebookReadPermissions = arrayListOf("email", "public_profile", "user_hometown")
 
-    override fun bindView(view: LoginContract.View) {
+    override fun bindView(view: LoginContract.View, context: Context) {
         this.view = view
         this.firebaseStudentRepository = FirebaseStudentRepository()
+        this.context = context
     }
 
-    override fun doLogin(student: Student, token: String) {
-        api.authenticate(AuthenticationBody(student.fbId!!, token))
-                .flatMap ({ authenticationResponse: Response<AuthenticationResponse> ->
-                    when {
-                        authenticationResponse.code() in 400..500 -> {
-                            Log.e("LoginPresenter", "unable to authenticate user - ${authenticationResponse.code()}")
-                            throw Exception("Não foi possível realizar o login")
-                        }
-                        authenticationResponse.code() in 200..299 -> {
-                            if(authenticationResponse.body()?.body?.token == null) {
-                                throw Exception("Token not present")
-                            } else {
-                                userRepository.saveUserToken(authenticationResponse.body()?.body?.token!!)
-                                api.createOrUpdateUser(student)
-                            }
-                        }
-                        else -> {
-                            throw Exception("Unknown error")
-                        }
+    override fun loginWithEmail(email: String, pass: String) {
+        auth.signInWithEmailAndPassword(email, pass)
+                .addOnCompleteListener(context as Activity) { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser!!
+                        val student: Student = studentRepository.getUserById(user.uid)!!
+                        view.successfulLogin(student)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        view.loginError("Unable to login")
                     }
-                }, { authenticationResponse, creationResponse: Response<AuthenticationResponse> ->
-                    when {
-                        authenticationResponse.code() in 200..299 -> {
-                            student.id = Random().nextInt()
-                            firebaseStudentRepository.saveUser(student) //TODO: Remove
-                            view.successfulLogin(student)
-                        }
-                        else -> {
-                            Log.e("LoginPresenter", "unable to create user - ${authenticationResponse.code()}")
-                            throw Exception("Não foi possível realizar o login")
-                        }
-                    }
-                })
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({},{
-                    Log.e("LoginPresenter", "unable to authenticate user - ${it.message}")
-                    view.loginError("Não foi possível Realizar o Login.\nTente novamente mais tarde.")
-                })
+                }
     }
 
+    override fun loginWithFacebook(student: Student, token: AccessToken) {
+        handleFacebookAccessToken(AccessToken.getCurrentAccessToken(), student)
+    }
 
-    override fun prepareForLogin() {
+    private fun handleFacebookAccessToken(token: AccessToken, student: Student) {
+
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(context as Activity) { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        student.id = user!!.uid
+                        studentRepository.saveUser(student)
+                        view.successfulLogin(student)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        view.loginError("Unable to login")
+                    }
+                }
+    }
+
+    override fun prepareFacebookLogin() {
         callbackManager = CallbackManager.Factory.create()
         val callback = LoginCallback()
         LoginManager.getInstance().logInWithReadPermissions(view as Fragment, facebookReadPermissions)
@@ -101,7 +96,7 @@ class LoginPresenter(val kodein: Kodein) : LoginContract.Presenter {
 
                 val student = getUserFromResponse(jsonObject)
 
-                doLogin(student, loginResult.accessToken.token)
+                loginWithFacebook(student, loginResult.accessToken)
 
             }
 
